@@ -24,6 +24,8 @@ namespace Application.IRepositories
 
         Task AddRangeAsync(List<TModel> models);
 
+        Task RemoveAsync(TModel model);
+
         // Add paging method to generic interface 
         Task<Pagination<TModel>> ToPaginationAsync(int pageIndex = 0, int pageSize = 10);
     }
