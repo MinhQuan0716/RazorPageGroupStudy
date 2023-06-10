@@ -8,10 +8,8 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <meta charset="UTF-8">
     <link href="https://fonts.googleapis.com/css?family=Roboto:300,400" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
-    <link rel="stylesheet" href="~/css/loginstyle.css">
+    <link href="./css/login.css" rel="stylesheet">
 </head>
 <body>
     <div class="modal-wrap">
@@ -24,7 +22,7 @@
                     <input type="email" placeholder="Email" asp-for="Email" />
                     <div class="text-center">
                         <button type="submit" class="button">LOG IN</button>
-                        <a href="signup.html" class="button">Create an account</a>
+                        <a asp-page="./Home" class="button">Create an account</a>
                     </div>
                 </form>
             </div>

@@ -1,9 +1,5 @@
 ﻿html {
-    background: #FF7361;
-    /*
-  background: radial-gradient(#fff176, #f57f17);
-  min-height: 100%;
-*/
+    background: #37517e;
     font-family: "Roboto", sans-serif;
 }
 
@@ -11,7 +7,7 @@
     text-transform: uppercase;
     text-align: center;
     margin-bottom: 30px;
-    color: #FF7361;
+    color: #37517e;
     font-weight: 300;
     font-size: 24px;
     letter-spacing: 1px;
@@ -39,7 +35,7 @@ input[type="con-password"] {
 
     input[type="text"]:focus,
     input[type="email"]:focus {
-        border-color: #FF7361;
+        border-color: #37517e;
     }
 
 input[type="radio"] {
@@ -66,7 +62,7 @@ label {
 .rerun-button {
     padding: 10px 20px;
     border-radius: 3px;
-    background: #FF7361;
+    background: #37517e;
     color: white;
     text-transform: uppercase;
     letter-spacing: 1px;
@@ -76,7 +72,7 @@ label {
 
     .button:hover,
     .rerun-button:hover {
-        background: #e66400;
+        background: #0385ff;
     }
 
     .button.rerun-button,

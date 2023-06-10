@@ -11,7 +11,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Infracstuructures", "Infrac
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Presentation", "Presentation\Presentation.csproj", "{B757675E-A01D-46B5-B768-D2B54C509F51}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GroupStudyUI", "GroupStudyUI\GroupStudyUI.csproj", "{2B4EB4F2-8531-4BFB-BF48-E41554D2374E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GroupStudyUI", "GroupStudyUI\GroupStudyUI.csproj", "{2B4EB4F2-8531-4BFB-BF48-E41554D2374E}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
