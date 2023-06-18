@@ -1,0 +1,7 @@
+﻿@page
+@model Presentation.Pages.Users.UserListModel
+@{
+    var user = ViewData["User"] as Domain.Entities.User;
+}
+
+<h1>@user.Name </h1>

@@ -10,7 +10,7 @@ namespace Infracstuructures
 {
     public class AppDbContext : DbContext
     {
-        public AppDbContext(DbContextOptions<AppDbContext> options) : base(options) { }
+        public AppDbContext(DbContextOptions options) : base(options) { }
 
         public DbSet<AttachFile> AttachFiles { get; set; }
         public DbSet<Comment> Comments { get; set; }
@@ -19,6 +19,16 @@ namespace Infracstuructures
         public DbSet<User> Users { get; set; }
         public DbSet<UserGroup> UserGroups { get; set; }
         public DbSet<Post> Posts { get; set; }
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<Comment>()
+                .HasOne(p => p.ReplyComment)
+                .WithOne()
+                .HasForeignKey<Comment>(x => x.ReplyToCommentId)
+                .IsRequired(false)
+                .OnDelete(DeleteBehavior.Restrict);
+        }
 
     }
 }
