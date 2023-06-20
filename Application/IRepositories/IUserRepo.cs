@@ -9,5 +9,7 @@ namespace Application.IRepositories
 {
     public interface IUserRepo : IGenericRepo<User>
     {
+        Task<bool> CheckEmailDuplicateAsync(string email);
+        Task<User> GetUserAsync(string email,string password);
     }
 }

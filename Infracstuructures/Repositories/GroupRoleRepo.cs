@@ -15,5 +15,6 @@ namespace Infracstuructures.Repositories
         public GroupRoleRepo(AppDbContext context) : base(context)
         {
         }
+
     }
 }

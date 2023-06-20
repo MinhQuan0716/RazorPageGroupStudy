@@ -1,4 +1,9 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Application;
+using Application.IRepositories;
+using Infracstuructures.Repositories;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Collections.Generic;
@@ -8,13 +13,22 @@ using System.Threading.Tasks;
 
 namespace Infracstuructures
 {
-    public static  class DependencyInjection
+    public static class DependencyInjection
     {
-        public static IServiceCollection AddInfrastructureService(this IServiceCollection services,string databseConnection) 
+        public static IServiceCollection AddInfractstructure(this IServiceCollection services, IConfiguration config)
         {
-            services.AddDbContext<AppDbContext>(options => options.UseSqlServer(databseConnection).EnableSensitiveDataLogging());
+            // Use local DB
+            services.AddDbContext<AppDbContext>(opt => opt.UseSqlServer(config.GetConnectionString("GroupStudy.Db")));
+
+            services.AddScoped<IAttachFileRepo, AttachFileRepo>();
+            services.AddScoped<ICommentRepo, CommentRepo>();
+            services.AddScoped<IGroupRepo, GroupRepo>();
+            services.AddScoped<IGroupRoleRepo, GroupRoleRepo>();
+            services.AddScoped<IPostRepo, PostRepo>();
+            services.AddScoped<IUserGroupRepo, UserGroupRepo>();
+            services.AddScoped<IUserRepo, UserRepo>();
+            services.AddScoped<IUnitOfWork, UnitOfWork>();
             return services;
-        
         }
     }
 }
