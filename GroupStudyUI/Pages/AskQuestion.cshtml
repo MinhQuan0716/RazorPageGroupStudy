@@ -1,0 +1,64 @@
+﻿@page
+@model GroupStudyUI.Pages.AskQuestionModel
+@{
+	ViewData["Title"] = "Ask Question";
+}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<link href="css/askqueststyle.css" rel="stylesheet" type="text/css">
+	<link href="css/font-awesome.min.css" rel="stylesheet" type="text/css">
+</head>
+
+
+<body>
+
+	<section class="main-content920">
+		<div class="container">
+			<div class="row">
+				<div class="col-md-12">
+					<div class="ask-question-input-part032">
+						<h4>Ask Question</h4>
+						<hr>
+						<form>
+
+							<div class="question-title39">
+								<span class="form-description433">Question-Title* </span><input type="text" name="fname" class="question-ttile32" placeholder="Write Your Question Title">
+							</div>
+
+							<div class="button-group-addfile3239">
+								<span class="form-description23993">Attactment*</span><input type="file" name="ffile" class="question-ttile3226">
+
+							</div>
+							<div class="details2-239">
+								<div class="col-md-12 nopadding">
+									<textarea id="txtEditor" style="width: 100%; height: 300px; padding: 10px"></textarea>
+								</div>
+							</div>
+
+						</form>
+						<div class="publish-button2389">
+							<button type="button" class="publis1291">Publish your Question</button>
+						</div>
+
+					</div>
+
+
+				</div>
+				<!--                end of col-md-12 -->
+			</div>
+		</div>
+	</section>
+
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+	<script>
+		$(document).ready(function () {
+			$("#txtEditor").Editor();
+		});
+	</script>
+
+</body>
+
+</html>
