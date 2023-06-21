@@ -7,7 +7,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <link href="./css/yourgroupstyle.css" rel="stylesheet">
+    <link href="./css/yourgroup.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/material-design-iconic-font/2.2.0/css/material-design-iconic-font.min.css">
 </head>
 
@@ -19,16 +19,16 @@
 
     <div class="container mb-3">
         <div class="well search-result">
-        <div class="input-group">
-            <input type="text" class="form-control" placeholder="Search">
-            <span class="input-group-btn">
-                <button class="btn btn-info btn-lg ml-1" type="button">
-                    <i class="glyphicon glyphicon-search"></i>
-                    Search
-                </button>
-            </span>
+            <div class="input-group">
+                <input type="text" class="form-control" placeholder="Search">
+                <span class="input-group-btn">
+                    <button class="btn btn-info btn-lg ml-1" type="button">
+                        <i class="glyphicon glyphicon-search"></i>
+                        Search
+                    </button>
+                </span>
+            </div>
         </div>
-    </div>
     </div>
 
     <div class="container">
@@ -58,169 +58,169 @@
                         <a asp-page="/Group" class="text-decoration-none"><h5>Business Management</h5></a>
                         <p class="mb-0 text-muted"><i class="zmdi zmdi-globe mr-2"></i>Public group - <i class="zmdi zmdi-accounts mr-2"></i>124 Members</p>
                         @*<p class="mb-0 text-muted">
-                            @if (Model.GroupDescription.Length > 50)
-                            {
-                                @Model.GroupDescription.Substring(0, 50).
-                                ..
-                                            }
-                            else
-                            {
-                                @Model.GroupDescription
-                            }*@
+                        @if (Model.GroupDescription.Length > 50)
+                        {
+                        @Model.GroupDescription.Substring(0, 50).
+                        ..
+                        }
+                        else
+                        {
+                        @Model.GroupDescription
+                        }*@
                         <p class="mb-0 text-muted">This group is created for students who want to learn business knowledge.</p>
                     </div>
                 </div>
             </div>
 
             <div class="col-lg-4 col-md-6 mb-4">
-            <div class="card hover-lift hover-shadow-xl shadow-sm border-0">
-                <!--card-body-->
-                <div class="card-body p-4">
-                    <div class="d-flex mb-4 align-items-center">
+                <div class="card hover-lift hover-shadow-xl shadow-sm border-0">
+                    <!--card-body-->
+                    <div class="card-body p-4">
+                        <div class="d-flex mb-4 align-items-center">
 
-                        <!--Companies group-->
-                        <div class="flex-grow-1 d-flex align-items-center">
-                            <!--Campany-->
-                            <div class="width-5x height-5x p-2 bg-white shadow-sm position-relative flex-center rounded-circle border">
-                                <img src="https://bootdey.com/img/Content/avatar/avatar1.png" class="img-fluid" alt="">
-                            </div>
-                            <!--Campany-->
-                            <div class="width-5x height-5x p-2 ms-n3 bg-white shadow-sm position-relative flex-center rounded-circle border">
-                                <img src="https://bootdey.com/img/Content/avatar/avatar2.png" class="img-fluid" alt="">
-                            </div>
-                            <!--Campany-->
-                            <div class="width-5x height-5x p-2 ms-n3 bg-white shadow-sm position-relative flex-center rounded-circle border">
-                                <img src="https://bootdey.com/img/Content/avatar/avatar3.png" class="img-fluid" alt="">
+                            <!--Companies group-->
+                            <div class="flex-grow-1 d-flex align-items-center">
+                                <!--Campany-->
+                                <div class="width-5x height-5x p-2 bg-white shadow-sm position-relative flex-center rounded-circle border">
+                                    <img src="https://bootdey.com/img/Content/avatar/avatar1.png" class="img-fluid" alt="">
+                                </div>
+                                <!--Campany-->
+                                <div class="width-5x height-5x p-2 ms-n3 bg-white shadow-sm position-relative flex-center rounded-circle border">
+                                    <img src="https://bootdey.com/img/Content/avatar/avatar2.png" class="img-fluid" alt="">
+                                </div>
+                                <!--Campany-->
+                                <div class="width-5x height-5x p-2 ms-n3 bg-white shadow-sm position-relative flex-center rounded-circle border">
+                                    <img src="https://bootdey.com/img/Content/avatar/avatar3.png" class="img-fluid" alt="">
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    <h5>UI Designer</h5>
+                        <h5>UI Designer</h5>
                         <p class="mb-0 text-muted">Public group - 424 Members</p>
                         <p class="mb-0 text-muted">This group is created for students who want to learn UI knowledge...</p>
+                    </div>
+                    <!--link-->
+                    <a href="#!" class="stretched-link"></a>
                 </div>
-                <!--link-->
-                <a href="#!" class="stretched-link"></a>
             </div>
-        </div>
             <div class="col-lg-4 col-md-6 mb-4">
-            <div class="card hover-lift hover-shadow-xl shadow-sm border-0">
-                <!--card-body-->
-                <div class="card-body p-4">
-                    <div class="d-flex mb-4 align-items-center">
+                <div class="card hover-lift hover-shadow-xl shadow-sm border-0">
+                    <!--card-body-->
+                    <div class="card-body p-4">
+                        <div class="d-flex mb-4 align-items-center">
 
-                        <!--Companies group-->
-                        <div class="flex-grow-1 d-flex align-items-center">
-                            <!--Campany-->
-                            <div class="width-5x height-5x p-2 bg-white shadow-sm position-relative flex-center rounded-circle border">
-                                <img src="https://bootdey.com/img/Content/avatar/avatar1.png" class="img-fluid" alt="">
-                            </div>
-                            <!--Campany-->
-                            <div class="width-5x height-5x p-2 ms-n3 bg-white shadow-sm position-relative flex-center rounded-circle border">
-                                <img src="https://bootdey.com/img/Content/avatar/avatar2.png" class="img-fluid" alt="">
-                            </div>
-                            <!--Campany-->
-                            <div class="width-5x height-5x p-2 ms-n3 bg-white shadow-sm position-relative flex-center rounded-circle border">
-                                <img src="https://bootdey.com/img/Content/avatar/avatar3.png" class="img-fluid" alt="">
+                            <!--Companies group-->
+                            <div class="flex-grow-1 d-flex align-items-center">
+                                <!--Campany-->
+                                <div class="width-5x height-5x p-2 bg-white shadow-sm position-relative flex-center rounded-circle border">
+                                    <img src="https://bootdey.com/img/Content/avatar/avatar1.png" class="img-fluid" alt="">
+                                </div>
+                                <!--Campany-->
+                                <div class="width-5x height-5x p-2 ms-n3 bg-white shadow-sm position-relative flex-center rounded-circle border">
+                                    <img src="https://bootdey.com/img/Content/avatar/avatar2.png" class="img-fluid" alt="">
+                                </div>
+                                <!--Campany-->
+                                <div class="width-5x height-5x p-2 ms-n3 bg-white shadow-sm position-relative flex-center rounded-circle border">
+                                    <img src="https://bootdey.com/img/Content/avatar/avatar3.png" class="img-fluid" alt="">
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    <h5>Software Engineer</h5>
+                        <h5>Software Engineer</h5>
                         <p class="mb-0 text-muted">Private group - 200 Members</p>
                         <p class="mb-0 text-muted">This group is created for students who want to learn Software Engi...</p>
+                    </div>
+                    <!--link-->
+                    <a href="#!" class="stretched-link"></a>
                 </div>
-                <!--link-->
-                <a href="#!" class="stretched-link"></a>
             </div>
-        </div>
             <div class="col-lg-4 col-md-6 mb-4">
-            <div class="card hover-lift hover-shadow-xl shadow-sm border-0">
-                <!--card-body-->
-                <div class="card-body p-4">
-                    <div class="d-flex mb-4 align-items-center">
+                <div class="card hover-lift hover-shadow-xl shadow-sm border-0">
+                    <!--card-body-->
+                    <div class="card-body p-4">
+                        <div class="d-flex mb-4 align-items-center">
 
-                        <!--Companies group-->
-                        <div class="flex-grow-1 d-flex align-items-center">
-                            <!--Campany-->
-                            <div class="width-5x height-5x p-2 bg-white shadow-sm position-relative flex-center rounded-circle border">
-                                <img src="https://bootdey.com/img/Content/avatar/avatar1.png" class="img-fluid" alt="">
-                            </div>
-                            <!--Campany-->
-                            <div class="width-5x height-5x p-2 ms-n3 bg-white shadow-sm position-relative flex-center rounded-circle border">
-                                <img src="https://bootdey.com/img/Content/avatar/avatar2.png" class="img-fluid" alt="">
-                            </div>
-                            <!--Campany-->
-                            <div class="width-5x height-5x p-2 ms-n3 bg-white shadow-sm position-relative flex-center rounded-circle border">
-                                <img src="https://bootdey.com/img/Content/avatar/avatar3.png" class="img-fluid" alt="">
+                            <!--Companies group-->
+                            <div class="flex-grow-1 d-flex align-items-center">
+                                <!--Campany-->
+                                <div class="width-5x height-5x p-2 bg-white shadow-sm position-relative flex-center rounded-circle border">
+                                    <img src="https://bootdey.com/img/Content/avatar/avatar1.png" class="img-fluid" alt="">
+                                </div>
+                                <!--Campany-->
+                                <div class="width-5x height-5x p-2 ms-n3 bg-white shadow-sm position-relative flex-center rounded-circle border">
+                                    <img src="https://bootdey.com/img/Content/avatar/avatar2.png" class="img-fluid" alt="">
+                                </div>
+                                <!--Campany-->
+                                <div class="width-5x height-5x p-2 ms-n3 bg-white shadow-sm position-relative flex-center rounded-circle border">
+                                    <img src="https://bootdey.com/img/Content/avatar/avatar3.png" class="img-fluid" alt="">
+                                </div>
                             </div>
                         </div>
+                        <h5>Sales &amp; Marketing</h5>
+                        <p class="mb-0 text-muted">28 Jobs opportunities</p>
                     </div>
-                    <h5>Sales &amp; Marketing</h5>
-                    <p class="mb-0 text-muted">28 Jobs opportunities</p>
+                    <!--link-->
+                    <a href="#!" class="stretched-link"></a>
                 </div>
-                <!--link-->
-                <a href="#!" class="stretched-link"></a>
             </div>
-        </div>
             <div class="col-lg-4 col-md-6 mb-4">
-            <div class="card hover-lift hover-shadow-xl shadow-sm border-0">
-                <!--card-body-->
-                <div class="card-body p-4">
-                    <div class="d-flex mb-4 align-items-center">
+                <div class="card hover-lift hover-shadow-xl shadow-sm border-0">
+                    <!--card-body-->
+                    <div class="card-body p-4">
+                        <div class="d-flex mb-4 align-items-center">
 
-                        <!--Companies group-->
-                        <div class="flex-grow-1 d-flex align-items-center">
-                            <!--Campany-->
-                            <div class="width-5x height-5x p-2 bg-white shadow-sm position-relative flex-center rounded-circle border">
-                                <img src="https://bootdey.com/img/Content/avatar/avatar1.png" class="img-fluid" alt="">
-                            </div>
-                            <!--Campany-->
-                            <div class="width-5x height-5x p-2 ms-n3 bg-white shadow-sm position-relative flex-center rounded-circle border">
-                                <img src="https://bootdey.com/img/Content/avatar/avatar2.png" class="img-fluid" alt="">
-                            </div>
-                            <!--Campany-->
-                            <div class="width-5x height-5x p-2 ms-n3 bg-white shadow-sm position-relative flex-center rounded-circle border">
-                                <img src="https://bootdey.com/img/Content/avatar/avatar3.png" class="img-fluid" alt="">
+                            <!--Companies group-->
+                            <div class="flex-grow-1 d-flex align-items-center">
+                                <!--Campany-->
+                                <div class="width-5x height-5x p-2 bg-white shadow-sm position-relative flex-center rounded-circle border">
+                                    <img src="https://bootdey.com/img/Content/avatar/avatar1.png" class="img-fluid" alt="">
+                                </div>
+                                <!--Campany-->
+                                <div class="width-5x height-5x p-2 ms-n3 bg-white shadow-sm position-relative flex-center rounded-circle border">
+                                    <img src="https://bootdey.com/img/Content/avatar/avatar2.png" class="img-fluid" alt="">
+                                </div>
+                                <!--Campany-->
+                                <div class="width-5x height-5x p-2 ms-n3 bg-white shadow-sm position-relative flex-center rounded-circle border">
+                                    <img src="https://bootdey.com/img/Content/avatar/avatar3.png" class="img-fluid" alt="">
+                                </div>
                             </div>
                         </div>
+                        <h5>Data Science</h5>
+                        <p class="mb-0 text-muted">14 Jobs opportunities</p>
                     </div>
-                    <h5>Data Science</h5>
-                    <p class="mb-0 text-muted">14 Jobs opportunities</p>
+                    <!--link-->
+                    <a href="#!" class="stretched-link"></a>
                 </div>
-                <!--link-->
-                <a href="#!" class="stretched-link"></a>
             </div>
-        </div>
             <div class="col-lg-4 col-md-6 mb-4">
-            <div class="card hover-lift hover-shadow-xl shadow-sm border-0">
-                <!--card-body-->
-                <div class="card-body p-4">
-                    <div class="d-flex mb-4 align-items-center">
+                <div class="card hover-lift hover-shadow-xl shadow-sm border-0">
+                    <!--card-body-->
+                    <div class="card-body p-4">
+                        <div class="d-flex mb-4 align-items-center">
 
-                        <!--Companies group-->
-                        <div class="flex-grow-1 d-flex align-items-center">
-                            <!--Campany-->
-                            <div class="width-5x height-5x p-2 bg-white shadow-sm position-relative flex-center rounded-circle border">
-                                <img src="https://bootdey.com/img/Content/avatar/avatar1.png" class="img-fluid" alt="">
-                            </div>
-                            <!--Campany-->
-                            <div class="width-5x height-5x p-2 ms-n3 bg-white shadow-sm position-relative flex-center rounded-circle border">
-                                <img src="https://bootdey.com/img/Content/avatar/avatar2.png" class="img-fluid" alt="">
-                            </div>
-                            <!--Campany-->
-                            <div class="width-5x height-5x p-2 ms-n3 bg-white shadow-sm position-relative flex-center rounded-circle border">
-                                <img src="https://bootdey.com/img/Content/avatar/avatar3.png" class="img-fluid" alt="">
+                            <!--Companies group-->
+                            <div class="flex-grow-1 d-flex align-items-center">
+                                <!--Campany-->
+                                <div class="width-5x height-5x p-2 bg-white shadow-sm position-relative flex-center rounded-circle border">
+                                    <img src="https://bootdey.com/img/Content/avatar/avatar1.png" class="img-fluid" alt="">
+                                </div>
+                                <!--Campany-->
+                                <div class="width-5x height-5x p-2 ms-n3 bg-white shadow-sm position-relative flex-center rounded-circle border">
+                                    <img src="https://bootdey.com/img/Content/avatar/avatar2.png" class="img-fluid" alt="">
+                                </div>
+                                <!--Campany-->
+                                <div class="width-5x height-5x p-2 ms-n3 bg-white shadow-sm position-relative flex-center rounded-circle border">
+                                    <img src="https://bootdey.com/img/Content/avatar/avatar3.png" class="img-fluid" alt="">
+                                </div>
                             </div>
                         </div>
+                        <h5>Content Creator</h5>
+                        <p class="mb-0 text-muted">7 Jobs opportunities</p>
                     </div>
-                    <h5>Content Creator</h5>
-                    <p class="mb-0 text-muted">7 Jobs opportunities</p>
+                    <!--link-->
+                    <a href="#!" class="stretched-link"></a>
                 </div>
-                <!--link-->
-                <a href="#!" class="stretched-link"></a>
             </div>
         </div>
     </div>
-</div>
 </body>
 
 </html>

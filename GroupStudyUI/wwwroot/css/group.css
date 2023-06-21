@@ -334,7 +334,7 @@ hr {
 
 .input-group-addon:last-child {
     border-left: 0;
-    background-color: #FF7361;
+    background-color: #4e63d7;
 }
 
     .input-group-addon:last-child:hover {
@@ -376,7 +376,7 @@ hr {
 }
 
 .input-group-addon {
-    padding: 6px 12px;
+    padding: 12px;
     font-size: 14px;
     font-weight: normal;
     line-height: 1;
@@ -435,7 +435,7 @@ hr {
     padding: 13px 15px;
     font-weight: 600;
     text-align: center;
-    color: #bbb;
+    color: black;
     border: 1px solid transparent;
 }
 
@@ -445,7 +445,7 @@ hr {
         margin-right: 10px;
     }
 
-    #main > label[for*='1']:before {
+    /*#main > label[for*='1']:before {
         content: '\f1cb';
     }
 
@@ -463,7 +463,7 @@ hr {
 
     #main > label[for*='5']:before {
         content: '\f1a9';
-    }
+    }*/
 
     #main > label:hover {
         color: #888;
@@ -471,11 +471,11 @@ hr {
     }
 
 #main > input:checked + label {
-    color: #555;
-    border: 1px solid #FF7361;
-    border-top: 2px solid #FF7361;
-    border-bottom: 1px solid #FF7361;
-    background-color: #FF7361;
+    color: white;
+    border: 1px solid #4e63d7;
+    border-top: 2px solid #4e63d7;
+    border-bottom: 1px solid #4e63d7;
+    background-color: #4e63d7;
 }
 
 #tab1:checked ~ #content1,
@@ -551,7 +551,7 @@ hr {
 
 .q-type238 {
     margin-top: 23px;
-    background-color: #FF7361;
+    background-color: #4e63d7;
     font-size: 10px;
     padding: 5px 10px 5px 10px;
     border: none;
@@ -581,7 +581,7 @@ hr {
 }
 
 .ques-icon-info3293 {
-    font-size: 13px;
+    font-size: 14px;
     font-weight: bold;
 }
 
@@ -778,14 +778,14 @@ hr {
                 transition: .5s;
             }
 
-.status-part3821 i {
+/*.status-part3821 i {
     background-color: #EAEAEB;
     padding: 15px 123px 15px 10px;
     font-size: 15px;
     color: black;
     font-weight: bold;
     margin-top: 10px;
-}
+}*/
 
 
 /*social part*/
