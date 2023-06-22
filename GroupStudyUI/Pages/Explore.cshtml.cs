@@ -18,10 +18,25 @@ namespace GroupStudyUI.Pages
 			_contextAccessor = contextAccessor;
 		}
         public List<Group> listGroups { get; set; }
+        [BindProperty]
+        public string searchName { get; set; }
         public async Task OnGet()
         {
             IEnumerable<Group> groups = await _groupService.GetAllGroup();
             listGroups = new List<Group>(groups);
+        }
+        public async Task<IActionResult> OnPostSearch() 
+        {
+            if (searchName == null)
+            {
+                IEnumerable<Group> group = await _groupService.GetAllGroup();
+                listGroups = new List<Group>(group);
+               return Page();  
+            }
+            List<Group> groups = new List<Group>();
+            groups=await _groupService.SearchGroupByName(searchName);
+            listGroups=groups;
+            return Page();
         }
     }
 }

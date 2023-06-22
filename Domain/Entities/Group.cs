@@ -18,7 +18,7 @@ namespace Domain.Entities
         public string InviteUrl { get; set; }
         public DateTime CreateDate { get; set; }
         public DateTime? UpdateDate { get; set; }
-
+        public int? memberAmount { get; set; }  
         public ICollection<UserGroup>? UserGroups { get; set; }
         public ICollection<Post>? Posts { get; set; }
     }

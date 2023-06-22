@@ -31,11 +31,11 @@
             <div class="col-lg-10 mx-auto">
                 <div class="career-search mb-60">
 
-                    <form action="#" class="career-form mb-60" method="get">
+                    <form  asp-page-handler="Search" class="career-form mb-60" method="post">
                         <div class="row">
                             <div class="col-md-9 col-lg-9 my-9 mt-4">
                                 <div class="input-group">
-                                    <input type="text" class="form-control" placeholder="Enter Group Name" id="keywords">
+                                    <input type="text" class="form-control" name="searchName" placeholder="Enter Group Name" id="keywords">
                                 </div>
                             </div>
                             
@@ -48,7 +48,7 @@
                     </form>
 
                     <div class="filter-result">
-                        <p class="mb-30 ff-montserrat">Finding result : 69</p>
+                        <p class="mb-30 ff-montserrat">Finding result : @Model.listGroups.Count</p>
 
                         @foreach (var group in Model.listGroups)
                         {
@@ -64,7 +64,7 @@
                                                 <i class="zmdi zmdi-globe mr-2"></i> @group.Status
                                             </li>
                                             <li class="mr-md-4">
-                                                <i class="zmdi zmdi-accounts mr-2"></i> 200k members
+                                                <i class="zmdi zmdi-accounts mr-2"></i> @group.memberAmount
                                             </li>
                                         </ul>
                                         <p>@group.Description</p>

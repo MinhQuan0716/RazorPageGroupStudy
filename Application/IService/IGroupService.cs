@@ -12,5 +12,6 @@ namespace Application.IService
         Task<IEnumerable<Group>> GetAllGroup();
         Task<bool> CreateGroup(string name,string description,string status,string inviteUrl);
         Task<List<Group>> GetJoinedGroup(int userId);
+        Task<List<Group>> SearchGroupByName(string name);
     }
 }

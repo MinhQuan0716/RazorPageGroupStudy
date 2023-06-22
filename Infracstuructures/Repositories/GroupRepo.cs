@@ -24,5 +24,11 @@ namespace Infracstuructures.Repositories
                                                 .ToListAsync();
             return group;
         }
+
+        public async Task<List<Group>> GetSearchGroup(string groupName)
+        {
+           var searchGroup= await _appDbContext.Groups.Where(x=>x.Name.Equals(groupName)).ToListAsync();
+            return searchGroup;
+        }
     }
 }
