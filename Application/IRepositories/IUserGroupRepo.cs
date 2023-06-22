@@ -9,5 +9,6 @@ namespace Application.IRepositories
 {
     public interface IUserGroupRepo : IGenericRepo<UserGroup>
     {
+
     }
 }

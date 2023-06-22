@@ -37,5 +37,10 @@ namespace Application.Service
         {
             return await _groupRepo.GetAllAsync();
         }
+
+        public async Task<List<Group>> GetJoinedGroup(int userId)
+        {
+            return await _groupRepo.GetJoinedGroup(userId);
+        }
     }
 }
