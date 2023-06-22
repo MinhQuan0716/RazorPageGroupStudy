@@ -18,7 +18,8 @@ namespace Domain.Entities
         [Required]
         public string Password { get; set; }
         [Required]
-        public string Role { get; set; }
+        public int  RoleId { get; set; }
+        public Role Role { get; set; }
         public bool IsDeleted { get; set; }
         public bool IsDisabled { get; set; }
 

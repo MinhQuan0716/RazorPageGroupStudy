@@ -13,5 +13,7 @@ namespace Infracstuructures.Repositories
         public GroupRepo(AppDbContext context) : base(context)
         {
         }
+
+        
     }
 }

@@ -1,0 +1,41 @@
+﻿using Application.IRepositories;
+using Application.IService;
+using Domain.Entities;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace Application.Service
+{
+    public class GroupService : IGroupService
+    {
+        private readonly IGroupRepo _groupRepo;
+        private readonly IUnitOfWork _unitOfWork;
+        public GroupService(IGroupRepo groupRepo,IUnitOfWork unitOfWork)
+        {
+            _groupRepo = groupRepo;
+            _unitOfWork = unitOfWork;
+        }
+
+        public async Task<bool> CreateGroup(string name, string description, string status, string inviteUrl)
+        {
+            Group newGroup = new Group()
+            {
+                Name= name,
+                Description= description,
+                CreateDate= DateTime.UtcNow,
+                Status= status,
+                InviteUrl= inviteUrl
+            };
+            await _groupRepo.AddAsync(newGroup);
+            return await _unitOfWork.SaveChangesAsync()>0;
+        }
+
+        public async Task<IEnumerable<Group>> GetAllGroup()
+        {
+            return await _groupRepo.GetAllAsync();
+        }
+    }
+}

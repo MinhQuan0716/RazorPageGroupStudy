@@ -10,6 +10,7 @@ namespace GroupStudyUI
         public static IServiceCollection AddWebService(this IServiceCollection services, IConfiguration config) 
         {
             services.AddScoped<IUserService, UserService>();
+            services.AddScoped<IGroupService, GroupService>();
             return services;
         
         }
