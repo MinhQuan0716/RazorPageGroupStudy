@@ -1,0 +1,165 @@
+﻿@page
+@model GroupStudyUI.Pages.PostDetailModel
+@{
+	ViewData["Title"] = "Post Detail";
+}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<link href="css/askqueststyle.css" rel="stylesheet" type="text/css">
+	<link href="css/font-awesome.min.css" rel="stylesheet" type="text/css">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/material-design-iconic-font/2.2.0/css/material-design-iconic-font.min.css">
+</head>
+
+<body>
+
+	<section class="main-content920">
+		<div class="container">
+			<div class="row">
+				<div class="col-md-12">
+
+
+					<div class="post-details">
+						<div class="row">
+							<div class="col-md-1">
+								<div class="author-img202l">
+									<a href="#"><img src="image/images.png" alt="image"> </a>
+								</div>
+							</div>
+							<div class="col-md-11">
+								<div class="details-header923">
+									<div class="row">
+										<div class="col-md-8">
+											<div class="post-title-left129">
+												<h3>This Is My first Question</h3>
+											</div>
+										</div>
+									</div>
+								</div>
+								<div class="post-details-info1982">
+									<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi adipiscing gravida odio, sit amet suscipit risus ultrices eu. Fusce viverra neque at purus laoreet consequat. Vivamus vulputate posuere nisl quis consequat. Donec congue commodo mi, sed commodo velit fringilla ac. Fusce placerat venenatis mi. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Cras ornare, dolor a aliquet rutrum, dolor turpis condimentum leo, a semper lacus purus in felis. Quisque blandit posuere turpis, eget auctor felis pharetra eu .</p>
+									<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi adipiscing gravida odio, sit amet suscipit risus ultrices eu. Fusce viverra neque at purus laoreet consequat. Vivamus vulputate posuere nisl quis consequat. Donec congue commodo mi, sed commodo velit fringilla ac. Fusce placerat venenatis mi. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Cras ornare, dolor a aliquet rutrum, dolor turpis condimentum leo, a semper lacus purus in felis. Quisque blandit posuere turpis, eget auctor felis pharetra eu .</p>
+									<hr>
+									<div class="ques-icon-info3293">
+										<a href="#" style="margin-right: 20px"><i class="zmdi zmdi-time" aria-hidden="true"></i>4 min ago </a>
+										<a href="#" style="margin-right: 20px"><i class="zmdi zmdi-folder" aria-hidden="true"></i>File Attach </a>
+										<a href="#" style="margin-right: 20px"><i class="zmdi zmdi-help-outline" aria-hidden="true"></i>Answer Post </a>
+										<a href="#" style="margin-right: 20px"><i class="zmdi zmdi-bug" aria-hidden="true"></i>Report </a>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+
+					@*=================================*@
+
+					<div class="author-details8392">
+						<div class="author-img202l">
+							<img src="image/images.png" alt="image">
+							<div class="au-image-overlay text-center"> <a href="#"><i class="fa fa-plus-square-o" aria-hidden="true"></i></a> </div>
+						</div> <span class="author-deatila04re">
+							<h5>About the Author</h5>
+							<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed viverra auctor neque. Nullam lobortis, sapien vitae lobortis tristique.</p>
+
+						</span>
+					</div>
+
+					@*=================================*@
+
+					<div class="comment-list12993">
+						<div class="container">
+							<div class="row">
+
+								<div class="comments-container">
+									<ul id="comments-list" class="comments-list">
+										<li>
+											<div class="comment-main-level">
+												<!-- Avatar -->
+												<div class="comment-avatar"><img src="image/images.png" alt=""></div>
+												<!-- Contenedor del Comentario -->
+												<div class="comment-box">
+													<div class="comment-head">
+														<h6 class="comment-name"><a href="#">Lorena Rojero</a></h6> <span><i class="fa fa-clock-o" aria-hidden="true"> January 15 , 2014 at 10:00 pm</i></span> <i class="fa fa-reply"></i> <i class="fa fa-heart"></i>
+													</div>
+													<div class="comment-content"> Lorem ipsum dolor sit amet, consectetur adipisicing elit. Velit omnis animi et iure laudantium vitae, praesentium optio, sapiente distinctio illo? </div>
+												</div>
+											</div>
+
+
+											<ul class="comments-list reply-list">
+												<li>
+													<div class="comment-avatar"><img src="image/images.png" alt=""></div>
+													<div class="comment-box">
+														<div class="comment-head">
+															<h6 class="comment-name"><a href="#">Lorena Rojero</a></h6> <span><i class="fa fa-clock-o" aria-hidden="true"> January 15 , 2014 at 10:00 pm</i></span> <i class="fa fa-reply"></i> <i class="fa fa-heart"></i>
+														</div>
+														<div class="comment-content"> Lorem ipsum dolor sit amet, consectetur adipisicing elit. Velit omnis animi et iure laudantium vitae, praesentium optio, sapiente distinctio illo? </div>
+													</div>
+												</li>
+												<li>
+													<div class="comment-avatar"><img src="image/images.png" alt=""></div>
+													<div class="comment-box">
+														<div class="comment-head">
+															<h6 class="comment-name by-author"><a href="#">Agustin Ortiz</a></h6> <span><i class="fa fa-clock-o" aria-hidden="true"> January 15 , 2014 at 10:00 pm</i></span> <i class="fa fa-reply"></i> <i class="fa fa-heart"></i>
+														</div>
+														<div class="comment-content"> Lorem ipsum dolor sit amet, consectetur adipisicing elit. Velit omnis animi et iure laudantium vitae, praesentium optio, sapiente distinctio illo? </div>
+													</div>
+												</li>
+												<li>
+													<div class="comment-avatar"><img src="image/images.png" alt=""></div>
+													<div class="comment-box">
+														<div class="comment-head">
+															<h6 class="comment-name"><a href="#">Lorena Rojero</a></h6> <span><i class="fa fa-clock-o" aria-hidden="true"> January 15 , 2014 at 10:00 pm</i></span> <i class="fa fa-reply"></i> <i class="fa fa-heart"></i>
+														</div>
+														<div class="comment-content"> Lorem ipsum dolor sit amet, consectetur adipisicing elit. Velit omnis animi et iure laudantium vitae, praesentium optio, sapiente distinctio illo? </div>
+													</div>
+												</li>
+											</ul>
+										</li>
+										<li>
+											<div class="comment-main-level">
+												<!-- Avatar -->
+												<div class="comment-avatar"><img src="image/images.png" alt=""></div>
+												<!-- Contenedor del Comentario -->
+												<div class="comment-box">
+													<div class="comment-head">
+														<h6 class="comment-name"><a href="#">Lorena Rojero</a></h6> <span><i class="fa fa-clock-o" aria-hidden="true"> January 15 , 2014 at 10:00 pm</i></span> <i class="fa fa-reply"></i> <i class="fa fa-heart"></i>
+													</div>
+													<div class="comment-content"> Lorem ipsum dolor sit amet, consectetur adipisicing elit. Velit omnis animi et iure laudantium vitae, praesentium optio, sapiente distinctio illo? </div>
+												</div>
+											</div>
+										</li>
+
+									</ul>
+
+								</div>
+							</div>
+						</div>
+					</div>
+
+					<div class="comment289-box mt-4">
+						<h3>Leave A Reply</h3>
+						<hr>
+						<div class="row">
+							<div class="col-md-12">
+								<div class="post9320-box">
+									<input type="text" class="comment-input219882" placeholder="Enter Your Comment/Answer">
+								</div>
+								<button type="button" class="pos393-submit">Comment</button>
+							</div>
+
+						</div>
+					</div>
+				</div>
+				<!--                end of col-md-12 -->
+			</div>
+		</div>
+	</section>
+
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+
+</body>
+
+</html>

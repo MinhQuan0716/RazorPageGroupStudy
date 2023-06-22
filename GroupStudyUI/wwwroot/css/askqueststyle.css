@@ -193,6 +193,7 @@ hr {
 
 .navbar-brand > img {
     display: block;
+    margin-top: -20px;
 }
 
 .navbar-default .navbar-nav > li > a {
@@ -230,7 +231,7 @@ hr {
     background-color: #ff7361;
 }
 
-/*.dropdown-menu > li > a:hover,
+.dropdown-menu > li > a:hover,
 .dropdown-menu > li > a:focus {
     color: #fff;
     text-decoration: none;
@@ -269,12 +270,12 @@ hr {
         color: #333;
         white-space: nowrap;
         font-family: serif;
-    }*/
+    }
 
 .welcome-part-one {
-    background-color: #37517e;
+    background-color: #FF7361;
     padding-top: 51px;
-    /*margin-top: -20px;*/
+    margin-top: -20px;
     padding-bottom: 35px;
 }
 
@@ -1614,7 +1615,7 @@ h5 {
     padding: 5px 15px 5px 15px;
     width: 100%;
     color: #fff;
-    background-color: #FF7361;
+    background-color: #4e63d7;
     border: none;
     border-radius: 3px;
     font-weight: bold;
@@ -2120,7 +2121,7 @@ h5 {
     padding: 8px;
     width: 100%;
     margin-top: 20px;
-    background-color: #FF7361;
+    background-color: #4e63d7;
     border: none;
     color: #fff;
     font-weight: bold;
@@ -2337,4 +2338,13 @@ h5 {
 
 .category2781 {
     margin-top: 70px;
+}
+
+
+.nopadding {
+    padding: 0px;
+}
+
+.nopadding-right {
+    padding-right: 0px;
 }
