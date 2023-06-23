@@ -17,6 +17,14 @@ namespace Infracstuructures.Repositories
             _appDbContext = context;
         }
 
+        public async Task<List<Group>> GetAllGroupV2()
+        {
+            var allGroups= await _appDbContext.Groups.OrderByDescending(g=>g.Name)
+                                               .Where(x=>x.Status.Equals("public"))
+                                               .ToListAsync();
+            return allGroups;
+        }
+
         public async Task<List<Group>> GetJoinedGroup(int userId)
         {
             var group = await _appDbContext.Groups.Include(x => x.UserGroups)

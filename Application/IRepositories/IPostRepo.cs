@@ -9,5 +9,8 @@ namespace Application.IRepositories
 {
     public interface IPostRepo : IGenericRepo<Post>
     {
+        Task<List<Post>> GetSearchPost(string content);
+        Task<List<Post>> SortPostByCreateDate();
+        Task<int> GetPostAmountInGroup(int groupId);    
     }
 }

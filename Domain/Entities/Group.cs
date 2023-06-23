@@ -15,7 +15,7 @@ namespace Domain.Entities
         public string Name { get; set; }
         public string? Description { get; set; }
         public string Status { get; set; }
-        public string InviteUrl { get; set; }
+        public string? InviteUrl { get; set; }
         public DateTime CreateDate { get; set; }
         public DateTime? UpdateDate { get; set; }
         public int? memberAmount { get; set; }  

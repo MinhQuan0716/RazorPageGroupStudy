@@ -11,5 +11,6 @@ namespace Application.IRepositories
     {
         Task<List<Group>> GetJoinedGroup(int userId);
         Task<List<Group>> GetSearchGroup(string groupName);
+        Task<List<Group>> GetAllGroupV2();
     }
 }

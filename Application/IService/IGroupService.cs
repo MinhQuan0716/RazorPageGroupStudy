@@ -13,5 +13,6 @@ namespace Application.IService
         Task<bool> CreateGroup(string name,string description,string status,string inviteUrl);
         Task<List<Group>> GetJoinedGroup(int userId);
         Task<List<Group>> SearchGroupByName(string name);
+        Task<List<Group>> GetAllGroupV2();
     }
 }
