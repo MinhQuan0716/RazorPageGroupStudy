@@ -22,14 +22,14 @@ namespace GroupStudyUI.Pages
         public string searchName { get; set; }
         public async Task OnGet()
         {
-            IEnumerable<Group> groups = await _groupService.GetAllGroup();
+            IEnumerable<Group> groups = await _groupService.GetAllGroupV2();
             listGroups = new List<Group>(groups);
         }
         public async Task<IActionResult> OnPostSearch() 
         {
             if (searchName == null)
             {
-                IEnumerable<Group> group = await _groupService.GetAllGroup();
+                IEnumerable<Group> group = await _groupService.GetAllGroupV2();
                 listGroups = new List<Group>(group);
                return Page();  
             }

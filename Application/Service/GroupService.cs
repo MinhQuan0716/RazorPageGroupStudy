@@ -52,5 +52,11 @@ namespace Application.Service
         {
             return await _groupRepo.GetSearchGroup(name); 
         }
-    }
+
+        public async Task<Group> GetGroupBydId(int groupId)
+        {
+            return await _groupRepo.GetByIdAsync(groupId);
+        }
+
+	}
 }

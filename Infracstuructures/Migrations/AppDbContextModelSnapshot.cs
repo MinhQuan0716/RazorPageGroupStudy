@@ -99,7 +99,6 @@ namespace Infracstuructures.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("InviteUrl")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Name")

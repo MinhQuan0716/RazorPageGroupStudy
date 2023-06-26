@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Infracstuructures.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20230622142620_Test")]
+    [Migration("20230626191603_Test")]
     partial class Test
     {
         /// <inheritdoc />
@@ -102,7 +102,6 @@ namespace Infracstuructures.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("InviteUrl")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Name")

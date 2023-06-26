@@ -23,15 +23,30 @@ namespace Infracstuructures.Repositories
             return searchPost;
         }
 
-        public async Task<List<Post>> SortPostByCreateDate()
+        public async Task<List<Post>> SortPostByCreateDate(int groupId)
         {
-            var sortPost= await _appDbContext.Posts.OrderByDescending(x=>x.CreateTime).ToListAsync();
-            return sortPost;
+            var sortedPosts = await _appDbContext.Posts
+                .Where(p => p.GroupId == groupId)
+                .OrderByDescending(p => p.CreateTime)
+                .ToListAsync();
+
+            return sortedPosts;
         }
-        public  async Task<int> GetPostAmountInGroup(int groupId)
+
+        public async Task<int> GetPostAmountInGroup(int groupId)
         {
-            int postAmount=  _appDbContext.Posts.Include(x=>x.Group.Id==groupId).ToList().Count();
+            int postAmount = await _appDbContext.Posts.CountAsync(p => p.GroupId == groupId);
             return postAmount;
         }
-    }
+
+        public async Task<List<Post>> GetPostsByGroupId(int groupId)
+		{
+			var posts = await _appDbContext.Posts
+				.Where(p => p.GroupId == groupId)
+				.ToListAsync();
+
+			return posts;
+		}
+
+	}
 }

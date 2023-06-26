@@ -28,11 +28,17 @@ namespace Application.Service
             return postList;
         }
 
-        public async Task<List<Post>> SortPostByNewestDay()
+        public async Task<List<Post>> SortPostByNewestDay(int groupId)
         {
-            var sortPostList = await _postRepo.SortPostByCreateDate();
+            var sortPostList = await _postRepo.SortPostByCreateDate(groupId);
             return sortPostList;
         }
 
-    }
+        public async Task<List<Post>> GetPostsByGroupId(int groupId)
+        {
+            var listPost = await _postRepo.GetPostsByGroupId(groupId);
+            return listPost;
+        }
+
+	}
 }

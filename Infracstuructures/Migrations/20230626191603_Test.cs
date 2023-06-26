@@ -36,7 +36,7 @@ namespace Infracstuructures.Migrations
                     Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Description = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Status = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    InviteUrl = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    InviteUrl = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     CreateDate = table.Column<DateTime>(type: "datetime2", nullable: false),
                     UpdateDate = table.Column<DateTime>(type: "datetime2", nullable: true),
                     memberAmount = table.Column<int>(type: "int", nullable: true)
@@ -192,12 +192,12 @@ namespace Infracstuructures.Migrations
                         principalTable: "Posts",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
+                    /*table.ForeignKey(
                         name: "FK_Comments_Users_CreateByUserId",
                         column: x => x.CreateByUserId,
                         principalTable: "Users",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.NoAction);
+                        onDelete: ReferentialAction.Cascade);*/
                 });
 
             migrationBuilder.InsertData(

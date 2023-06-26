@@ -13,26 +13,34 @@ namespace GroupStudyUI.Pages
     public class GroupModel : PageModel
     {
 		private readonly IGroupService _groupService;
+		private readonly IPostService _postService;
 		private readonly IHttpContextAccessor _contextAccessor;
-		public GroupModel(IGroupService groupService, IHttpContextAccessor contextAccessor)
+		public GroupModel(IGroupService groupService, IPostService postService, IHttpContextAccessor contextAccessor)
 		{
 			_groupService = groupService;
 			_contextAccessor = contextAccessor;
+			_postService = postService;
 		}
-		public List<Group> Groups { get; set; }
-		public async Task<IActionResult> OnGet()
-        {
-			if (_contextAccessor.HttpContext.Session.Keys.Any())
+		public Group Group { get; set; }
+		public List<Post> listPosts { get; set; }
+        public List<Post> listPostsSortByDate { get; set; }
+        public int TotalPostInGroup { get; set; }
+		public async Task<IActionResult> OnGet(int id)
+		{
+			Group = await _groupService.GetGroupBydId(id);
+			
+
+			if (Group == null)
 			{
-				string customerJson = _contextAccessor.HttpContext.Session.GetString("User");
-				if(customerJson != null)
-				{
-					var user=JsonConvert.DeserializeObject<User>(customerJson);
-				Groups=await _groupService.GetJoinedGroup(user.Id);
-					return Page();
-				}
+				return NotFound();
 			}
-			return RedirectToPage("/Login");
-        }
-    }
+
+			listPosts = await _postService.GetPostsByGroupId(Group.Id);
+            listPostsSortByDate = await _postService.SortPostByNewestDay(Group.Id);
+            TotalPostInGroup = await _postService.PostAmountInGroup(Group.Id);
+
+			return Page();
+		}
+
+	}
 }

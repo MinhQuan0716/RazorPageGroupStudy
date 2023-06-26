@@ -14,5 +14,6 @@ namespace Application.IService
         Task<List<Group>> GetJoinedGroup(int userId);
         Task<List<Group>> SearchGroupByName(string name);
         Task<List<Group>> GetAllGroupV2();
+        Task<Group> GetGroupBydId(int groupId);
     }
 }

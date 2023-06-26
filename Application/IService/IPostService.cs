@@ -10,7 +10,8 @@ namespace Application.IService
     public  interface IPostService
     {
         Task<List<Post>> SearchPost(string content);
-        Task<List<Post>> SortPostByNewestDay();
+        Task<List<Post>> SortPostByNewestDay(int groupId);
         Task<int> PostAmountInGroup(int groupId);
-    }
+		Task<List<Post>> GetPostsByGroupId(int groupId);
+	}
 }
