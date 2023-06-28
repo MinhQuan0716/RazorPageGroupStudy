@@ -36,7 +36,9 @@ namespace Application.Service
                 Email= email,
                 Password= password,
                 Name= name,
-                RoleId=2
+                RoleId=2,
+                IsDeleted=false,
+                IsDisabled=false,
             };
             await _userRepo.AddAsync(newUser);
             return await _unitOfWork.SaveChangesAsync()>0;

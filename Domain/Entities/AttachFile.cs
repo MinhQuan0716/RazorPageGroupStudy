@@ -14,8 +14,7 @@ namespace Domain.Entities
         public int Id { get; set; }
         [Required]
         public string Name { get; set; }
-        [Required]
-        public string FirebaseUrl { get; set; }
+        public string? FirebaseUrl { get; set; }
         public int OrderInPost { get; set; }
         [Required]
         [ForeignKey("Post")]

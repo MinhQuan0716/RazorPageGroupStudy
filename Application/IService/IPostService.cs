@@ -13,5 +13,8 @@ namespace Application.IService
         Task<List<Post>> SortPostByNewestDay(int groupId);
         Task<int> PostAmountInGroup(int groupId);
 		Task<List<Post>> GetPostsByGroupId(int groupId);
+        Task<bool> CreatePost(string content);
+        Task<bool> DeletePost(int postId);
+        Task<Post> GetPostById(int postId); 
 	}
 }

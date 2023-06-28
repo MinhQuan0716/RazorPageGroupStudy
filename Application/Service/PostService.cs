@@ -12,9 +12,11 @@ namespace Application.Service
     public class PostService : IPostService
     {
         private readonly IPostRepo _postRepo;
-        public PostService(IPostRepo postRepo)
+        private readonly IUnitOfWork _unitOfWork;
+        public PostService(IPostRepo postRepo,IUnitOfWork unitOfWork)
         {
             _postRepo = postRepo;
+            _unitOfWork = unitOfWork;
         }
 
         public async Task<int> PostAmountInGroup(int groupId)
@@ -40,5 +42,36 @@ namespace Application.Service
             return listPost;
         }
 
-	}
+        public async Task<bool> CreatePost(string content)
+        {
+            var post = new Post
+            {
+                Content = content,
+                CommentOnPost = 0,
+                PostStatusId = 1
+            };
+           await _postRepo.AddAsync(post);
+            return await _unitOfWork.SaveChangesAsync()>0;
+        }
+
+        public async Task<bool> DeletePost(int postId)
+        {
+            var post = await _postRepo.GetByIdAsync(postId);
+            if(post != null)
+            {
+                await _postRepo.RemoveAsync(post);
+            }
+            else
+            {
+                throw new Exception("Post do not exist");
+            }
+            return await _unitOfWork.SaveChangesAsync()>0;
+        }
+
+        public async Task<Post> GetPostById(int postId)
+        {
+            var post = await _postRepo.GetByIdAsync(postId);
+            return post;
+        }
+    }
 }
