@@ -43,5 +43,9 @@ namespace Application.Service
             await _userRepo.AddAsync(newUser);
             return await _unitOfWork.SaveChangesAsync()>0;
         }
+        public async Task<List<User>> GetUsersByGroupId(int groupId)
+        {
+            return await _userRepo.GetUsersByGroupId(groupId);
+        }
     }
 }
