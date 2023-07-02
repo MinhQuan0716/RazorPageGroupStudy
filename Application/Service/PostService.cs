@@ -42,11 +42,15 @@ namespace Application.Service
             return listPost;
         }
 
-        public async Task<bool> CreatePost(string content)
+        public async Task<bool> CreatePost(string title, string content, int groupId, int userId)
         {
             var post = new Post
             {
+                PostTitle = title,
                 Content = content,
+                GroupId = groupId,
+                CreateUserId = userId,
+                CreateTime = DateTime.Now,
                 CommentOnPost = 0,
                 PostStatusId = 1
             };
@@ -72,6 +76,23 @@ namespace Application.Service
         {
             var post = await _postRepo.GetByIdAsync(postId);
             return post;
+        }
+
+        public async Task<List<Post>> GetPostsByUserId(int userId, int groupId)
+        {
+            var listPost = await _postRepo.GetPostsByUserId(userId, groupId);
+            return listPost;
+        }
+
+        public async Task<List<Post>> GetPostsPendingByUserId(int userId, int groupId)
+        {
+            var listPost = await _postRepo.GetPostsPendingByUserId(userId, groupId);
+            return listPost;
+        }
+        public async Task<List<Post>> GetPostsBannedByUserId(int userId, int groupId)
+        {
+            var listPost = await _postRepo.GetPostsBannedByUserId(userId, groupId);
+            return listPost;
         }
     }
 }

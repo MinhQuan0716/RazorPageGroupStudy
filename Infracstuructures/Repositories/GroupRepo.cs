@@ -57,5 +57,30 @@ namespace Infracstuructures.Repositories
                                         .ToListAsync();
             return searchGroup;
         }
-    }
+
+		public async Task<List<Group>> GetAdminGroup(int userId)
+		{
+			var adminGroups = await _appDbContext.UserGroups
+				.Where(ug => ug.UserId == userId && ug.GroupRoleId == 1)
+				.Join(_appDbContext.Groups,
+					ug => ug.GroupId,
+					g => g.Id,
+					(ug, g) => g)
+				.ToListAsync();
+
+			return adminGroups;
+		}
+		public async Task<List<Group>> GetModeratorGroup(int userId)
+		{
+			var adminGroups = await _appDbContext.UserGroups
+				.Where(ug => ug.UserId == userId && ug.GroupRoleId == 2)
+				.Join(_appDbContext.Groups,
+					ug => ug.GroupId,
+					g => g.Id,
+					(ug, g) => g)
+				.ToListAsync();
+
+			return adminGroups;
+		}
+	}
 }

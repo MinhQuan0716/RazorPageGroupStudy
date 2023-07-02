@@ -13,5 +13,8 @@ namespace Application.IRepositories
         Task<List<Post>> SortPostByCreateDate(int groupId);
         Task<int> GetPostAmountInGroup(int groupId);
 		Task<List<Post>> GetPostsByGroupId (int groupId);
+        Task<List<Post>> GetPostsByUserId(int userId, int groupId);
+        Task<List<Post>> GetPostsPendingByUserId(int userId, int groupId);
+        Task<List<Post>> GetPostsBannedByUserId(int userId, int groupId);
     }
 }

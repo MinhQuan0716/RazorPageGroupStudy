@@ -26,7 +26,7 @@ namespace Infracstuructures.Repositories
         public async Task<List<Post>> SortPostByCreateDate(int groupId)
         {
             var sortedPosts = await _appDbContext.Posts
-                .Where(p => p.GroupId == groupId)
+                .Where(p => p.GroupId == groupId && p.PostStatusId == 2)
                 .OrderByDescending(p => p.CreateTime)
                 .ToListAsync();
 
@@ -48,5 +48,23 @@ namespace Infracstuructures.Repositories
 			return posts;
 		}
 
-	}
+        public async Task<List<Post>> GetPostsByUserId(int userId, int groupId)
+        {
+            return await _appDbContext.Posts
+                .Where(p => p.CreateUserId == userId && p.GroupId == groupId && p.PostStatusId == 2)
+                .ToListAsync();
+        }
+        public async Task<List<Post>> GetPostsPendingByUserId(int userId, int groupId)
+        {
+            return await _appDbContext.Posts
+                .Where(p => p.CreateUserId == userId && p.GroupId == groupId && p.PostStatusId == 1)
+                .ToListAsync();
+        }
+        public async Task<List<Post>> GetPostsBannedByUserId(int userId, int groupId)
+        {
+            return await _appDbContext.Posts
+                .Where(p => p.CreateUserId == userId && p.GroupId == groupId && p.PostStatusId == 3)
+                .ToListAsync();
+        }
+    }
 }

@@ -57,6 +57,14 @@ namespace Application.Service
         {
             return await _groupRepo.GetByIdAsync(groupId);
         }
+		public async Task<List<Group>> GetAdminGroup(int userId)
+		{
+			return await _groupRepo.GetAdminGroup(userId);
+		}
+		public async Task<List<Group>> GetModeratorGroup(int userId)
+		{
+			return await _groupRepo.GetModeratorGroup(userId);
+		}
 
 	}
 }

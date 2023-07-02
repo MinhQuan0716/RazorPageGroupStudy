@@ -24,6 +24,9 @@ namespace GroupStudyUI.Pages
 		public Group Group { get; set; }
 		public List<Post> listPosts { get; set; }
         public List<Post> listPostsSortByDate { get; set; }
+		public List<Post> listPostsOfUser { get; set; }
+        public List<Post> listPostsPendingOfUser { get; set; }
+        public List<Post> listPostsBannedOfUser { get; set; }
         public int TotalPostInGroup { get; set; }
 		public async Task<IActionResult> OnGet(int id)
 		{
@@ -34,8 +37,14 @@ namespace GroupStudyUI.Pages
 			{
 				return NotFound();
 			}
+            string customerJson = _contextAccessor.HttpContext.Session.GetString("User");
+            var user = JsonConvert.DeserializeObject<User>(customerJson);
 
-			listPosts = await _postService.GetPostsByGroupId(Group.Id);
+			listPostsPendingOfUser = await _postService.GetPostsPendingByUserId(user.Id, Group.Id);
+            listPostsBannedOfUser = await _postService.GetPostsBannedByUserId(user.Id, Group.Id);
+
+            listPostsOfUser = await _postService.GetPostsByUserId(user.Id, Group.Id);
+            listPosts = await _postService.GetPostsByGroupId(Group.Id);
             listPostsSortByDate = await _postService.SortPostByNewestDay(Group.Id);
             TotalPostInGroup = await _postService.PostAmountInGroup(Group.Id);
 

@@ -73,6 +73,101 @@
 		</div>
 	</div>
 
+
+	<hr>
+	<div class="container mt-3" style="background-color: #4e63d7">
+		<p class="text-center font-weight-bold text-white pt-2 pb-2" style="font-size: 24px">Your groups manage as Admin</p>
+	</div>
+	<div class="container">
+		<div class="row mb-4">
+			@if (Model.listAdminGroups != null && Model.listAdminGroups.Any())
+			{
+				@foreach (var group in Model.listAdminGroups)
+				{
+					<div class="col-lg-4 col-md-6 mb-4">
+						<div class="card hover-lift hover-shadow-xl shadow-sm border-0">
+							<div class="card-body p-4">
+								<div class="d-flex mb-4 align-items-center">
+									<div class="flex-grow-1 d-flex align-items-center">
+										<!--Campany-->
+										<div class="width-5x height-5x p-2 bg-white shadow-sm position-relative flex-center rounded-circle border">
+											<img src="https://bootdey.com/img/Content/avatar/avatar1.png" class="img-fluid" alt="">
+										</div>
+										<!--Campany-->
+										<div class="width-5x height-5x p-2 ms-n3 bg-white shadow-sm position-relative flex-center rounded-circle border">
+											<img src="https://bootdey.com/img/Content/avatar/avatar2.png" class="img-fluid" alt="">
+										</div>
+										<!--Campany-->
+										<div class="width-5x height-5x p-2 ms-n3 bg-white shadow-sm position-relative flex-center rounded-circle border">
+											<img src="https://bootdey.com/img/Content/avatar/avatar3.png" class="img-fluid" alt="">
+										</div>
+									</div>
+								</div>
+								<a asp-page="/Group" asp-route-id="@group.Id" class="text-decoration-none"><h5>@group.Name</h5></a>
+								<p class="mb-0 text-muted"><i class="zmdi zmdi-globe mr-2"></i>@group.Status - <i class="zmdi zmdi-accounts mr-2"></i>@group.memberAmount Members</p>
+								<p class="mb-0 text-muted">@group.Description</p>
+							</div>
+						</div>
+					</div>
+				}
+			}
+			else
+			{
+				<div class="col-12">
+					<p>You haven't managed any groups.</p>
+				</div>
+			}
+		</div>
+	</div>
+
+
+
+	<hr>
+	<div class="container mt-3" style="background-color: #4e63d7">
+		<p class="text-center font-weight-bold text-white pt-2 pb-2" style="font-size: 24px">Your groups manage as Moderator</p>
+	</div>
+	<div class="container">
+		<div class="row mb-4">
+			@if (Model.listModeratorGroups != null && Model.listModeratorGroups.Any())
+			{
+				@foreach (var group in Model.listModeratorGroups)
+				{
+					<div class="col-lg-4 col-md-6 mb-4">
+						<div class="card hover-lift hover-shadow-xl shadow-sm border-0">
+							<div class="card-body p-4">
+								<div class="d-flex mb-4 align-items-center">
+									<div class="flex-grow-1 d-flex align-items-center">
+										<!--Campany-->
+										<div class="width-5x height-5x p-2 bg-white shadow-sm position-relative flex-center rounded-circle border">
+											<img src="https://bootdey.com/img/Content/avatar/avatar1.png" class="img-fluid" alt="">
+										</div>
+										<!--Campany-->
+										<div class="width-5x height-5x p-2 ms-n3 bg-white shadow-sm position-relative flex-center rounded-circle border">
+											<img src="https://bootdey.com/img/Content/avatar/avatar2.png" class="img-fluid" alt="">
+										</div>
+										<!--Campany-->
+										<div class="width-5x height-5x p-2 ms-n3 bg-white shadow-sm position-relative flex-center rounded-circle border">
+											<img src="https://bootdey.com/img/Content/avatar/avatar3.png" class="img-fluid" alt="">
+										</div>
+									</div>
+								</div>
+								<a asp-page="/Group" asp-route-id="@group.Id" class="text-decoration-none"><h5>@group.Name</h5></a>
+								<p class="mb-0 text-muted"><i class="zmdi zmdi-globe mr-2"></i>@group.Status - <i class="zmdi zmdi-accounts mr-2"></i>@group.memberAmount Members</p>
+								<p class="mb-0 text-muted">@group.Description</p>
+							</div>
+						</div>
+					</div>
+				}
+			}
+			else
+			{
+				<div class="col-12">
+					<p>You haven't managed any groups.</p>
+				</div>
+			}
+		</div>
+	</div>
+
 </body>
 
 </html>
