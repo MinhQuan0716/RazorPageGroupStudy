@@ -22,14 +22,14 @@
 					<div class="ask-question-input-part032">
 						<h4>Ask Question</h4>
 						<hr>
-						<form method="post">
+						<form method="post" enctype="multipart/form-data">
 
 							<div class="question-title39">
 								<span class="form-description433">Question-Title* </span><input type="text" name="PostTitle" class="question-ttile32" placeholder="Write Your Question Title">
 							</div>
 
 							<div class="button-group-addfile3239">
-								<span class="form-description23993">Attactment*</span><input type="file" name="ffile" class="question-ttile3226">
+								<span class="form-description23993">Attactment*</span><input type="file" name="file" class="question-ttile3226">
 
 							</div>
 							<div class="details2-239">
@@ -41,7 +41,7 @@
 								<button type="submit" class="publis1291">Publish your Question</button>
 							</div>
 						</form>
-						
+
 
 					</div>
 
@@ -58,6 +58,25 @@
 			$("#txtEditor").Editor();
 		});
 	</script>
+
+	<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app.js"></script>
+	<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-storage.js"></script>
+	<script>
+		// Your web app's Firebase configuration
+		const firebaseConfig = {
+			apiKey: "AIzaSyCbVUKHM-sErlKspNHGBAKrhawryQSPiH4",
+			authDomain: "group-study-prn.firebaseapp.com",
+			projectId: "group-study-prn",
+			storageBucket: "group-study-prn.appspot.com",
+			messagingSenderId: "220864201824",
+			appId: "1:220864201824:web:2b360fabcd200a239d2f05",
+			measurementId: "G-QMCXR1TP1X"
+		};
+
+		// Initialize Firebase
+		firebase.initializeApp(firebaseConfig);
+	</script>
+
 
 </body>
 

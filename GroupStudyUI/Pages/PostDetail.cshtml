@@ -1,4 +1,4 @@
-﻿@page
+﻿ @page
 @model GroupStudyUI.Pages.PostDetailModel
 @{
 	ViewData["Title"] = "Post Detail";
@@ -25,45 +25,33 @@
 						<div class="row">
 							<div class="col-md-1">
 								<div class="author-img202l">
-									<a href="#"><img src="image/images.png" alt="image"> </a>
+									<a href="#"><img src="~/imgs/default_avatar.png" alt="image"> </a>
 								</div>
 							</div>
 							<div class="col-md-11">
 								<div class="details-header923">
 									<div class="row">
 										<div class="col-md-8">
+											<h4>Author - @Model.AuthorPost.Name</h4>
 											<div class="post-title-left129">
-												<h3>This Is My first Question</h3>
+												<h3>@Model.Post.PostTitle</h3>
 											</div>
 										</div>
 									</div>
 								</div>
 								<div class="post-details-info1982">
-									<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi adipiscing gravida odio, sit amet suscipit risus ultrices eu. Fusce viverra neque at purus laoreet consequat. Vivamus vulputate posuere nisl quis consequat. Donec congue commodo mi, sed commodo velit fringilla ac. Fusce placerat venenatis mi. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Cras ornare, dolor a aliquet rutrum, dolor turpis condimentum leo, a semper lacus purus in felis. Quisque blandit posuere turpis, eget auctor felis pharetra eu .</p>
-									<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi adipiscing gravida odio, sit amet suscipit risus ultrices eu. Fusce viverra neque at purus laoreet consequat. Vivamus vulputate posuere nisl quis consequat. Donec congue commodo mi, sed commodo velit fringilla ac. Fusce placerat venenatis mi. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Cras ornare, dolor a aliquet rutrum, dolor turpis condimentum leo, a semper lacus purus in felis. Quisque blandit posuere turpis, eget auctor felis pharetra eu .</p>
+									<p>@Model.Post.Content</p>
 									<hr>
 									<div class="ques-icon-info3293">
-										<a href="#" style="margin-right: 20px"><i class="zmdi zmdi-time" aria-hidden="true"></i>4 min ago </a>
-										<a href="#" style="margin-right: 20px"><i class="zmdi zmdi-folder" aria-hidden="true"></i>File Attach </a>
-										<a href="#" style="margin-right: 20px"><i class="zmdi zmdi-help-outline" aria-hidden="true"></i>Answer Post </a>
-										<a href="#" style="margin-right: 20px"><i class="zmdi zmdi-bug" aria-hidden="true"></i>Report </a>
+										<p style="margin-right: 20px"><i class="zmdi zmdi-time" aria-hidden="true"></i>@Model.Post.CreateTime.ToString("g")</p>
+										<a href="@Model.Post.fileURL" style="margin-right: 20px" target="_blank" download>
+											<i class="zmdi zmdi-folder" aria-hidden="true"></i>File Attach
+										</a>
+										<a href="#" style="margin-right: 20px"><i class="zmdi zmdi-bug" aria-hidden="true"></i>Report</a>
 									</div>
 								</div>
 							</div>
 						</div>
-					</div>
-
-					@*=================================*@
-
-					<div class="author-details8392">
-						<div class="author-img202l">
-							<img src="image/images.png" alt="image">
-							<div class="au-image-overlay text-center"> <a href="#"><i class="fa fa-plus-square-o" aria-hidden="true"></i></a> </div>
-						</div> <span class="author-deatila04re">
-							<h5>About the Author</h5>
-							<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed viverra auctor neque. Nullam lobortis, sapien vitae lobortis tristique.</p>
-
-						</span>
 					</div>
 
 					@*=================================*@
@@ -140,7 +128,7 @@
 					</div>
 
 					<div class="comment289-box mt-4">
-						<h3>Leave A Reply</h3>
+						<h3>Leave A Comment</h3>
 						<hr>
 						<div class="row">
 							<div class="col-md-12">

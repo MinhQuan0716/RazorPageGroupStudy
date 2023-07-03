@@ -14,5 +14,6 @@ namespace Application.IService
         Task<List<User>> GetUsersByGroupId(int groupId);
         Task<bool> UpdateUser (User user);
         Task<List<User>> GetAllUser();
+        Task<User> GetUserById(int id);
     }
 }
