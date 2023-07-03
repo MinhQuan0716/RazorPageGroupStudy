@@ -20,15 +20,16 @@ namespace Infracstuructures
         public DbSet<User> Users { get; set; }
         public DbSet<UserGroup> UserGroups { get; set; }
         public DbSet<Post> Posts { get; set; }
+        public DbSet<CommentMap> CommentMap { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<Comment>()
+           /* modelBuilder.Entity<Comment>()
                 .HasOne(p => p.ReplyComment)
                 .WithOne()
                 .HasForeignKey<Comment>(x => x.ReplyToCommentId)
                 .IsRequired(false)
-                .OnDelete(DeleteBehavior.Restrict);
+                .OnDelete(DeleteBehavior.Restrict);*/
             modelBuilder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());
         }
 

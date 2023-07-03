@@ -17,14 +17,13 @@ namespace Domain.Entities
         public int CreateByUserId { get; set; }
         [Required]
         [ForeignKey("Post")]
-        public int PostId { get; set; }
+        public int? PostId { get; set; }
         public DateTime CreateDate { get; set; }
-        [ForeignKey("ReplyComment")]
-        public int? ReplyToCommentId { get; set; }
 
         public Post Post { get; set; }
         public User CommentUser { get; set; }
-        public Comment? ReplyComment { get; set; }
+        public ICollection<CommentMap> ParentComment { get; set; }
+        public ICollection<CommentMap> ChildComment { get; set; }
 
     }
 }
