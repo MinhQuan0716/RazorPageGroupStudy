@@ -25,6 +25,7 @@ namespace Domain.Entities
         public int? PostStatusId { get; set; }
         public PostStatus PostStatus { get; set; }
         public int? CommentOnPost { get; set; }
+        public string? fileURL { get; set; }    
         [Required]
         public DateTime CreateTime { get; set; }
         public bool? isReport { get; set; }  
