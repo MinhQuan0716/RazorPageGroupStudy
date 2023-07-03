@@ -12,5 +12,7 @@ namespace Application.IService
         Task<bool> RegisterAsync(string email, string password,string name);
         Task<User> LoginAsync(string email, string password);
         Task<List<User>> GetUsersByGroupId(int groupId);
+        Task<bool> UpdateUser (User user);
+        Task<List<User>> GetAllUser();
     }
 }

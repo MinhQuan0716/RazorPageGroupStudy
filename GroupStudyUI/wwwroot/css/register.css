@@ -1,0 +1,39 @@
+﻿.register-form {
+    max-width: 400px;
+    margin: auto;
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+label {
+    display: block;
+    font-weight: bold;
+}
+
+.form-control {
+    width: 100%;
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+}
+
+.btn {
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+    .btn:hover {
+        background-color: #0056b3;
+    }
+
+.small-input {
+    width: 150px; /* Adjust the width as per your preference */
+    height: 30px; /* Adjust the height as per your preference */
+    font-size: 14px; /* Adjust the font size as per your preference */
+}

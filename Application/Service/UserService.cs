@@ -47,5 +47,23 @@ namespace Application.Service
         {
             return await _userRepo.GetUsersByGroupId(groupId);
         }
+
+        public async Task<bool> UpdateUser(User user)
+        {
+
+           var findUser =_userRepo.GetByIdAsync(user.Id);
+            if (findUser != null)
+            {
+                _userRepo.Update(user);
+            }
+          
+            return await _unitOfWork.SaveChangesAsync() > 0;    
+        }
+
+        public Task<List<User>> GetAllUser()
+        {
+           var listUser= _userRepo.GetAllAsync();
+            return listUser;
+        }
     }
 }

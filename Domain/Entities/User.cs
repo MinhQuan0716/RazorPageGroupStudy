@@ -20,8 +20,8 @@ namespace Domain.Entities
         [Required]
         public int  RoleId { get; set; }
         public Role Role { get; set; }
-        public bool IsDeleted { get; set; }
-        public bool IsDisabled { get; set; }
+        public bool? IsDeleted { get; set; }
+        public bool? IsDisabled { get; set; }
 
         public ICollection<UserGroup>? UserGroups { get; set; }
         public ICollection<Comment>? CommentGroups { get; set; }
