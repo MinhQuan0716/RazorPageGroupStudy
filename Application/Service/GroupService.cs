@@ -32,8 +32,12 @@ namespace Application.Service
             await _groupRepo.AddAsync(newGroup);
             return await _unitOfWork.SaveChangesAsync()>0;
         }
+		public async Task UpdateGroup(Group group)
+		{
+			await _groupRepo.UpdateGroup(group);
+		}
 
-        public async Task<IEnumerable<Group>> GetAllGroup()
+		public async Task<IEnumerable<Group>> GetAllGroup()
         {
             return await _groupRepo.GetAllAsync();
         }
@@ -57,6 +61,19 @@ namespace Application.Service
         {
             return await _groupRepo.GetByIdAsync(groupId);
         }
+		public async Task<List<Group>> GetAdminGroup(int userId)
+		{
+			return await _groupRepo.GetAdminGroup(userId);
+		}
+		public async Task<List<Group>> GetModeratorGroup(int userId)
+		{
+			return await _groupRepo.GetModeratorGroup(userId);
+		}
+        public async Task<int> GetUserRoleIdInGroup(int userId, int groupId)
+        {
+            return await _groupRepo.GetUserRoleIdInGroup(userId, groupId);
+        }
 
-	}
+
+    }
 }

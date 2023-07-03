@@ -9,8 +9,12 @@ namespace Application.IRepositories
 {
     public interface IGroupRepo : IGenericRepo<Group>
     {
-        Task<List<Group>> GetJoinedGroup(int userId);
-        Task<List<Group>> GetSearchGroup(string groupName);
+		Task UpdateGroup(Group group);
+		Task<List<Group>> GetJoinedGroup(int userId);
+		Task<List<Group>> GetAdminGroup(int userId);
+		Task<List<Group>> GetModeratorGroup(int userId);
+		Task<List<Group>> GetSearchGroup(string groupName);
         Task<List<Group>> GetAllGroupV2();
+        Task<int> GetUserRoleIdInGroup(int userId, int groupId);
     }
 }

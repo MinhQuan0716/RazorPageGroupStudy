@@ -10,6 +10,7 @@ namespace Application.IService
     public  interface IUserService
     {
         Task<bool> RegisterAsync(string email, string password,string name);
-        Task<User> LoginAsync(string email, string password); 
+        Task<User> LoginAsync(string email, string password);
+        Task<List<User>> GetUsersByGroupId(int groupId);
     }
 }

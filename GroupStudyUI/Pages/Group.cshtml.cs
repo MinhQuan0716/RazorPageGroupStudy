@@ -22,20 +22,37 @@ namespace GroupStudyUI.Pages
 			_postService = postService;
 		}
 		public Group Group { get; set; }
-		public List<Post> listPosts { get; set; }
+		public int UserRoleIdInGroup { get; set; }
+		public bool CanManageGroup { get; set; } = false;
+        public List<Post> listPosts { get; set; }
         public List<Post> listPostsSortByDate { get; set; }
+		public List<Post> listPostsOfUser { get; set; }
+        public List<Post> listPostsPendingOfUser { get; set; }
+        public List<Post> listPostsBannedOfUser { get; set; }
         public int TotalPostInGroup { get; set; }
 		public async Task<IActionResult> OnGet(int id)
 		{
 			Group = await _groupService.GetGroupBydId(id);
-			
 
-			if (Group == null)
+            if (Group == null)
 			{
 				return NotFound();
 			}
+            string customerJson = _contextAccessor.HttpContext.Session.GetString("User");
+            var user = JsonConvert.DeserializeObject<User>(customerJson);
 
-			listPosts = await _postService.GetPostsByGroupId(Group.Id);
+			UserRoleIdInGroup = await _groupService.GetUserRoleIdInGroup(user.Id, Group.Id);
+			if (UserRoleIdInGroup == 1 || UserRoleIdInGroup == 2)
+			{
+				CanManageGroup = true;
+
+            }
+
+            listPostsPendingOfUser = await _postService.GetPostsPendingByUserId(user.Id, Group.Id);
+            listPostsBannedOfUser = await _postService.GetPostsBannedByUserId(user.Id, Group.Id);
+
+            listPostsOfUser = await _postService.GetPostsByUserId(user.Id, Group.Id);
+            listPosts = await _postService.GetPostsByGroupId(Group.Id);
             listPostsSortByDate = await _postService.SortPostByNewestDay(Group.Id);
             TotalPostInGroup = await _postService.PostAmountInGroup(Group.Id);
 

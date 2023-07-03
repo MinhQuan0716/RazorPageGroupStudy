@@ -1,0 +1,151 @@
+﻿@page
+@model GroupStudyUI.Pages.ManageGroup.IndexModel
+@{
+}
+
+
+<ul class="nav nav-tabs">
+	<li class="nav-item">
+		<a class="nav-link active" id="user-tab" data-bs-toggle="tab" href="#user-tab-content">User Manage</a>
+	</li>
+	<li class="nav-item">
+		<a class="nav-link" id="post-tab" data-bs-toggle="tab" href="#post-tab-content">Post Manage</a>
+	</li>
+	<li class="nav-item">
+		<a class="nav-link" id="comment-tab" data-bs-toggle="tab" href="#comment-tab-content">Comment Manage</a>
+	</li>
+	<li class="nav-item">
+		<a class="nav-link" id="group-tab" data-bs-toggle="tab" href="#group-tab-content">Modify Group</a>
+	</li>
+</ul>
+
+<div class="tab-content mt-3">
+	<div class="tab-pane fade show active" id="user-tab-content">
+		<h4>User Management</h4>
+		<table class="table">
+			<thead>
+				<tr>
+					<th>Username</th>
+					<th>Email</th>
+					<th>Actions</th>
+				</tr>
+			</thead>
+			<tbody>
+				@foreach (var user in Model.listUserInGroup)
+				{
+					<tr>
+						<td>@user.Name</td>
+						<td>@user.Email</td>
+						<td>
+							<!-- Actions for user management (e.g., ban, promote, etc.) -->
+						</td>
+					</tr>
+				}
+			</tbody>
+		</table>
+	</div>
+
+	<div class="tab-pane fade" id="post-tab-content">
+		<h4>Post Management</h4>
+		<table class="table">
+			<thead>
+				<tr>
+					<th>Title</th>
+					<th>Content</th>
+					<th>Created By</th>
+					<th>Created Time</th>
+					<th>Status</th>
+					<th>Actions</th>
+				</tr>
+			</thead>
+			<tbody>
+				@foreach (var post in Model.listPostInGroup)
+				{
+					<tr>
+						<td>@post.PostTitle</td>
+						<td>@post.Content</td>
+						<td>@post.CreateUserId</td>
+						<td>@post.CreateTime</td>
+						<td>@post.PostStatusId</td>
+						<td>
+							<!-- Actions for user management (e.g., ban, promote, etc.) -->
+						</td>
+					</tr>
+				}
+			</tbody>
+		</table>
+	</div>
+	<div class="tab-pane fade" id="comment-tab-content">
+		<h4>Comment Management</h4>
+		<!-- Comment management content here -->
+	</div>
+	<div class="tab-pane fade" id="group-tab-content">
+		<h4>Group Modification</h4>
+
+		<form method="post">
+			<div class="form-group">
+				<label for="name">Name</label>
+				<input type="text" class="form-control" id="name" name="groupInfo.Name" value="@Model.groupInfo.Name" required>
+			</div>
+
+			<div class="form-group">
+				<label for="description">Description</label>
+				<textarea class="form-control" id="description" name="groupInfo.Description" required>@Model.groupInfo.Description</textarea>
+			</div>
+
+			<div class="form-group">
+				<label for="status">Status</label>
+				<select class="form-control" id="status" name="groupInfo.Status" required>
+					<option value="Public" selected="@(Model.groupInfo.Status == "Public")">Public</option>
+					<option value="Private" selected="@(Model.groupInfo.Status == "Private")">Private</option>
+				</select>
+			</div>
+
+			<div class="form-group">
+				<label for="inviteUrl">Invite URL</label>
+				<input type="text" class="form-control" id="inviteUrl" name="groupInfo.InviteUrl" value="@Model.groupInfo.InviteUrl">
+			</div>
+
+			<button type="submit" class="btn btn-primary">Update</button>
+		</form>
+	</div>
+
+</div>
+
+@section Scripts {
+	<script>
+		document.addEventListener("DOMContentLoaded", function () {
+			// Get all tab links
+			var tabLinks = document.querySelectorAll(".nav-link");
+
+			// Get all tab panes
+			var tabPanes = document.querySelectorAll(".tab-pane");
+
+			// Loop through each tab link
+			tabLinks.forEach(function (link) {
+				link.addEventListener("click", function (event) {
+					event.preventDefault();
+
+					// Remove active class from all tab links
+					tabLinks.forEach(function (tabLink) {
+						tabLink.classList.remove("active");
+					});
+
+					// Add active class to the clicked tab link
+					link.classList.add("active");
+
+					// Get the target tab pane ID from the href attribute
+					var targetPaneId = link.getAttribute("href");
+
+					// Remove active class from all tab panes
+					tabPanes.forEach(function (tabPane) {
+						tabPane.classList.remove("show", "active");
+					});
+
+					// Add active class to the target tab pane
+					document.querySelector(targetPaneId).classList.add("show", "active");
+				});
+			});
+		});
+	</script>
+}

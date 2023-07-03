@@ -20,7 +20,9 @@ namespace GroupStudyUI.Pages
             _contextAccessor = contextAccessor;
         }
         public List<Group> listGroups { get; set; }
-        public async Task<IActionResult> OnGet()
+		public List<Group> listAdminGroups { get; set; }
+		public List<Group> listModeratorGroups { get; set; }
+		public async Task<IActionResult> OnGet()
         {
             if (_contextAccessor.HttpContext.Session.Keys.Any())
             {
@@ -29,7 +31,10 @@ namespace GroupStudyUI.Pages
                 {
                     var user = JsonConvert.DeserializeObject<User>(customerJson);
                     listGroups = await _groupService.GetJoinedGroup(user.Id);
-                    return Page();
+					listAdminGroups = await _groupService.GetAdminGroup(user.Id);
+                    listModeratorGroups = await _groupService.GetModeratorGroup(user.Id);
+
+					return Page();
                 }
             }
             return RedirectToPage("/Login");

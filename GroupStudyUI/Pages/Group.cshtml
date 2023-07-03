@@ -44,10 +44,13 @@
                 <div class="col-md-9">
                     <div id="main">
                         <input id="tab1" type="radio" name="tabs" checked>
-                        <label for="tab1"><i class="zmdi zmdi-time-restore"></i> Recent Post</label>
+                        <label for="tab1"><i class="zmdi zmdi-time-restore"></i> Recent Posts </label>
                         <input id="tab2" type="radio" name="tabs">
-                        <label for="tab2"> <i class="zmdi zmdi-thumb-up"></i> Most Response</label>
-
+                        <label for="tab2"> <i class="zmdi zmdi-thumb-up"></i> Your Posts </label>
+                        <input id="tab3" type="radio" name="tabs">
+                        <label for="tab3"> <i class="zmdi zmdi zmdi-time"></i> Wait for approve </label>
+                        <input id="tab4" type="radio" name="tabs">
+                        <label for="tab4"> <i class="zmdi zmdi-block"></i> Banned </label>
 
                         <section id="content1">
                             <!--Recent Question Content Section -->
@@ -57,22 +60,22 @@
                                     <div class="row">
                                         <div class="col-md-1">
                                             <div class="left-user12923 left-user12923-repeat">
-                                                <a href="#"><img src="image/images.png" alt="image"> </a>
+                                                <a href="#"><img src="~/imgs/default_avatar.png" alt="image"> </a>
                                             </div>
                                         </div>
                                         <div class="col-md-9">
                                             <div class="right-description893">
                                                 <div id="que-hedder2983">
-                                                    <h3><a href="/PostDetail" target="_blank">Title: @post.Id</a></h3>
+                                                    <h3><a href="/PostDetail" target="_blank">@post.PostTitle</a></h3>
                                                 </div>
                                                 <div class="ques-details10018">
                                                     <p>@post.Content</p>
                                                 </div>
                                                 <hr />
                                                 <div class="ques-icon-info3293">
-                                                    <a href="#" style="margin-right: 20px"><i class="zmdi zmdi-time" aria-hidden="true"></i>@post.CreateTime.ToString("g")</a>
+                                                    <p style="margin-right: 20px"><i class="zmdi zmdi-time" aria-hidden="true"></i>@post.CreateTime.ToString("g")</p>
                                                     <a href="#" style="margin-right: 20px"><i class="zmdi zmdi-folder" aria-hidden="true"></i>File Attach</a>
-                                                    <a href="#" style="margin-right: 20px"><i class="zmdi zmdi-help-outline" aria-hidden="true"></i>Answer Post</a>
+                                                    <a href="/PostDetail" target="_blank" style="margin-right: 20px"><i class="zmdi zmdi-help-outline" aria-hidden="true"></i>Answer Post</a>
                                                     <a href="#" style="margin-right: 20px"><i class="zmdi zmdi-bug" aria-hidden="true"></i>Report</a>
                                                 </div>
                                             </div>
@@ -80,7 +83,7 @@
                                         <div class="col-md-2">
                                             <div class="ques-type302">
                                                 <a href="#">
-                                                    <button type="button" class="q-type238"><i class="fa fa-comment" aria-hidden="true"> 333335 answer</i></button>
+                                                    <button type="button" class="q-type238"> @post.CommentOnPost answers </button>
                                                 </a>
                                             </div>
                                         </div>
@@ -92,29 +95,29 @@
                         <!--  End of content-1------>
 
                         <section id="content2">
-                            <!--Most Response Content Section -->
-                            @foreach (var post in Model.listPosts)
+                            <!--Most Your Post Section -->
+                            @foreach (var post in Model.listPostsOfUser)
                             {
                                 <div class="question-type2033">
                                     <div class="row">
                                         <div class="col-md-1">
                                             <div class="left-user12923 left-user12923-repeat">
-                                                <a href="#"><img src="image/images.png" alt="image"> </a>
+                                                <a href="#"><img src="~/imgs/default_avatar.png" alt="image"> </a>
                                             </div>
                                         </div>
                                         <div class="col-md-9">
                                             <div class="right-description893">
                                                 <div id="que-hedder2983">
-                                                    <h3><a href="/PostDetail" target="_blank">Title: @post.Id</a></h3>
+                                                    <h3><a href="/PostDetail" target="_blank">@post.PostTitle</a></h3>
                                                 </div>
                                                 <div class="ques-details10018">
                                                     <p>@post.Content</p>
                                                 </div>
                                                 <hr />
                                                 <div class="ques-icon-info3293">
-                                                    <a href="#" style="margin-right: 20px"><i class="zmdi zmdi-time" aria-hidden="true"></i>@post.CreateTime.ToString("g")</a>
+                                                    <p style="margin-right: 20px"><i class="zmdi zmdi-time" aria-hidden="true"></i>@post.CreateTime.ToString("g")</p>
                                                     <a href="#" style="margin-right: 20px"><i class="zmdi zmdi-folder" aria-hidden="true"></i>File Attach</a>
-                                                    <a href="#" style="margin-right: 20px"><i class="zmdi zmdi-help-outline" aria-hidden="true"></i>Answer Post</a>
+                                                    <a href="/PostDetail" target="_blank" style="margin-right: 20px"><i class="zmdi zmdi-help-outline" aria-hidden="true"></i>Answer Post</a>
                                                     <a href="#" style="margin-right: 20px"><i class="zmdi zmdi-bug" aria-hidden="true"></i>Report</a>
                                                 </div>
                                             </div>
@@ -122,7 +125,7 @@
                                         <div class="col-md-2">
                                             <div class="ques-type302">
                                                 <a href="#">
-                                                    <button type="button" class="q-type238"><i class="fa fa-comment" aria-hidden="true"> 333335 answer</i></button>
+                                                    <button type="button" class="q-type238"> @post.CommentOnPost answers </button>
                                                 </a>
                                             </div>
                                         </div>
@@ -132,6 +135,89 @@
 
                         </section>
                         <!----end of content-2----->
+
+                        <section id="content3">
+                            <!--Recent Pending Post Section -->
+                            @foreach (var post in Model.listPostsPendingOfUser)
+                            {
+                                <div class="question-type2033">
+                                    <div class="row">
+                                        <div class="col-md-1">
+                                            <div class="left-user12923 left-user12923-repeat">
+                                                <a href="#"><img src="~/imgs/default_avatar.png" alt="image"> </a>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-9">
+                                            <div class="right-description893">
+                                                <div id="que-hedder2983">
+                                                    <h3><a href="/PostDetail" target="_blank">@post.PostTitle</a></h3>
+                                                </div>
+                                                <div class="ques-details10018">
+                                                    <p>@post.Content</p>
+                                                </div>
+                                                <hr />
+                                                <div class="ques-icon-info3293">
+                                                    <p style="margin-right: 20px"><i class="zmdi zmdi-time" aria-hidden="true"></i>@post.CreateTime.ToString("g")</p>
+                                                    <a href="#" style="margin-right: 20px"><i class="zmdi zmdi-folder" aria-hidden="true"></i>File Attach</a>
+                                                    <a href="/PostDetail" target="_blank" style="margin-right: 20px"><i class="zmdi zmdi-help-outline" aria-hidden="true"></i>Answer Post</a>
+                                                    <a href="#" style="margin-right: 20px"><i class="zmdi zmdi-bug" aria-hidden="true"></i>Report</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-2">
+                                            <div class="ques-type302">
+                                                <a href="#">
+                                                    <button type="button" class="q-type238"> @post.CommentOnPost answers </button>
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            }
+
+                        </section>
+
+                        <section id="content4">
+                            <!--Recent Banned Post Section -->
+                            @foreach (var post in Model.listPostsBannedOfUser)
+                            {
+                                <div class="question-type2033">
+                                    <div class="row">
+                                        <div class="col-md-1">
+                                            <div class="left-user12923 left-user12923-repeat">
+                                                <a href="#"><img src="~/imgs/default_avatar.png" alt="image"> </a>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-9">
+                                            <div class="right-description893">
+                                                <div id="que-hedder2983">
+                                                    <h3><a href="/PostDetail" target="_blank">@post.PostTitle</a></h3>
+                                                </div>
+                                                <div class="ques-details10018">
+                                                    <p>@post.Content</p>
+                                                </div>
+                                                <hr />
+                                                <div class="ques-icon-info3293">
+                                                    <p style="margin-right: 20px"><i class="zmdi zmdi-time" aria-hidden="true"></i>@post.CreateTime.ToString("g")</p>
+                                                    <a href="#" style="margin-right: 20px"><i class="zmdi zmdi-folder" aria-hidden="true"></i>File Attach</a>
+                                                    <a href="/PostDetail" target="_blank" style="margin-right: 20px"><i class="zmdi zmdi-help-outline" aria-hidden="true"></i>Answer Post</a>
+                                                    <a href="#" style="margin-right: 20px"><i class="zmdi zmdi-bug" aria-hidden="true"></i>Report</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-2">
+                                            <div class="ques-type302">
+                                                <a href="#">
+                                                    <button type="button" class="q-type238"> @post.CommentOnPost answers </button>
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            }
+
+                        </section>
+
                     </div>
                 </div>
                 <!--end of col-md-9 -->
@@ -139,9 +225,17 @@
                 <!--strart col-md-3 (side bar)-->
                 <aside class="col-md-3 sidebar97239">
 
-                    <a href="/AskQuestion" class="btn btn-primary mb-3">
+                    <a href="/AskQuestion?groupId=@Model.Group.Id" class="btn btn-primary mb-3">
                         <i class="zmdi zmdi-edit" aria-hidden="true"></i> Write Your Post
                     </a>
+
+                    @if (Model.CanManageGroup)
+                    {
+                        <a href="/ManageGroup?groupId=@Model.Group.Id" class="btn btn-primary mb-3">
+                            <i class="zmdi zmdi-settings" aria-hidden="true"></i> Manage Group
+                        </a>
+                    }
+
 
                     <div class="status-part3821">
                         <h4>Group Stats</h4>
@@ -156,58 +250,35 @@
                         <h4>Most Comments</h4>
                         <div class="pints-wrapper">
                             <div class="left-user3898">
-                                <a href="#"><img src="image/images.png" alt="Image"></a>
+                                <a href="#"><img src="~/imgs/default_avatar.png" alt="Image"></a>
                                 <div class="imag-overlay39"> <a href="#"><i class="fa fa-plus" aria-hidden="true"></i></a> </div>
                             </div> <span class="points-details938">
                                 <a href="#"><h5>Ahmed Hasan</h5></a>
-                                <a href="#" class="designetion439">Pundit</a>
-                                <p>206 points</p>
+                                <p>206 Comments</p>
                             </span>
                         </div>
                         <hr>
                         <div class="pints-wrapper">
                             <div class="left-user3898">
-                                <a href="#"><img src="image/images.png" alt="Image"></a>
+                                <a href="#"><img src="~/imgs/default_avatar.png" alt="Image"></a>
                                 <div class="imag-overlay39"> <a href="#"><i class="fa fa-plus" aria-hidden="true"></i></a> </div>
                             </div> <span class="points-details938">
                                 <a href="#"><h5>Ahmed Hasan</h5></a>
-                                <a href="#" class="designetion439">Pundit</a>
-                                <p>206 points</p>
+                                <p>206 Comments</p>
                             </span>
                         </div>
                         <hr>
                         <div class="pints-wrapper">
                             <div class="left-user3898">
-                                <a href="#"><img src="image/images.png" alt="Image"></a>
+                                <a href="#"><img src="~/imgs/default_avatar.png" alt="Image"></a>
                                 <div class="imag-overlay39"> <a href="#"><i class="fa fa-plus" aria-hidden="true"></i></a> </div>
                             </div> <span class="points-details938">
                                 <a href="#"><h5>Ahmed Hasan</h5></a>
-                                <a href="#" class="designetion439">Pundit</a>
-                                <p>206 points</p>
+                                <p>206 Comments</p>
                             </span>
                         </div>
                         <hr>
-                        <div class="pints-wrapper">
-                            <div class="left-user3898">
-                                <a href="#"><img src="image/images.png" alt="Image"></a>
-                                <div class="imag-overlay39"> <a href="#"><i class="fa fa-plus" aria-hidden="true"></i></a> </div>
-                            </div> <span class="points-details938">
-                                <a href="#"><h5>Ahmed Hasan</h5></a>
-                                <a href="#" class="designetion439">Pundit</a>
-                                <p>206 points</p>
-                            </span>
-                        </div>
-                        <hr>
-                        <div class="pints-wrapper">
-                            <div class="left-user3898">
-                                <a href="#"><img src="image/images.png" alt="Image"></a>
-                                <div class="imag-overlay39"> <a href="#"><i class="fa fa-plus" aria-hidden="true"></i></a> </div>
-                            </div> <span class="points-details938">
-                                <a href="#"><h5>Ahmed Hasan</h5></a>
-                                <a href="#" class="designetion439">Pundit</a>
-                                <p>206 points</p>
-                            </span>
-                        </div>
+                        
                     </div>
                     <!--               end of Highest points -->
 

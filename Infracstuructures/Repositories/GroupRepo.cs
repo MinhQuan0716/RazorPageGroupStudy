@@ -16,8 +16,13 @@ namespace Infracstuructures.Repositories
         {
             _appDbContext = context;
         }
+		public async Task UpdateGroup(Group group)
+		{
+			_appDbContext.Groups.Update(group);
+			await _appDbContext.SaveChangesAsync();
+		}
 
-        public async Task<List<Group>> GetAllGroupV2()
+		public async Task<List<Group>> GetAllGroupV2()
         {
             var allGroups= await _appDbContext.Groups.OrderBy(g=>g.Name)
                                                .Where(x=>x.Status.Equals("Public"))
@@ -57,5 +62,41 @@ namespace Infracstuructures.Repositories
                                         .ToListAsync();
             return searchGroup;
         }
+
+		public async Task<List<Group>> GetAdminGroup(int userId)
+		{
+			var adminGroups = await _appDbContext.UserGroups
+				.Where(ug => ug.UserId == userId && ug.GroupRoleId == 1)
+				.Join(_appDbContext.Groups,
+					ug => ug.GroupId,
+					g => g.Id,
+					(ug, g) => g)
+				.ToListAsync();
+
+			return adminGroups;
+		}
+		public async Task<List<Group>> GetModeratorGroup(int userId)
+		{
+			var adminGroups = await _appDbContext.UserGroups
+				.Where(ug => ug.UserId == userId && ug.GroupRoleId == 2)
+				.Join(_appDbContext.Groups,
+					ug => ug.GroupId,
+					g => g.Id,
+					(ug, g) => g)
+				.ToListAsync();
+
+			return adminGroups;
+		}
+        public async Task<int> GetUserRoleIdInGroup(int userId, int groupId)
+        {
+            var userRoleId = await _appDbContext.UserGroups
+                .Where(ug => ug.UserId == userId && ug.GroupId == groupId)
+                .Select(ug => ug.GroupRoleId)
+                .FirstOrDefaultAsync();
+
+            return userRoleId;
+        }
+
+
     }
 }
