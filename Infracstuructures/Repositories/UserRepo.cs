@@ -40,7 +40,7 @@ namespace Infracstuructures.Repositories
                     u => u.Id,
                     ug => ug.UserId,
                     (u, ug) => new { User = u, UserGroup = ug })
-                .Where(j => j.UserGroup.GroupId == groupId)
+                .Where(j => j.UserGroup.GroupId == groupId && j.UserGroup.isBanned == false)
                 .Select(j => j.User)
                 .ToListAsync();
         }

@@ -28,15 +28,27 @@ namespace Application.Service
             await _unitOfWork.SaveChangesAsync();
         }
 
-		public async Task BanUserFromGroup(int userId)
+		public async Task<bool> BanUserFromGroup(int userId)
 		{
             var userGroup = await _userGroupRepo.isUserExisted(userId);
             if (userGroup != null)
             {
                 userGroup.isBanned = true;
+                userGroup.BannedDate=DateTime.Now;
                  _userGroupRepo.Update(userGroup);
             }
-            await _unitOfWork.SaveChangesAsync();
+          return  await _unitOfWork.SaveChangesAsync()>0;
+		}
+
+		public async Task<bool> PromoteUser(int userId)
+		{
+			var userGroup = await _userGroupRepo.isUserExisted(userId);
+			if (userGroup != null)
+			{
+                userGroup.GroupRoleId = 2;
+				_userGroupRepo.Update(userGroup);
+			}
+			return await _unitOfWork.SaveChangesAsync() > 0;
 		}
 	}
 }

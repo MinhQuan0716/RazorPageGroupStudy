@@ -27,12 +27,15 @@ namespace GroupStudyUI.Pages.ManageGroup
         }
         [BindProperty]
         public int GroupId { get; set; }
+		[BindProperty]
         public List<User> listUserInGroup { get; set; }
+		[BindProperty]
         public List<Post> listPostInGroup { get; set; }
 		[BindProperty]
 		public Domain.Entities.Group groupInfo { get; set; }
         public async Task<IActionResult> OnGet(int groupId)
         {
+			TempData["GroupId"] = groupId;
             GroupId = groupId;
             listUserInGroup = await _userService.GetUsersByGroupId(groupId);
             listPostInGroup = await _postService.GetPostsByGroupId(groupId);
@@ -70,17 +73,35 @@ namespace GroupStudyUI.Pages.ManageGroup
 		}
 		public async Task< IActionResult> OnPostBanUser(int? userId)
 		{
-			
+			int groupId = (int)TempData["GroupId"];
 			if (userId == null)
 			{
 				return NotFound();
 			}
-		bool isBanned=	await _userService.SoftRemove(userId.Value);
-			if (!isBanned)
+			bool isBan=await _userGroupService.BanUserFromGroup(userId.Value);
+
+			if (!isBan)
 			{
 				return BadRequest();
 			}
-			return RedirectToPage("/ManageGroup/Index");
+			listUserInGroup = await _userService.GetUsersByGroupId(groupId);
+			return Page();
+		}
+		public async Task<IActionResult> OnPostPromoteUser(int? userId)
+		{
+			int groupId = (int)TempData["GroupId"];
+			if (userId == null)
+			{
+				return NotFound();
+			}
+			bool isBan = await _userGroupService.PromoteUser(userId.Value);
+
+			if (!isBan)
+			{
+				return BadRequest();
+			}
+			listUserInGroup = await _userService.GetUsersByGroupId(groupId);
+			return Page();
 		}
 
 	}

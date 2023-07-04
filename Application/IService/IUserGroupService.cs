@@ -10,6 +10,7 @@ namespace Application.IService
     public  interface IUserGroupService
     {
         Task AddUserToGroup(UserGroup userGroup);
-        Task BanUserFromGroup(int userId);
+        Task<bool> BanUserFromGroup(int userId);
+        Task<bool> PromoteUser(int userId);
     }
 }
