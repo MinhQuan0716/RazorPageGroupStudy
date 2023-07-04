@@ -13,7 +13,7 @@ namespace Infracstuructures.FluentAPIs
     {
         public void Configure(EntityTypeBuilder<CommentMap> builder)
         {
-            builder.HasKey(x=>x.ParentCommentId);
+            builder.HasKey(x=>x.MapId);
             builder.HasOne(x=>x.ParentComment).WithMany(co=>co.ParentComment).HasForeignKey(x=>x.ParentCommentId).OnDelete(DeleteBehavior.NoAction);
             builder.HasOne(x=>x.SubComment).WithMany(co=>co.ChildComment).HasForeignKey(x=>x.SubCommentId).OnDelete(DeleteBehavior.NoAction);
 

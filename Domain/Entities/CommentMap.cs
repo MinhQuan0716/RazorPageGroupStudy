@@ -10,11 +10,13 @@ namespace Domain.Entities
 { 
     public  class CommentMap
     {
+        [Key]
+        public int MapId { get; set; }
         [ForeignKey("Comment")]
         public int? ParentCommentId { get; set; }
         public int? SubCommentId { get; set; }   
+        public string? Content { get; set; }
         public Comment ParentComment { get; set; }
         public Comment SubComment { get; set; }
-
     }
 }
