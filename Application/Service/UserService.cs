@@ -83,5 +83,10 @@ namespace Application.Service
             var listUser = await _userRepo.GetAllUserV2();
             return listUser;
         }
+        public Task<User> GetUserById (int id)
+        {
+            var user = _userRepo.GetByIdAsync(id);
+            return user;
+        }
     }
 }

@@ -17,5 +17,6 @@ namespace Application.IService
         Task<bool> SoftRemove(int userId);
         Task<User> FindUserById(int userId);
         Task<List<User>> GetAllUserV2();
+        Task<User> GetUserById(int id);
     }
 }

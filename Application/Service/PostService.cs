@@ -42,7 +42,7 @@ namespace Application.Service
             return listPost;
         }
 
-        public async Task<bool> CreatePost(string title, string content, int groupId, int userId)
+        public async Task<bool> CreatePost(string title, string content, int groupId, int userId, string fileUrl)
         {
             var post = new Post
             {
@@ -52,7 +52,8 @@ namespace Application.Service
                 CreateUserId = userId,
                 CreateTime = DateTime.Now,
                 CommentOnPost = 0,
-                PostStatusId = 1
+                PostStatusId = 1,
+                fileURL = fileUrl
             };
            await _postRepo.AddAsync(post);
             return await _unitOfWork.SaveChangesAsync()>0;

@@ -1,3 +1,5 @@
+using System.IO;
+using System;
 using System.Threading.Tasks;
 using Application.IService;
 using Domain.Entities;
@@ -5,6 +7,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Newtonsoft.Json;
+using Firebase.Storage;
 
 namespace GroupStudyUI.Pages
 {
@@ -37,20 +40,38 @@ namespace GroupStudyUI.Pages
             return Page();
         }
 
-        public async Task<IActionResult> OnPostAsync()
-        {
-            if (!ModelState.IsValid)
-            {
-                return Page();
-            }
+		public async Task<IActionResult> OnPostAsync(IFormFile file)
+		{
+			if (!ModelState.IsValid)
+			{
+				return Page();
+			}
 
 			string customerJson = _contextAccessor.HttpContext.Session.GetString("User");
 			var user = JsonConvert.DeserializeObject<User>(customerJson);
 
-			await _postService.CreatePost(PostTitle, Content, GroupId, user.Id);
+			string fileName = file.FileName;
+			string fileUrl = null;
 
-            return RedirectToPage("/Group", new { id = GroupId });
-        }
+			if (file.Length > 0)
+			{
+				// Create a Firebase Storage reference
+				var storage = new FirebaseStorage("group-study-prn.appspot.com");
 
-    }
+				// Upload the file to Firebase Storage
+				var fileRef = storage.Child(fileName);
+				await fileRef.PutAsync(file.OpenReadStream());
+
+				// Get the file download URL
+				fileUrl = await fileRef.GetDownloadUrlAsync();
+
+			}
+
+			await _postService.CreatePost(PostTitle, Content, GroupId, user.Id, fileUrl);
+
+			return RedirectToPage("/Group", new { id = GroupId });
+		}
+
+
+	}
 }
