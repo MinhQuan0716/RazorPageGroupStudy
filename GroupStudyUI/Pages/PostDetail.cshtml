@@ -32,7 +32,7 @@
 								<div class="details-header923">
 									<div class="row">
 										<div class="col-md-8">
-											<h4>Author - @Model.AuthorPost.Name</h4>
+											<h2 style="color: #37517e;">@Model.AuthorPost.Name</h2>
 											<div class="post-title-left129">
 												<h3>@Model.Post.PostTitle</h3>
 											</div>
@@ -115,14 +115,17 @@
 						<hr>
 						<div class="row">
 							<div class="col-md-12">
-								<div class="post9320-box">
-									<input type="text" class="comment-input219882" placeholder="Enter Your Comment/Answer">
-								</div>
-								<button type="button" class="pos393-submit">Comment</button>
+								<form method="post" asp-page-handler="AddComment">
+									<div class="post9320-box">
+										<input type="hidden" name="postId" value="@Model.Post.Id" />
+										<input type="text" class="comment-input219882" placeholder="Enter Your Comment/Answer" name="content">
+									</div>
+									<button type="submit" class="pos393-submit">Comment</button>
+								</form>
 							</div>
-
 						</div>
 					</div>
+
 				</div>
 				<!--                end of col-md-12 -->
 			</div>

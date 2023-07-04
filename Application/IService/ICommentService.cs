@@ -10,6 +10,6 @@ namespace Application.IService
     public interface ICommentService
     {
         Task<List<Comment>> GetAllCommentByPostId(int postId);
-        //Task<List<Comment>> GetCommentParentOfPost(int postId);
-    }
+		Task<bool> CreateComment(int userId, int postId, string content);
+	}
 }

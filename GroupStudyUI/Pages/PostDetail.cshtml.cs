@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -40,11 +41,19 @@ namespace GroupStudyUI.Pages
                 return NotFound();
             }
 
-            string customerJson = _contextAccessor.HttpContext.Session.GetString("User");
-            var user = JsonConvert.DeserializeObject<User>(customerJson);
-
             return Page();
         }
 
-    }
+		public async Task<IActionResult> OnPostAddComment(int postId, string content)
+		{
+			string customerJson = _contextAccessor.HttpContext.Session.GetString("User");
+			var user = JsonConvert.DeserializeObject<User>(customerJson);
+
+            await _commentService.CreateComment(user.Id, postId, content);
+
+			return RedirectToPage("/PostDetail", new { id = postId });
+		}
+
+
+	}
 }
