@@ -19,6 +19,7 @@ namespace Domain.Entities
         public DateTime CreateDate { get; set; }
         public DateTime? UpdateDate { get; set; }
         public int? memberAmount { get; set; }  
+        public bool? isDeleted { get; set; }
         public ICollection<UserGroup>? UserGroups { get; set; }
         public ICollection<Post>? Posts { get; set; }
     }

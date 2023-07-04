@@ -9,6 +9,8 @@ namespace Application.IRepositories
 {
     public interface IUserGroupRepo : IGenericRepo<UserGroup>
     {
+        Task<UserGroup> GetById(int userId, int groupId);
+        Task<UserGroup> isUserExisted(int userId);
 
-    }
+	}
 }

@@ -35,6 +35,9 @@
                 <a asp-page="./Details" asp-route-id="@item.CustomerId">Details</a> |
                 <a asp-page="./Delete" asp-route-id="@item.CustomerId">Delete</a>
             </td>*@
+            <td>
+                    <a asp-page="./BanUser" asp-route-id="@item.Id">Ban User</a>
+            </td>
         </tr>
 }
         <form asp-page-handler="Logout" method="post">

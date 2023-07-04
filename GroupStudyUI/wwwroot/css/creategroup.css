@@ -1,0 +1,28 @@
+﻿.facebook-group-form {
+    max-width: 400px;
+    margin: 30px auto;
+}
+
+.input-group {
+    margin-bottom: 15px;
+}
+
+    .input-group input,
+    .input-group textarea {
+        width: 100%;
+        padding: 10px;
+        border: 1px solid #ddd;
+        border-radius: 3px;
+    }
+
+        .input-group input:focus,
+        .input-group textarea:focus {
+            border-color: #3b5998;
+            box-shadow: 0 0 5px #3b5998;
+        }
+
+button {
+    margin-top: 20px;
+    background: #3b5998;
+    color: white;
+}

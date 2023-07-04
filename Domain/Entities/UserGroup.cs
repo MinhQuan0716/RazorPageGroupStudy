@@ -19,7 +19,7 @@ namespace Domain.Entities
         public DateTime? BannedDate { get; set;}
         public bool? isBanned { get; set; }  
         [ForeignKey("GroupRole")]
-        public int GroupRoleId { get; set; }
+        public int? GroupRoleId { get; set; }
 
         public GroupRole GroupRole { get; set; }
         public Group Group { get; set; }

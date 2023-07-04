@@ -5,25 +5,24 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
-namespace GroupStudyUI.Pages.UserManagement
+namespace GroupStudyUI.Pages.AdminPage
 {
-    public class IndexModel : PageModel
+    public class GroupIndexModel : PageModel
     {
         [BindProperty]
-        public List<User> Users { get; set; }
-        private readonly IUserService _userService;
-        public IndexModel(IUserService userService)
+        public List<Group> Groups { get; set; }
+        private readonly IGroupService _groupService;
+        public GroupIndexModel(IGroupService groupService)
         {
-            _userService = userService;
+            _groupService = groupService;
         }
         public async Task OnGet()
         {
-            Users=await _userService.GetAllUserV2();
+            Groups = await  _groupService.GetAllGroupV3();
         }
         public IActionResult OnPostLogout()
         {
             return RedirectToPage("/Login");
         }
-
     }
 }

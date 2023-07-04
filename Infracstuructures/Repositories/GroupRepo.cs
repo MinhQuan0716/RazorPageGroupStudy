@@ -94,9 +94,17 @@ namespace Infracstuructures.Repositories
                 .Select(ug => ug.GroupRoleId)
                 .FirstOrDefaultAsync();
 
-            return userRoleId;
+            return (int)userRoleId;
         }
 
+        public async Task<Group> GetLastSavedGroup()
+        {
+            return  await _appDbContext.Groups.OrderByDescending(x=>x.Id).FirstAsync();
+        }
 
+        public async Task<List<Group>> GetAllGroupV3()
+        {
+            return await _appDbContext.Groups.Where(x=>x.isDeleted==false).ToListAsync();
+        }
     }
 }

@@ -16,5 +16,8 @@ namespace Application.IRepositories
 		Task<List<Group>> GetSearchGroup(string groupName);
         Task<List<Group>> GetAllGroupV2();
         Task<int> GetUserRoleIdInGroup(int userId, int groupId);
+        Task<Group> GetLastSavedGroup();
+        Task<List<Group>> GetAllGroupV3();
+     
     }
 }

@@ -17,8 +17,8 @@ namespace Domain.Entities
         public string Email { get; set; }
         [Required]
         public string Password { get; set; }
-        [Required]
-        public int  RoleId { get; set; }
+      
+        public int?  RoleId { get; set; }
         public Role Role { get; set; }
         public bool? IsDeleted { get; set; }
         public bool? IsDisabled { get; set; }

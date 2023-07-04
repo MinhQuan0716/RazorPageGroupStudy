@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using Application.IService;
 using Domain.Entities;
@@ -15,19 +16,21 @@ namespace GroupStudyUI.Pages.ManageGroup
         private readonly IGroupService _groupService;
         private readonly IUserService _userService;
         private readonly IHttpContextAccessor _contextAccessor;
-        public IndexModel(IUserService userService, IGroupService groupService, IPostService postService, IHttpContextAccessor contextAccessor)
+		private readonly IUserGroupService _userGroupService;
+        public IndexModel(IUserService userService, IGroupService groupService, IPostService postService, IHttpContextAccessor contextAccessor,IUserGroupService userGroupService)
         {
             _contextAccessor = contextAccessor;
             _postService = postService;
             _groupService = groupService;
             _userService = userService;
+			_userGroupService= userGroupService;
         }
         [BindProperty]
         public int GroupId { get; set; }
         public List<User> listUserInGroup { get; set; }
         public List<Post> listPostInGroup { get; set; }
 		[BindProperty]
-		public Group groupInfo { get; set; }
+		public Domain.Entities.Group groupInfo { get; set; }
         public async Task<IActionResult> OnGet(int groupId)
         {
             GroupId = groupId;
@@ -64,6 +67,20 @@ namespace GroupStudyUI.Pages.ManageGroup
 			await _groupService.UpdateGroup(existingGroup);
 
 			return RedirectToPage("/ManageGroup/Index", new { groupId = GroupId });
+		}
+		public async Task< IActionResult> OnPostBanUser(int? userId)
+		{
+			
+			if (userId == null)
+			{
+				return NotFound();
+			}
+		bool isBanned=	await _userService.SoftRemove(userId.Value);
+			if (!isBanned)
+			{
+				return BadRequest();
+			}
+			return RedirectToPage("/ManageGroup/Index");
 		}
 
 	}

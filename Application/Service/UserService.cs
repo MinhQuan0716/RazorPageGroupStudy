@@ -65,5 +65,23 @@ namespace Application.Service
            var listUser= _userRepo.GetAllAsync();
             return listUser;
         }
+
+        public async Task<bool> SoftRemove(int userId)
+        {
+            var delete=_userRepo.SoftRemove(userId);
+            return await _unitOfWork.SaveChangesAsync() > 0;
+        }
+
+        public async Task<User> FindUserById(int userId)
+        {
+            var user = await _userRepo.GetByIdAsync(userId);
+            return user;
+        }
+
+        public async Task<List<User>> GetAllUserV2()
+        {
+            var listUser = await _userRepo.GetAllUserV2();
+            return listUser;
+        }
     }
 }

@@ -37,7 +37,18 @@
 						<td>@user.Name</td>
 						<td>@user.Email</td>
 						<td>
-							<!-- Actions for user management (e.g., ban, promote, etc.) -->
+							<form method="post">
+								<button type="submit" asp-page-handler="BanUser"
+									asp-route-userId="@user.Id" class="btn btn-danger btn-sm">
+									Ban
+								</button>
+							</form>
+							<form method="post">
+								<button type="submit" asp-page-handler="PromoteUser"
+									asp-route-userId="@user.Id" class="btn btn-warning btn-sm">
+									Promote
+								</button>
+							</form>
 						</td>
 					</tr>
 				}

@@ -12,6 +12,7 @@ namespace GroupStudyUI
             services.AddScoped<IUserService, UserService>();
             services.AddScoped<IGroupService, GroupService>();
             services.AddScoped<IPostService, PostService>();    
+            services.AddScoped<IUserGroupService , UserGroupService>(); 
             return services;
         
         }

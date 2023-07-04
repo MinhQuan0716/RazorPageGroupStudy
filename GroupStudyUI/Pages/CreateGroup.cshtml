@@ -1,0 +1,33 @@
+﻿@page
+@model GroupStudyUI.Pages.CreateGroupModel
+@{
+}
+<head>
+    <link href="./css/creategroup.css" rel="stylesheet">
+</head>
+<form method="post" class="facebook-group-form">
+  <div class="input-group">
+    <input type="text" class="form-control" placeholder="Group Name" name="name" >
+  </div>
+
+  <div class="input-group">
+    <textarea class="form-control" placeholder="What's this group about?" name="description"></textarea>
+  </div>
+
+  <div class="input-group"> 
+    <input type="text" class="form-control" placeholder="Status" name="status">
+  </div>
+
+  <button type="submit" class="btn btn-primary">Create Group</button>      
+</form>
+@if (!ModelState.IsValid)
+{
+       <div class="alert alert-danger" role="alert">
+          <ul>
+            @foreach (var error in ModelState)
+            {
+                    <li>@error.Value.Errors.FirstOrDefault().ErrorMessage</li>
+            }    
+          </ul>
+       </div>
+}

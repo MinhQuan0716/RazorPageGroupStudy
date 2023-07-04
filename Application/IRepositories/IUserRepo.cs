@@ -12,5 +12,7 @@ namespace Application.IRepositories
         Task<bool> CheckEmailDuplicateAsync(string email);
         Task<User> GetUserAsync(string email,string password);
         Task<List<User>> GetUsersByGroupId(int groupId);
+        Task<bool> SoftRemove(int userId);
+        Task<List<User>> GetAllUserV2();
     }
 }

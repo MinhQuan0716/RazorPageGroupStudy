@@ -19,17 +19,22 @@ namespace Application.Service
             _unitOfWork = unitOfWork;
         }
 
-        public async Task<bool> CreateGroup(string name, string description, string status, string inviteUrl)
+        public async Task<bool> CreateGroup(Group group)
         {
-            Group newGroup = new Group()
+            var isExistedGroup= await _groupRepo.GetByIdAsync(group.Id);
+            if(isExistedGroup == null) 
             {
-                Name= name,
-                Description= description,
-                CreateDate= DateTime.UtcNow,
-                Status= status,
-                InviteUrl= inviteUrl
-            };
-            await _groupRepo.AddAsync(newGroup);
+                Group newGroup = new Group()
+                {
+                    Name = group.Name,
+                    Description = group.Description,
+                    CreateDate = DateTime.UtcNow,
+                    Status = group.Status,
+                    InviteUrl = group.InviteUrl
+                };
+                await _groupRepo.AddAsync(newGroup);
+            }
+           
             return await _unitOfWork.SaveChangesAsync()>0;
         }
 		public async Task UpdateGroup(Group group)
@@ -74,6 +79,25 @@ namespace Application.Service
             return await _groupRepo.GetUserRoleIdInGroup(userId, groupId);
         }
 
+        public async Task<Group> GetSavedGroup()
+        {
+            return await _groupRepo.GetLastSavedGroup();
+        }
 
+        public async Task SoftRemoveGroup(int groupId)
+        {
+            var group =await _groupRepo.GetByIdAsync(groupId);
+            if(group!=null) 
+            {
+                group.isDeleted = true;
+                await _groupRepo.UpdateGroup(group);
+            }
+            await _unitOfWork.SaveChangesAsync();
+        }
+
+        public async Task<List<Group>> GetAllGroupV3()
+        {
+            return await _groupRepo.GetAllGroupV3();
+        }
     }
 }

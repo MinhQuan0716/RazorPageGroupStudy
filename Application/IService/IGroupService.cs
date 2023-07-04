@@ -10,7 +10,7 @@ namespace Application.IService
     public  interface IGroupService
     {
         Task<IEnumerable<Group>> GetAllGroup();
-        Task<bool> CreateGroup(string name,string description,string status,string inviteUrl);
+        Task<bool> CreateGroup(Group group);
 		Task UpdateGroup(Group group);
 		Task<List<Group>> GetJoinedGroup(int userId);
 		Task<List<Group>> GetAdminGroup(int userId);
@@ -19,5 +19,8 @@ namespace Application.IService
         Task<List<Group>> GetAllGroupV2();
         Task<Group> GetGroupBydId(int groupId);
         Task<int> GetUserRoleIdInGroup(int userId, int groupId);
+        Task<Group> GetSavedGroup();
+        Task SoftRemoveGroup(int groupId);
+        Task<List<Group>> GetAllGroupV3();
     }
 }
