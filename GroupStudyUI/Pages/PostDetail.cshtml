@@ -71,12 +71,26 @@
 													<div class="comment-box">
 														<div class="comment-head">
 															<h6 class="comment-name">@comment.CommentUser.Name</h6>
-															<span><i class="fa fa-clock-o" aria-hidden="true">@comment.CreateDate.ToString("MMMM dd, yyyy 'at' h:mm tt")</i></span>
-															<i class="fa fa-reply"></i> <i class="fa fa-heart"></i>
+															<span><i class="fa fa-clock-o" aria-hidden="true">@comment.CreateDate.ToString("g")</i></span>
 														</div>
 														<div class="comment-content">@comment.Content</div>
+														<div class="comment-reply">
+															<button class="reply-btn" style="background-color: #37517e; color: white; border-radius: 4px; padding: 5px 10px;">Reply</button>
+														</div>
+
+													</div>
+													<div class="reply-form" style="float: right; display: none;">
+														<form method="post" asp-page-handler="AddReply">
+															<div class="post9320-box">
+																<input type="hidden" name="postId" value="@Model.Post.Id" />
+																<input type="hidden" name="replyCommentId" value="@comment.Id" />
+																<input type="text" class="reply-input" placeholder="Enter Your Reply" name="content">
+																<button type="submit" class="pos393-submit">Reply</button>
+															</div>
+														</form>
 													</div>
 												</div>
+
 
 												@if (comment.ParentComment.Count > 0)
 												{
@@ -91,8 +105,7 @@
 																<div class="comment-box">
 																	<div class="comment-head">
 																		<h6 class="comment-name">@childComment.CommentUser.Name</h6>
-																		<span><i class="fa fa-clock-o" aria-hidden="true">@childComment.CreateDate.ToString("MMMM dd, yyyy 'at' h:mm tt")</i></span>
-																		<i class="fa fa-reply"></i> <i class="fa fa-heart"></i>
+																		<span><i class="fa fa-clock-o" aria-hidden="true">@childComment.CreateDate.ToString("g")</i></span>
 																	</div>
 																	<div class="comment-content">@childComment.Content</div>
 																</div>
@@ -107,6 +120,7 @@
 							</div>
 						</div>
 					</div>
+
 
 
 
@@ -133,6 +147,17 @@
 	</section>
 
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+	<script>
+		$(document).ready(function () {
+			$(".reply-btn").click(function () {
+				var replyForm = $(this).closest("li").find(".reply-form");
+				replyForm.toggle();
+			});
+		});
+	</script>
+
+
+
 
 </body>
 

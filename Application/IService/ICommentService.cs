@@ -11,5 +11,6 @@ namespace Application.IService
     {
         Task<List<Comment>> GetAllCommentByPostId(int postId);
 		Task<bool> CreateComment(int userId, int postId, string content);
+		Task<bool> ReplyComment(int userId, int postId, string content, int replyCommentId);
 	}
 }

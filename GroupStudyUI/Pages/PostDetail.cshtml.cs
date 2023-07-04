@@ -54,6 +54,16 @@ namespace GroupStudyUI.Pages
 			return RedirectToPage("/PostDetail", new { id = postId });
 		}
 
+		public async Task<IActionResult> OnPostAddReply(int postId, string content, int replyCommentId)
+		{
+			string customerJson = _contextAccessor.HttpContext.Session.GetString("User");
+			var user = JsonConvert.DeserializeObject<User>(customerJson);
+
+			await _commentService.ReplyComment(user.Id, postId, content, replyCommentId);
+
+			return RedirectToPage("/PostDetail", new { id = postId });
+		}
+
 
 	}
 }
