@@ -1,4 +1,4 @@
-﻿ @page
+﻿@page
 @model GroupStudyUI.Pages.PostDetailModel
 @{
 	ViewData["Title"] = "Post Detail";
@@ -59,73 +59,56 @@
 					<div class="comment-list12993">
 						<div class="container">
 							<div class="row">
-
 								<div class="comments-container">
 									<ul id="comments-list" class="comments-list">
-										<li>
-											<div class="comment-main-level">
-												<!-- Avatar -->
-												<div class="comment-avatar"><img src="image/images.png" alt=""></div>
-												<!-- Contenedor del Comentario -->
-												<div class="comment-box">
-													<div class="comment-head">
-														<h6 class="comment-name"><a href="#">Lorena Rojero</a></h6> <span><i class="fa fa-clock-o" aria-hidden="true"> January 15 , 2014 at 10:00 pm</i></span> <i class="fa fa-reply"></i> <i class="fa fa-heart"></i>
+										@foreach (var comment in Model.listAllCommentOfPost.Where(c => c.ChildComment == null))
+										{
+											<li>
+												<div class="comment-main-level">
+													<div class="comment-avatar">
+														<img src="~/imgs/default_avatar.png" alt="">
 													</div>
-													<div class="comment-content"> Lorem ipsum dolor sit amet, consectetur adipisicing elit. Velit omnis animi et iure laudantium vitae, praesentium optio, sapiente distinctio illo? </div>
+													<div class="comment-box">
+														<div class="comment-head">
+															<h6 class="comment-name">@comment.CommentUser.Name</h6>
+															<span><i class="fa fa-clock-o" aria-hidden="true">@comment.CreateDate.ToString("MMMM dd, yyyy 'at' h:mm tt")</i></span>
+															<i class="fa fa-reply"></i> <i class="fa fa-heart"></i>
+														</div>
+														<div class="comment-content">@comment.Content</div>
+													</div>
 												</div>
-											</div>
 
-
-											<ul class="comments-list reply-list">
-												<li>
-													<div class="comment-avatar"><img src="image/images.png" alt=""></div>
-													<div class="comment-box">
-														<div class="comment-head">
-															<h6 class="comment-name"><a href="#">Lorena Rojero</a></h6> <span><i class="fa fa-clock-o" aria-hidden="true"> January 15 , 2014 at 10:00 pm</i></span> <i class="fa fa-reply"></i> <i class="fa fa-heart"></i>
-														</div>
-														<div class="comment-content"> Lorem ipsum dolor sit amet, consectetur adipisicing elit. Velit omnis animi et iure laudantium vitae, praesentium optio, sapiente distinctio illo? </div>
-													</div>
-												</li>
-												<li>
-													<div class="comment-avatar"><img src="image/images.png" alt=""></div>
-													<div class="comment-box">
-														<div class="comment-head">
-															<h6 class="comment-name by-author"><a href="#">Agustin Ortiz</a></h6> <span><i class="fa fa-clock-o" aria-hidden="true"> January 15 , 2014 at 10:00 pm</i></span> <i class="fa fa-reply"></i> <i class="fa fa-heart"></i>
-														</div>
-														<div class="comment-content"> Lorem ipsum dolor sit amet, consectetur adipisicing elit. Velit omnis animi et iure laudantium vitae, praesentium optio, sapiente distinctio illo? </div>
-													</div>
-												</li>
-												<li>
-													<div class="comment-avatar"><img src="image/images.png" alt=""></div>
-													<div class="comment-box">
-														<div class="comment-head">
-															<h6 class="comment-name"><a href="#">Lorena Rojero</a></h6> <span><i class="fa fa-clock-o" aria-hidden="true"> January 15 , 2014 at 10:00 pm</i></span> <i class="fa fa-reply"></i> <i class="fa fa-heart"></i>
-														</div>
-														<div class="comment-content"> Lorem ipsum dolor sit amet, consectetur adipisicing elit. Velit omnis animi et iure laudantium vitae, praesentium optio, sapiente distinctio illo? </div>
-													</div>
-												</li>
-											</ul>
-										</li>
-										<li>
-											<div class="comment-main-level">
-												<!-- Avatar -->
-												<div class="comment-avatar"><img src="image/images.png" alt=""></div>
-												<!-- Contenedor del Comentario -->
-												<div class="comment-box">
-													<div class="comment-head">
-														<h6 class="comment-name"><a href="#">Lorena Rojero</a></h6> <span><i class="fa fa-clock-o" aria-hidden="true"> January 15 , 2014 at 10:00 pm</i></span> <i class="fa fa-reply"></i> <i class="fa fa-heart"></i>
-													</div>
-													<div class="comment-content"> Lorem ipsum dolor sit amet, consectetur adipisicing elit. Velit omnis animi et iure laudantium vitae, praesentium optio, sapiente distinctio illo? </div>
-												</div>
-											</div>
-										</li>
-
+												@if (comment.ParentComment.Count > 0)
+												{
+													<ul class="comments-list reply-list">
+														@foreach (var childCommentMap in comment.ParentComment)
+														{
+															var childComment = childCommentMap.SubComment;
+															<li>
+																<div class="comment-avatar">
+																	<img src="~/imgs/default_avatar.png" alt="">
+																</div>
+																<div class="comment-box">
+																	<div class="comment-head">
+																		<h6 class="comment-name">@childComment.CommentUser.Name</h6>
+																		<span><i class="fa fa-clock-o" aria-hidden="true">@childComment.CreateDate.ToString("MMMM dd, yyyy 'at' h:mm tt")</i></span>
+																		<i class="fa fa-reply"></i> <i class="fa fa-heart"></i>
+																	</div>
+																	<div class="comment-content">@childComment.Content</div>
+																</div>
+															</li>
+														}
+													</ul>
+												}
+											</li>
+										}
 									</ul>
-
 								</div>
 							</div>
 						</div>
 					</div>
+
+
 
 					<div class="comment289-box mt-4">
 						<h3>Leave A Comment</h3>
