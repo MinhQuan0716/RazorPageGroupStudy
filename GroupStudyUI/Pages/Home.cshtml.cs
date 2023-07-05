@@ -16,15 +16,13 @@ namespace GroupStudyUI.Pages
         }
         public IActionResult OnGet()
         {
-            if (!_contextAccessor.HttpContext.Session.Keys.Any())
+			string isLogin = HttpContext.Session.GetString("isLogin");
+
+			if (isLogin == null || isLogin.Equals("false"))
             {
-                return RedirectToPage("/login");
-            }
-            bool isLogin = BitConverter.ToBoolean(_contextAccessor.HttpContext.Session.Get("isLogin"));
-            if (!isLogin)
-            {
-                return RedirectToPage("/Login");
-            }
+				return RedirectToPage("/Login");
+			}
+ 
             return Page();
         }
     }

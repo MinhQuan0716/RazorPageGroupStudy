@@ -14,7 +14,7 @@ namespace GroupStudyUI.Pages
     public class InformationModel : PageModel
     {
         [BindProperty]
-        public User User { get; set; }
+        public User infoUser { get; set; }
         private readonly IUserService _userService;
         private readonly IHttpContextAccessor _contextAccessor;
         public InformationModel (IUserService userService,IHttpContextAccessor contextAccessor)
@@ -24,20 +24,18 @@ namespace GroupStudyUI.Pages
         }
         public IActionResult OnGet()
         {
-            if (_contextAccessor.HttpContext.Session.Keys.Any())
-            {
-                var userLoginData = _contextAccessor.HttpContext.Session.GetString("User");
-                var userLogin = JsonConvert.DeserializeObject<User>(userLoginData);
-                User= userLogin;
-                User.Id = userLogin.Id;
-                return Page();
-            }
-            bool isLogin = BitConverter.ToBoolean(_contextAccessor.HttpContext.Session.Get("isLogin"));
-            if (!isLogin)
+            string isLogin = HttpContext.Session.GetString("isLogin");
+
+            if (isLogin == null || isLogin.Equals("false"))
             {
                 return RedirectToPage("/Login");
             }
-            return RedirectToPage("/Login");
+
+            string customerJson = _contextAccessor.HttpContext.Session.GetString("User");
+			var user = JsonConvert.DeserializeObject<User>(customerJson);
+            infoUser = user;
+			return Page();
+
         }
   
     }

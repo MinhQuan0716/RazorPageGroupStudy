@@ -27,10 +27,18 @@ namespace GroupStudyUI.Pages
         public List<Group> listGroups { get; set; }
         [BindProperty]
         public string searchName { get; set; }
-        public async Task OnGet()
+        public async Task<IActionResult> OnGet()
         {
+            string isLogin = HttpContext.Session.GetString("isLogin");
+
+            if (isLogin == null || isLogin.Equals("false"))
+            {
+                return RedirectToPage("/Login");
+            }
+
             IEnumerable<Group> groups = await _groupService.GetAllGroupV2();
             listGroups = new List<Group>(groups);
+            return Page();
         }
         public async Task<IActionResult> OnPostSearch() 
         {

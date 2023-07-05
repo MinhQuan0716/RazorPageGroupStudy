@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.Extensions.Logging;
@@ -17,8 +18,15 @@ namespace GroupStudyUI.Pages
             _logger = logger;
         }
 
-        public void OnGet()
+        public IActionResult OnGet()
         {
+            string isLogin = HttpContext.Session.GetString("isLogin");
+
+            if (isLogin == null || isLogin.Equals("false"))
+            {
+                return RedirectToPage("/Login");
+            }
+            return Page();
         }
     }
 }

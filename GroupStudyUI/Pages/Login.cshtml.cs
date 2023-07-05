@@ -28,22 +28,28 @@ namespace GroupStudyUI.Pages
         public string Password { get; set; }
         [BindProperty]
         public string ErrorMessage { get; set; }
-        public async Task<IActionResult> OnPost()
+		public IActionResult OnGet()
+		{
+			// Clearing all session values
+			_contextAccessor.HttpContext.Session.Clear();
+            return Page();
+		}
+
+		public async Task<IActionResult> OnPost()
         {
-            // Handle the form submission here
-            // You can access the submitted values using the 'Name' and 'Email' properties
-            // For example: string name = Name;
-            //              string email = Email;
+ 
             if (Email == null || Password == null)
             {
-                ErrorMessage = "Email or password is null";
+                ErrorMessage = "Email and password is required";
                 return Page();
             }
+
             User loginUser = await _userService.LoginAsync(Email, Password);
             bool isExisted = await _userService.CheckEmail(Email);
-            if (loginUser == null && !isExisted)
+
+            if (!isExisted)
             {
-                ErrorMessage = "Email is incorrect";
+                ErrorMessage = "Email is not existed";
                 return Page();
             }
             else if (loginUser == null)
@@ -51,33 +57,30 @@ namespace GroupStudyUI.Pages
                 ErrorMessage = "Password is incorrect";
                 return Page();
             }
+
             if (loginUser != null)
             {
+                string login = JsonConvert.SerializeObject(loginUser);
+                _contextAccessor.HttpContext.Session.SetString("User", login);
+
                 if (loginUser.RoleId == 2)
                 {
-                    string login = JsonConvert.SerializeObject(loginUser);
-                    _contextAccessor.HttpContext.Session.SetString("User", login);
-                    bool isLogin = true;
-                    bool isAdmin = false;
-                    _contextAccessor.HttpContext.Session.Set("isLogin", BitConverter.GetBytes(isLogin));
-                    _contextAccessor.HttpContext.Session.Set("isAdmin", BitConverter.GetBytes(isAdmin));
+					_contextAccessor.HttpContext.Session.SetString("isLogin", "true");
+					_contextAccessor.HttpContext.Session.SetString("isAdmin", "false");
+                    
                     return RedirectToPage("/Home");
                 }
                 else if (loginUser.RoleId == 1)
                 {
-                    bool isAdmin = true;
-                    bool isLogin = false;
-                    _contextAccessor.HttpContext.Session.Set("isAdmin", BitConverter.GetBytes(isAdmin));
-                    _contextAccessor.HttpContext.Session.Set("isLogin", BitConverter.GetBytes(isLogin));
-                    return RedirectToPage("/AdminPage/Index");
+					_contextAccessor.HttpContext.Session.SetString("isLogin", "true");
+					_contextAccessor.HttpContext.Session.SetString("isAdmin", "true");
+
+					return RedirectToPage("/AdminPage/Index");
                 }
 
             }
             return Page();
         }
-        public void OnGet()
-        {
 
-        }
     }
 }

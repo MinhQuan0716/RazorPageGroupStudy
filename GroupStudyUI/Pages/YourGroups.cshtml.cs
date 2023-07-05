@@ -21,29 +21,26 @@ namespace GroupStudyUI.Pages
             _contextAccessor = contextAccessor;
         }
         public List<Group> listGroups { get; set; }
-		public List<Group> listAdminGroups { get; set; }
-		public List<Group> listModeratorGroups { get; set; }
-		public async Task<IActionResult> OnGet()
+        public List<Group> listAdminGroups { get; set; }
+        public List<Group> listModeratorGroups { get; set; }
+        public async Task<IActionResult> OnGet()
         {
-            if (_contextAccessor.HttpContext.Session.Keys.Any())
-            {
-                string customerJson = _contextAccessor.HttpContext.Session.GetString("User");
-                if (customerJson != null)
-                {
-                    var user = JsonConvert.DeserializeObject<User>(customerJson);
-                    listGroups = await _groupService.GetJoinedGroup(user.Id);
-					listAdminGroups = await _groupService.GetAdminGroup(user.Id);
-                    listModeratorGroups = await _groupService.GetModeratorGroup(user.Id);
+            string isLogin = HttpContext.Session.GetString("isLogin");
 
-					return Page();
-                }
-            }
-            bool isLogin = BitConverter.ToBoolean(_contextAccessor.HttpContext.Session.Get("isLogin"));
-            if (!isLogin)
+            if (isLogin == null || isLogin.Equals("false"))
             {
                 return RedirectToPage("/Login");
             }
-            return RedirectToPage("/Login");
+
+            string customerJson = _contextAccessor.HttpContext.Session.GetString("User");
+            var user = JsonConvert.DeserializeObject<User>(customerJson);
+
+            listGroups = await _groupService.GetJoinedGroup(user.Id);
+            listAdminGroups = await _groupService.GetAdminGroup(user.Id);
+            listModeratorGroups = await _groupService.GetModeratorGroup(user.Id);
+
+            return Page();
+
         }
     }
 }
