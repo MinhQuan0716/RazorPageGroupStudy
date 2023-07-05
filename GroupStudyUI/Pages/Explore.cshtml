@@ -44,9 +44,16 @@
                                     value="Search"/>
                                 
                             </div>
+
                         </div>
                     </form>
+                    <form method="post">
+                        <input type="text" name="inviteUrl"
+                               placeholder="Enter Group Invite URL" />
 
+                        <input type="submit" value="Join Group"
+                               asp-page-handler="JoinGroupByLink" />
+                    </form>
                     <div class="filter-result">
                         <p class="mb-30 ff-montserrat">Finding result : @Model.listGroups.Count</p>
 

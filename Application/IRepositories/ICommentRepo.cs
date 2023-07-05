@@ -10,6 +10,7 @@ namespace Application.IRepositories
     public interface ICommentRepo : IGenericRepo<Comment>
     {
         Task<List<Comment>> GetAllCommentByPostId(int postId);
+        Task<List<Comment>> GetAllCommentByGroupId(int groupId);
     }
 
 }

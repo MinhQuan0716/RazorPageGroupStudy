@@ -21,6 +21,7 @@ namespace GroupStudyUI.Pages
             _contextAccessor = contextAccessor;
             _postService = postService;
         }
+        [BindProperty]
         public Group Group { get; set; }
         public int UserRoleIdInGroup { get; set; }
         public bool CanManageGroup { get; set; } = false;
@@ -58,6 +59,20 @@ namespace GroupStudyUI.Pages
 
             return Page();
         }
-
+        public async Task<IActionResult> OnPostReportPost(int? postId)
+        {
+            if (postId == null)
+            {
+                return NotFound();
+            }
+            var reportPost = await _postService.GetPostById(postId.Value);
+            if(reportPost == null)
+            {
+                return NotFound();
+            }
+            reportPost.PostStatusId = 4;
+            await _postService.UpdatePost(reportPost);
+            return Page();
+        }
     }
 }

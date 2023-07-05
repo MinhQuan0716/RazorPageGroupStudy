@@ -40,12 +40,7 @@
 					<tr>
 						<td>@user.Name</td>
 						<td>@user.Email</td>
-						<td>
-							@foreach(var status in user.UserGroups.ToList())
-							{
-							 <span>status.isBanned</span>
-							}
-						</td>
+				<td></td>
 						<td>
 							<form method="post">
 								<button type="submit" asp-page-handler="BanUser"
@@ -90,22 +85,29 @@
 						<td>@post.PostStatusId</td>
 						<td>
 							<!-- Actions for user management (e.g., ban, promote, etc.) -->
-							<form method="post">
-								<button type="submit"
+							@if(post.PostStatusId==2 || post.PostStatusId == 4)
+							{
+								<form method="post">
+									<button type="submit"
 									asp-page-handler="BanPost"
 									asp-route-postId="@post.Id"
 									class="btn btn-danger btn-sm">
-									Ban
-								</button>
-							</form>
-							<form method="post">
-								<button type="submit"
+										Ban
+									</button>
+								</form>
+							}
+							@if (post.PostStatusId == 2)
+							{
+								<form method="post">
+									<button type="submit"
 									asp-page-handler="ApprovePost"
 									asp-route-postId="@post.Id"
 									class="btn btn-success btn-sm">
-									Approve
-								</button>
-							</form>
+										Approve
+									</button>
+								</form>
+							}
+							
 						</td>
 					</tr>
 				}

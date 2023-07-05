@@ -18,6 +18,7 @@ namespace Application.IRepositories
         Task<int> GetUserRoleIdInGroup(int userId, int groupId);
         Task<Group> GetLastSavedGroup();
         Task<List<Group>> GetAllGroupV3();
+        Task<Group> GetGroupThroughLink(string inviteUrl);
      
     }
 }

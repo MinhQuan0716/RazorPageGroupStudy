@@ -51,13 +51,13 @@ namespace Infracstuructures.Repositories
         public async Task<List<Post>> GetPostsByUserId(int userId, int groupId)
         {
             return await _appDbContext.Posts
-                .Where(p => p.CreateUserId == userId && p.GroupId == groupId && p.PostStatusId == 2)
+                .Where(p => p.CreateUserId == userId && p.GroupId == groupId && p.PostStatusId == 1)
                 .ToListAsync();
         }
         public async Task<List<Post>> GetPostsPendingByUserId(int userId, int groupId)
         {
             return await _appDbContext.Posts
-                .Where(p => p.CreateUserId == userId && p.GroupId == groupId && p.PostStatusId == 1)
+                .Where(p => p.CreateUserId == userId && p.GroupId == groupId && p.PostStatusId == 2)
                 .ToListAsync();
         }
         public async Task<List<Post>> GetPostsBannedByUserId(int userId, int groupId)

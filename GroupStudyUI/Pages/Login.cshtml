@@ -20,11 +20,17 @@
                 <form method="post">
                     <input type="email" placeholder="Email" asp-for="Email" />
                     <input type="password" placeholder="Password" asp-for="Password" />
+                         @if (!string.IsNullOrEmpty(@Model.ErrorMessage))
+                {
+                    <div class="text-danger">@Model.ErrorMessage</div>
+                }
                     <div class="text-center">
                         <button type="submit" class="button">LOG IN</button>
                         <a asp-page="./Register" class="button">Create an account</a>
                     </div>
                 </form>
+           
+
             </div>
         </div>
     </div>

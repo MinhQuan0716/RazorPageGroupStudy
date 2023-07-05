@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using Application.IService;
 using Domain.Entities;
@@ -6,6 +7,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Newtonsoft.Json;
+using Group = Domain.Entities.Group;
 
 namespace GroupStudyUI.Pages
 {
@@ -47,10 +49,11 @@ namespace GroupStudyUI.Pages
             var userLoginJson = _contextAccessor.HttpContext.Session.GetString("User");
             var userLoginData = JsonConvert.DeserializeObject<User>(userLoginJson);
             var isInGroup = await _userGroupService.CheckUserExisted(userLoginData.Id, groupId.Value);
+            
             if (isInGroup)
             {
                 return RedirectToPage("/Group", new { id = groupId });
-            }
+            } 
             if (groupId == null)
             {
                 return NotFound();
@@ -72,6 +75,37 @@ namespace GroupStudyUI.Pages
             };
             await _userGroupService.AddUserToGroup(userJoinGroup);  
             return RedirectToPage("/Group",new {id=groupId});
+        }
+        public async Task<IActionResult> OnPostJoinGroupByLink(string? inviteUrl)
+        {
+              var userLoginJson = _contextAccessor.HttpContext.Session.GetString("User");
+            var userLoginData = JsonConvert.DeserializeObject<User>(userLoginJson);
+            if (inviteUrl == null)
+            {
+                return NotFound();
+            }
+            var joinGroup = await _groupService.GetGroupByLink(inviteUrl);
+            if (joinGroup == null)
+            {
+                return NotFound();
+            }
+            var isInGroup = await _userGroupService.CheckUserExisted(userLoginData.Id, joinGroup.Id);
+
+            if (isInGroup)
+            {
+                return RedirectToPage("/Group", new { id = joinGroup.Id});
+            }
+            var userInGroup = new UserGroup
+            {
+                UserId = userLoginData.Id,
+                GroupId = joinGroup.Id,
+                GroupRoleId=3,
+                isBanned=false
+            };
+            await _userGroupService.AddUserToGroup(userInGroup);
+            joinGroup.memberAmount++;
+            await _groupService.UpdateGroup(joinGroup);
+            return RedirectToPage("/Group", new { id = joinGroup.Id });
         }
     }
 }

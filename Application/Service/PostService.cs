@@ -52,7 +52,7 @@ namespace Application.Service
                 CreateUserId = userId,
                 CreateTime = DateTime.Now,
                 CommentOnPost = 0,
-                PostStatusId = 1,
+                PostStatusId = 2,
                 fileURL = fileUrl
             };
            await _postRepo.AddAsync(post);

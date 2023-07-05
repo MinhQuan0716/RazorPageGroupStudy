@@ -59,5 +59,10 @@ namespace Application.Service
         {
             return await _commentRepo.GetAllCommentByPostId(postId);
         }
-    }
+
+		public async Task<List<Comment>> GetAllCommentByGroupId(int groupId)
+		{
+			return await _commentRepo.GetAllCommentByGroupId(groupId);
+		}
+	}
 }

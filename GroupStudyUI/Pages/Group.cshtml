@@ -78,7 +78,14 @@
                                                         <i class="zmdi zmdi-folder" aria-hidden="true"></i>File Attach
                                                     </a>
                                                     <a href="/PostDetail?id=@post.Id" target="_blank" style="margin-right: 20px"><i class="zmdi zmdi-help-outline" aria-hidden="true"></i>View Post Detail</a>
-                                                    <a href="#" style="margin-right: 20px"><i class="zmdi zmdi-bug" aria-hidden="true"></i>Report</a>
+                                                    <form method="post">
+                                                        <button type="submit"
+                                                            asp-page-handler="ReportPost"
+                                                            asp-route-postId="@post.Id"
+                                                            class="btn btn-danger">
+                                                            <i class="zmdi zmdi-bug" aria-hidden="true"></i> Report
+                                                        </button>
+                                                    </form>
                                                 </div>
                                             </div>
                                         </div>

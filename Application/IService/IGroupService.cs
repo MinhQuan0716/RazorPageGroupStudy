@@ -22,5 +22,6 @@ namespace Application.IService
         Task<Group> GetSavedGroup();
         Task SoftRemoveGroup(int groupId);
         Task<List<Group>> GetAllGroupV3();
+        Task<Group> GetGroupByLink(string inviteUrl);
     }
 }

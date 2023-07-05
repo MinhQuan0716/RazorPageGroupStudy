@@ -140,7 +140,7 @@ namespace GroupStudyUI.Pages.ManageGroup
 			{
 				return NotFound();
 			}
-			post.PostStatusId = 2;
+			post.PostStatusId = 1;
 			bool isBanned = await _postService.UpdatePost(post);
 			if (!isBanned)
 			{

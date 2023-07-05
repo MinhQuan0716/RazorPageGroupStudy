@@ -10,6 +10,7 @@ namespace Domain.Enum
     {
         Pending,
         Approved,
-        Banned
+        Banned,
+        Reported,
     }
 }

@@ -100,5 +100,10 @@ namespace Application.Service
         {
             return await _groupRepo.GetAllGroupV3();
         }
-    }
+
+		public async Task<Group> GetGroupByLink(string inviteUrl)
+		{
+            return await _groupRepo.GetGroupThroughLink(inviteUrl);
+		}
+	}
 }

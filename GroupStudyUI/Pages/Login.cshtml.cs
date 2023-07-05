@@ -25,20 +25,34 @@ namespace GroupStudyUI.Pages
 
         [BindProperty]
         public string Password { get; set; }
-
+        [BindProperty]
+        public string ErrorMessage { get; set; }
         public async Task<IActionResult> OnPost()
         {
             // Handle the form submission here
             // You can access the submitted values using the 'Name' and 'Email' properties
             // For example: string name = Name;
             //              string email = Email;
-
+            if(Email == null ||Password==null)
+            {
+                ErrorMessage = "Email or password is null";
+                return Page();
+            }
            User loginUser= await _userService.LoginAsync(Email, Password);
+            if (loginUser == null)
+            {
+                ErrorMessage = "Email or password is incorrect";
+                return Page();
+            }
             if (loginUser != null)
             {
                 string login = JsonConvert.SerializeObject(loginUser);
                 _contextAccessor.HttpContext.Session.SetString("User", login);
                 return RedirectToPage("/Home");
+            }
+            if (loginUser.RoleId == 1)
+            {
+                return RedirectToPage("/AdminPage/Index");
             }
             
           

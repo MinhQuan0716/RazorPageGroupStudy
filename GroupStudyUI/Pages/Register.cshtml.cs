@@ -1,6 +1,7 @@
 using Application.IService;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using System;
 using System.Threading.Tasks;
 
 namespace GroupStudyUI.Pages
@@ -23,12 +24,15 @@ namespace GroupStudyUI.Pages
         }
         public async Task<IActionResult> OnPost()
         {
-            var user=await _userService.RegisterAsync(Email,Password,Name);
-            if (!user)
+            try
             {
-                ModelState.AddModelError(string.Empty, "Registration failed. Please try again later.");
+                var user = await _userService.RegisterAsync(Email, Password, Name);
+            } catch(Exception ex)
+            {
+                ModelState.AddModelError(ex.Message,ex.Message);
                 return Page();
             }
+           
             return RedirectToPage("/Login");
         }
     }

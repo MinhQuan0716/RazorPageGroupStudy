@@ -28,6 +28,11 @@ namespace Infracstuructures.FluentAPIs
 			{
 				PostStatusId=3,
 				PostStatusName=nameof(PostStatusEnum.Banned)
+			},
+			new PostStatus
+			{
+				PostStatusId=4,
+				PostStatusName=nameof(PostStatusEnum.Reported)
 			}
 			);
 

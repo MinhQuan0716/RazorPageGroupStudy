@@ -106,5 +106,10 @@ namespace Infracstuructures.Repositories
         {
             return await _appDbContext.Groups.Where(x=>x.isDeleted==false).ToListAsync();
         }
-    }
+
+		public async Task<Group> GetGroupThroughLink(string inviteUrl)
+		{
+            return await _appDbContext.Groups.SingleOrDefaultAsync(x => x.InviteUrl.Equals(inviteUrl));
+		}
+	}
 }
