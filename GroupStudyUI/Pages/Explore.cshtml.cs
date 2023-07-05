@@ -1,4 +1,6 @@
+using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using Application.IService;
@@ -32,6 +34,15 @@ namespace GroupStudyUI.Pages
         }
         public async Task<IActionResult> OnPostSearch() 
         {
+            if (!_contextAccessor.HttpContext.Session.Keys.Any())
+            {
+                return RedirectToPage("/Login");
+            }
+            bool isLogin = BitConverter.ToBoolean(_contextAccessor.HttpContext.Session.Get("isLogin"));
+            if (!isLogin)
+            {
+                return RedirectToPage("/Login");
+            }
             if (searchName == null)
             {
                 IEnumerable<Group> group = await _groupService.GetAllGroupV2();

@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Newtonsoft.Json;
+using System;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -28,9 +29,14 @@ namespace GroupStudyUI.Pages
         }
         public IActionResult OnGet()
         {
-            if (_contextAccessor.HttpContext.Session.Keys.Any())
+            if (!_contextAccessor.HttpContext.Session.Keys.Any())
             {
-                return Page();
+                return RedirectToPage("/Login");
+            }
+            bool isLogin = BitConverter.ToBoolean(_contextAccessor.HttpContext.Session.Get("isLogin"));
+            if (!isLogin)
+            {
+                return RedirectToPage("/Login");
             }
             return RedirectToPage("/Login");
         }

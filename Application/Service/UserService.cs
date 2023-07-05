@@ -93,5 +93,9 @@ namespace Application.Service
         {
             return await _userRepo.GetUserWithRole(id);
         }
+        public async Task <bool> CheckEmail(string email)
+        {
+            return await _userRepo.CheckEmailDuplicateAsync(email);
+        }
     }
 }

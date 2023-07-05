@@ -19,5 +19,6 @@ namespace Application.IService
         Task<List<User>> GetAllUserV2();
         Task<User> GetUserById(int id);
         Task<User> GetUserWithRole(int id);
+        Task<bool> CheckEmail(string email);
     }
 }

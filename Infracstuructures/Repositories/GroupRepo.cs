@@ -58,7 +58,7 @@ namespace Infracstuructures.Repositories
         public async Task<List<Group>> GetSearchGroup(string groupName)
         {
             var searchGroup = await _appDbContext.Groups
-                                        .Where(x => x.Name.Contains(groupName))
+                                        .Where(x => x.Name.Contains(groupName)&&x.Status.Equals("Public"))
                                         .ToListAsync();
             return searchGroup;
         }

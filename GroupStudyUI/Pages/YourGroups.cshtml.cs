@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Newtonsoft.Json;
 using System.Linq;
+using System;
 
 namespace GroupStudyUI.Pages
 {
@@ -36,6 +37,11 @@ namespace GroupStudyUI.Pages
 
 					return Page();
                 }
+            }
+            bool isLogin = BitConverter.ToBoolean(_contextAccessor.HttpContext.Session.Get("isLogin"));
+            if (!isLogin)
+            {
+                return RedirectToPage("/Login");
             }
             return RedirectToPage("/Login");
         }

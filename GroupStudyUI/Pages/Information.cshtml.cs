@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
 using Newtonsoft.Json;
+using System;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -21,7 +22,7 @@ namespace GroupStudyUI.Pages
             _userService = userService;
             _contextAccessor = contextAccessor;
         }
-        public void OnGet()
+        public IActionResult OnGet()
         {
             if (_contextAccessor.HttpContext.Session.Keys.Any())
             {
@@ -29,7 +30,14 @@ namespace GroupStudyUI.Pages
                 var userLogin = JsonConvert.DeserializeObject<User>(userLoginData);
                 User= userLogin;
                 User.Id = userLogin.Id;
+                return Page();
             }
+            bool isLogin = BitConverter.ToBoolean(_contextAccessor.HttpContext.Session.Get("isLogin"));
+            if (!isLogin)
+            {
+                return RedirectToPage("/Login");
+            }
+            return RedirectToPage("/Login");
         }
   
     }

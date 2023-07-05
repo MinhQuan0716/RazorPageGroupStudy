@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -33,6 +34,15 @@ namespace GroupStudyUI.Pages
         public int TotalPostInGroup { get; set; }
         public async Task<IActionResult> OnGet(int id)
         {
+            if (!_contextAccessor.HttpContext.Session.Keys.Any())
+            {
+                return RedirectToPage("/Login");
+            }
+            bool isLogin = BitConverter.ToBoolean(_contextAccessor.HttpContext.Session.Get("isLogin"));
+            if (!isLogin)
+            {
+                return RedirectToPage("/Login");
+            }
             Group = await _groupService.GetGroupBydId(id);
 
             if (Group == null)
