@@ -23,16 +23,15 @@ namespace GroupStudyUI.Pages.UserManagement
         }
         public async Task<IActionResult> OnGet()
         {
-            if(!_contextAccessor.HttpContext.Session.Keys.Any())
-            {
-                return RedirectToPage("/Login");
-            }
-            bool isAdmin = BitConverter.ToBoolean(_contextAccessor.HttpContext.Session.Get("isAdmin"));
-            if(!isAdmin)
-            {
-                return RedirectToPage("/Login");
-            }
-            Users=await _userService.GetAllUserV2();
+			string isLogin = HttpContext.Session.GetString("isLogin");
+            string isAdmin = HttpContext.Session.GetString("isAdmin");
+
+			if (isLogin == null || isLogin.Equals("false") || isAdmin.Equals("false"))
+			{
+				return RedirectToPage("/Login");
+			}
+
+			Users =await _userService.GetAllUserV2();
             return Page();
         }
         public IActionResult OnPostLogout()
