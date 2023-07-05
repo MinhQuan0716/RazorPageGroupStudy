@@ -11,17 +11,22 @@ using System.Threading.Tasks;
 namespace Infracstuructures.Repositories
 {
 	public class CommentRepo : GenericRepo<Comment>, ICommentRepo
-    {
-        private AppDbContext _appDbContext;
-        public CommentRepo(AppDbContext context) : base(context)
-        {
-            _appDbContext = context;
-        }
+	{
+		private AppDbContext _appDbContext;
+		public CommentRepo(AppDbContext context) : base(context)
+		{
+			_appDbContext = context;
+		}
 
 		public async Task<List<Comment>> GetAllCommentByGroupId(int groupId)
 		{
-			var listCommentInGroup = await _appDbContext.Comments.Include(c => c.Post).ThenInclude(p => p.GroupId == groupId).ToListAsync();
-			return listCommentInGroup;
+			var comments = await _appDbContext.Comments
+				.Include(c => c.Post) // Eager loading of the User navigation property
+				.Include(c => c.CommentUser) // Eager loading of the Post navigation property
+				.Where(c => c.Post.GroupId == groupId)
+				.ToListAsync();
+
+			return comments;
 		}
 
 		public async Task<List<Comment>> GetAllCommentByPostId(int postId)

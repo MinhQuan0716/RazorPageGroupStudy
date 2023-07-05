@@ -27,20 +27,18 @@ namespace GroupStudyUI.Pages
             _contextAccessor = contextAccessor;
             _userGroupService = userGroupService;
         }
-        public IActionResult OnGet()
-        {
-            if (!_contextAccessor.HttpContext.Session.Keys.Any())
-            {
-                return RedirectToPage("/Login");
-            }
-            bool isLogin = BitConverter.ToBoolean(_contextAccessor.HttpContext.Session.Get("isLogin"));
-            if (!isLogin)
-            {
-                return RedirectToPage("/Login");
-            }
-            return RedirectToPage("/Login");
-        }
-        public async Task<IActionResult> OnPost()
+		public IActionResult OnGet()
+		{
+			string isLogin = HttpContext.Session.GetString("isLogin");
+
+			if (isLogin == null || isLogin.Equals("false"))
+			{
+				return RedirectToPage("/Login");
+			}
+
+			return Page();
+		}
+		public async Task<IActionResult> OnPost()
         {
             if (!ModelState.IsValid)
             {

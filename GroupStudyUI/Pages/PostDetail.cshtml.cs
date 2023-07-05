@@ -32,6 +32,13 @@ namespace GroupStudyUI.Pages
         public List<Comment> listAllCommentOfPost { get; set; }
         public async Task<IActionResult> OnGet(int id)
         {
+            string isLogin = HttpContext.Session.GetString("isLogin");
+
+            if (isLogin == null || isLogin.Equals("false"))
+            {
+                return RedirectToPage("/Login");
+            }
+
             Post = await _postService.GetPostById(id);
             AuthorPost = await _userService.GetUserById(Post.CreateUserId);
             listAllCommentOfPost = await _commentService.GetAllCommentByPostId(id);

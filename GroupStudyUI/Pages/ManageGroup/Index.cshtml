@@ -19,6 +19,7 @@
 </ul>
 
 <div class="tab-content mt-3">
+
 	<div class="tab-pane fade show active" id="user-tab-content">
 		<h4>User Management</h4>
 		@if (!string.IsNullOrEmpty(TempData["Message"] as string))
@@ -30,6 +31,7 @@
 				<tr>
 					<th>Username</th>
 					<th>Email</th>
+					<th>Role Group</th>
 					<th>Status</th>
 					<th>Action</th>
 				</tr>
@@ -40,26 +42,42 @@
 					<tr>
 						<td>@user.Name</td>
 						<td>@user.Email</td>
-				<td></td>
+						<td>@(user.UserGroups.FirstOrDefault()?.GroupRole?.Name)</td>
+						<td>@(user.UserGroups.FirstOrDefault()?.isBanned == true ? "Banned" : "Active")</td>
 						<td>
-							<form method="post">
-								<button type="submit" asp-page-handler="BanUser"
-									asp-route-userId="@user.Id" class="btn btn-danger btn-sm">
-									Ban
-								</button>
-							</form>
-							<form method="post">
-								<button type="submit" asp-page-handler="PromoteUser"
-									asp-route-userId="@user.Id" class="btn btn-warning btn-sm">
-									Promote
-								</button>
-							</form>
+							@if (user.UserGroups.FirstOrDefault()?.GroupRole?.Name == "GroupAdmin")
+							{
+								<span>Admin</span>
+							}
+							else if (user.UserGroups.FirstOrDefault()?.GroupRole?.Name == "GroupModerators")
+							{
+								<form method="post" class="mb-2">
+									<button type="submit" asp-page-handler="BanUser" asp-route-userId="@user.Id" class="btn btn-danger btn-sm">
+										Ban
+									</button>
+								</form>
+							}
+							else if (user.UserGroups.FirstOrDefault()?.GroupRole?.Name == "GroupMember")
+							{
+								<form method="post" class="mb-2">
+									<button type="submit" asp-page-handler="BanUser" asp-route-userId="@user.Id" class="btn btn-danger btn-sm">
+										Ban
+									</button>
+								</form>
+								<form method="post">
+									<button type="submit" asp-page-handler="PromoteUser" asp-route-userId="@user.Id" class="btn btn-warning btn-sm">
+										Promote
+									</button>
+								</form>
+							}
 						</td>
 					</tr>
 				}
+
 			</tbody>
 		</table>
 	</div>
+
 
 	<div class="tab-pane fade" id="post-tab-content">
 		<h4>Post Management</h4>
@@ -80,14 +98,32 @@
 					<tr>
 						<td>@post.PostTitle</td>
 						<td>@post.Content</td>
-						<td>@post.CreateUserId</td>
+						<td>@post.User.Name</td>
 						<td>@post.CreateTime</td>
-						<td>@post.PostStatusId</td>
+						<td>
+							@if (@post.PostStatusId == 1)
+							{
+								<span>Approved</span>
+							}
+							else if (@post.PostStatusId == 2)
+							{
+								<span>Pending</span>
+							}
+							else if (@post.PostStatusId == 3)
+							{
+								<span>Banned</span>
+							}
+							else if (@post.PostStatusId == 4)
+							{
+								<span>Reported</span>
+							}
+						</td>
+
 						<td>
 							<!-- Actions for user management (e.g., ban, promote, etc.) -->
-							@if(post.PostStatusId==2 || post.PostStatusId == 4)
+							@if (post.PostStatusId == 1 || post.PostStatusId == 2 || post.PostStatusId == 4)
 							{
-								<form method="post">
+								<form method="post" class="mb-2">
 									<button type="submit"
 									asp-page-handler="BanPost"
 									asp-route-postId="@post.Id"
@@ -114,10 +150,37 @@
 			</tbody>
 		</table>
 	</div>
+
+
 	<div class="tab-pane fade" id="comment-tab-content">
 		<h4>Comment Management</h4>
-		<!-- Comment management content here -->
+		<table class="table">
+			<thead>
+				<tr>
+					<th>Content</th>
+					<th>Created By</th>
+					<th>On Post</th>
+					<th>Created Time</th>
+					<th>Actions</th>
+				</tr>
+			</thead>
+			<tbody>
+				@foreach (var cmt in Model.listCommentInGroup)
+				{
+					<tr>
+						<td>@cmt.Content</td>
+						<td>@(cmt.CommentUser.Name)</td>
+						<td>@(cmt.Post.PostTitle)</td>
+						<td>@cmt.CreateDate</td>
+						<td></td>
+						
+					</tr>
+				}
+			</tbody>
+		</table>
 	</div>
+
+
 	<div class="tab-pane fade" id="group-tab-content">
 		<h4>Group Modification</h4>
 
@@ -138,11 +201,6 @@
 					<option value="Public" selected="@(Model.groupInfo.Status == "Public")">Public</option>
 					<option value="Private" selected="@(Model.groupInfo.Status == "Private")">Private</option>
 				</select>
-			</div>
-
-			<div class="form-group">
-				<label for="inviteUrl">Invite URL</label>
-				<input type="text" class="form-control" id="inviteUrl" name="groupInfo.InviteUrl" value="@Model.groupInfo.InviteUrl">
 			</div>
 
 			<button type="submit" class="btn btn-primary">Update</button>

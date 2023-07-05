@@ -17,13 +17,15 @@ namespace GroupStudyUI.Pages.ManageGroup
         private readonly IUserService _userService;
         private readonly IHttpContextAccessor _contextAccessor;
 		private readonly IUserGroupService _userGroupService;
-        public IndexModel(IUserService userService, IGroupService groupService, IPostService postService, IHttpContextAccessor contextAccessor,IUserGroupService userGroupService)
+		private readonly ICommentService _commentService;
+        public IndexModel(IUserService userService, IGroupService groupService, IPostService postService, IHttpContextAccessor contextAccessor,IUserGroupService userGroupService, ICommentService commentService)
         {
             _contextAccessor = contextAccessor;
             _postService = postService;
             _groupService = groupService;
             _userService = userService;
 			_userGroupService= userGroupService;
+			_commentService = commentService;
         }
         [BindProperty]
         public int GroupId { get; set; }
@@ -32,14 +34,24 @@ namespace GroupStudyUI.Pages.ManageGroup
 		[BindProperty]
         public List<Post> listPostInGroup { get; set; }
 		[BindProperty]
+		public List<Comment> listCommentInGroup { get; set; }
+		[BindProperty]
 		public Domain.Entities.Group groupInfo { get; set; }
         public async Task<IActionResult> OnGet(int groupId)
         {
-			TempData["GroupId"] = groupId;
+            string isLogin = HttpContext.Session.GetString("isLogin");
+
+            if (isLogin == null || isLogin.Equals("false"))
+            {
+                return RedirectToPage("/Login");
+            }
+
+            TempData["GroupId"] = groupId;
             GroupId = groupId;
             listUserInGroup = await _userService.GetUsersByGroupId(groupId);
             listPostInGroup = await _postService.GetPostsByGroupId(groupId);
-            groupInfo = await _groupService.GetGroupBydId(groupId);
+			listCommentInGroup = await _commentService.GetAllCommentByGroupId(groupId);
+			groupInfo = await _groupService.GetGroupBydId(groupId);
             return Page();
         }
 

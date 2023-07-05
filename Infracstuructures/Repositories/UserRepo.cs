@@ -37,7 +37,7 @@ namespace Infracstuructures.Repositories
         {
             return await _dbContext.Users.Include(u => u.Role).FirstOrDefaultAsync(x => x.Id == id);
         }
-        public async Task<List<User>> GetUsersByGroupId(int groupId)
+		/*public async Task<List<User>> GetUsersByGroupId(int groupId)
         {
             return await _dbContext.Users
                 .Join(_dbContext.UserGroups,
@@ -47,9 +47,21 @@ namespace Infracstuructures.Repositories
                 .Where(j => j.UserGroup.GroupId == groupId && j.UserGroup.isBanned == false)
                 .Select(j => j.User)
                 .ToListAsync();
-        }
+        }*/
+		public async Task<List<User>> GetUsersByGroupId(int groupId)
+		{
+			var users = await _dbContext.Users
+				.Include(u => u.UserGroups)
+					.ThenInclude(ug => ug.GroupRole)
+				.Where(u => u.UserGroups.Any(ug => ug.GroupId == groupId))
+				.ToListAsync();
 
-        public async Task<bool> SoftRemove(int userId)
+			return users;
+		}
+
+
+
+		public async Task<bool> SoftRemove(int userId)
         {
             bool deleted = false;
             var user=_dbSet.FirstOrDefault(x => x.Id == userId);  

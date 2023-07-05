@@ -39,16 +39,19 @@ namespace Infracstuructures.Repositories
             return postAmount;
         }
 
-        public async Task<List<Post>> GetPostsByGroupId(int groupId)
+		public async Task<List<Post>> GetPostsByGroupId(int groupId)
 		{
 			var posts = await _appDbContext.Posts
+				.Include(p => p.User) // Eager loading of the User navigation property
 				.Where(p => p.GroupId == groupId)
+				.OrderByDescending(p => p.CreateTime)
 				.ToListAsync();
 
 			return posts;
 		}
 
-        public async Task<List<Post>> GetPostsByUserId(int userId, int groupId)
+
+		public async Task<List<Post>> GetPostsByUserId(int userId, int groupId)
         {
             return await _appDbContext.Posts
                 .Where(p => p.CreateUserId == userId && p.GroupId == groupId && (p.PostStatusId == 1 || p.PostStatusId == 4))
