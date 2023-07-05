@@ -1,4 +1,6 @@
+using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using Application.IService;
 using Domain.Entities;
@@ -27,21 +29,41 @@ namespace GroupStudyUI.Pages
         [BindProperty]
         public Post Post { get; set; }
         public User AuthorPost { get; set; }
-        public List<Comment> listMainComment { get; set; }
+        public List<Comment> listAllCommentOfPost { get; set; }
         public async Task<IActionResult> OnGet(int id)
         {
             Post = await _postService.GetPostById(id);
             AuthorPost = await _userService.GetUserById(Post.CreateUserId);
-            listMainComment = await _commentService.GetAllCommentByPostId(id);
+            listAllCommentOfPost = await _commentService.GetAllCommentByPostId(id);
 
             if (Post == null)
             {
                 return NotFound();
             }
-            string customerJson = _contextAccessor.HttpContext.Session.GetString("User");
-            var user = JsonConvert.DeserializeObject<User>(customerJson);
 
             return Page();
         }
-    }
+
+		public async Task<IActionResult> OnPostAddComment(int postId, string content)
+		{
+			string customerJson = _contextAccessor.HttpContext.Session.GetString("User");
+			var user = JsonConvert.DeserializeObject<User>(customerJson);
+
+            await _commentService.CreateComment(user.Id, postId, content);
+
+			return RedirectToPage("/PostDetail", new { id = postId });
+		}
+
+		public async Task<IActionResult> OnPostAddReply(int postId, string content, int replyCommentId)
+		{
+			string customerJson = _contextAccessor.HttpContext.Session.GetString("User");
+			var user = JsonConvert.DeserializeObject<User>(customerJson);
+
+			await _commentService.ReplyComment(user.Id, postId, content, replyCommentId);
+
+			return RedirectToPage("/PostDetail", new { id = postId });
+		}
+
+
+	}
 }

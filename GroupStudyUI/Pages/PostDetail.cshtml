@@ -1,4 +1,4 @@
-﻿ @page
+﻿@page
 @model GroupStudyUI.Pages.PostDetailModel
 @{
 	ViewData["Title"] = "Post Detail";
@@ -32,7 +32,7 @@
 								<div class="details-header923">
 									<div class="row">
 										<div class="col-md-8">
-											<h4>Author - @Model.AuthorPost.Name</h4>
+											<h2 style="color: #37517e;">@Model.AuthorPost.Name</h2>
 											<div class="post-title-left129">
 												<h3>@Model.Post.PostTitle</h3>
 											</div>
@@ -59,87 +59,87 @@
 					<div class="comment-list12993">
 						<div class="container">
 							<div class="row">
-
 								<div class="comments-container">
 									<ul id="comments-list" class="comments-list">
-										<li>
-											<div class="comment-main-level">
-												<!-- Avatar -->
-												<div class="comment-avatar"><img src="image/images.png" alt=""></div>
-												<!-- Contenedor del Comentario -->
-												<div class="comment-box">
-													<div class="comment-head">
-														<h6 class="comment-name"><a href="#">Lorena Rojero</a></h6> <span><i class="fa fa-clock-o" aria-hidden="true"> January 15 , 2014 at 10:00 pm</i></span> <i class="fa fa-reply"></i> <i class="fa fa-heart"></i>
+										@foreach (var comment in Model.listAllCommentOfPost.Where(c => c.ChildComment == null))
+										{
+											<li>
+												<div class="comment-main-level">
+													<div class="comment-avatar">
+														<img src="~/imgs/default_avatar.png" alt="">
 													</div>
-													<div class="comment-content"> Lorem ipsum dolor sit amet, consectetur adipisicing elit. Velit omnis animi et iure laudantium vitae, praesentium optio, sapiente distinctio illo? </div>
+													<div class="comment-box">
+														<div class="comment-head">
+															<h6 class="comment-name">@comment.CommentUser.Name</h6>
+															<span><i class="fa fa-clock-o" aria-hidden="true">@comment.CreateDate.ToString("g")</i></span>
+														</div>
+														<div class="comment-content">@comment.Content</div>
+														<div class="comment-reply">
+															<button class="reply-btn" style="background-color: #37517e; color: white; border-radius: 4px; padding: 5px 10px;">Reply</button>
+														</div>
+
+													</div>
+													<div class="reply-form" style="float: right; display: none;">
+														<form method="post" asp-page-handler="AddReply">
+															<div class="post9320-box">
+																<input type="hidden" name="postId" value="@Model.Post.Id" />
+																<input type="hidden" name="replyCommentId" value="@comment.Id" />
+																<input type="text" class="reply-input" placeholder="Enter Your Reply" name="content">
+																<button type="submit" class="pos393-submit">Reply</button>
+															</div>
+														</form>
+													</div>
 												</div>
-											</div>
 
 
-											<ul class="comments-list reply-list">
-												<li>
-													<div class="comment-avatar"><img src="image/images.png" alt=""></div>
-													<div class="comment-box">
-														<div class="comment-head">
-															<h6 class="comment-name"><a href="#">Lorena Rojero</a></h6> <span><i class="fa fa-clock-o" aria-hidden="true"> January 15 , 2014 at 10:00 pm</i></span> <i class="fa fa-reply"></i> <i class="fa fa-heart"></i>
-														</div>
-														<div class="comment-content"> Lorem ipsum dolor sit amet, consectetur adipisicing elit. Velit omnis animi et iure laudantium vitae, praesentium optio, sapiente distinctio illo? </div>
-													</div>
-												</li>
-												<li>
-													<div class="comment-avatar"><img src="image/images.png" alt=""></div>
-													<div class="comment-box">
-														<div class="comment-head">
-															<h6 class="comment-name by-author"><a href="#">Agustin Ortiz</a></h6> <span><i class="fa fa-clock-o" aria-hidden="true"> January 15 , 2014 at 10:00 pm</i></span> <i class="fa fa-reply"></i> <i class="fa fa-heart"></i>
-														</div>
-														<div class="comment-content"> Lorem ipsum dolor sit amet, consectetur adipisicing elit. Velit omnis animi et iure laudantium vitae, praesentium optio, sapiente distinctio illo? </div>
-													</div>
-												</li>
-												<li>
-													<div class="comment-avatar"><img src="image/images.png" alt=""></div>
-													<div class="comment-box">
-														<div class="comment-head">
-															<h6 class="comment-name"><a href="#">Lorena Rojero</a></h6> <span><i class="fa fa-clock-o" aria-hidden="true"> January 15 , 2014 at 10:00 pm</i></span> <i class="fa fa-reply"></i> <i class="fa fa-heart"></i>
-														</div>
-														<div class="comment-content"> Lorem ipsum dolor sit amet, consectetur adipisicing elit. Velit omnis animi et iure laudantium vitae, praesentium optio, sapiente distinctio illo? </div>
-													</div>
-												</li>
-											</ul>
-										</li>
-										<li>
-											<div class="comment-main-level">
-												<!-- Avatar -->
-												<div class="comment-avatar"><img src="image/images.png" alt=""></div>
-												<!-- Contenedor del Comentario -->
-												<div class="comment-box">
-													<div class="comment-head">
-														<h6 class="comment-name"><a href="#">Lorena Rojero</a></h6> <span><i class="fa fa-clock-o" aria-hidden="true"> January 15 , 2014 at 10:00 pm</i></span> <i class="fa fa-reply"></i> <i class="fa fa-heart"></i>
-													</div>
-													<div class="comment-content"> Lorem ipsum dolor sit amet, consectetur adipisicing elit. Velit omnis animi et iure laudantium vitae, praesentium optio, sapiente distinctio illo? </div>
-												</div>
-											</div>
-										</li>
-
+												@if (comment.ParentComment.Count > 0)
+												{
+													<ul class="comments-list reply-list">
+														@foreach (var childCommentMap in comment.ParentComment)
+														{
+															var childComment = childCommentMap.SubComment;
+															<li>
+																<div class="comment-avatar">
+																	<img src="~/imgs/default_avatar.png" alt="">
+																</div>
+																<div class="comment-box">
+																	<div class="comment-head">
+																		<h6 class="comment-name">@childComment.CommentUser.Name</h6>
+																		<span><i class="fa fa-clock-o" aria-hidden="true">@childComment.CreateDate.ToString("g")</i></span>
+																	</div>
+																	<div class="comment-content">@childComment.Content</div>
+																</div>
+															</li>
+														}
+													</ul>
+												}
+											</li>
+										}
 									</ul>
-
 								</div>
 							</div>
 						</div>
 					</div>
+
+
+
 
 					<div class="comment289-box mt-4">
 						<h3>Leave A Comment</h3>
 						<hr>
 						<div class="row">
 							<div class="col-md-12">
-								<div class="post9320-box">
-									<input type="text" class="comment-input219882" placeholder="Enter Your Comment/Answer">
-								</div>
-								<button type="button" class="pos393-submit">Comment</button>
+								<form method="post" asp-page-handler="AddComment">
+									<div class="post9320-box">
+										<input type="hidden" name="postId" value="@Model.Post.Id" />
+										<input type="text" class="comment-input219882" placeholder="Enter Your Comment/Answer" name="content">
+									</div>
+									<button type="submit" class="pos393-submit">Comment</button>
+								</form>
 							</div>
-
 						</div>
 					</div>
+
 				</div>
 				<!--                end of col-md-12 -->
 			</div>
@@ -147,6 +147,17 @@
 	</section>
 
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+	<script>
+		$(document).ready(function () {
+			$(".reply-btn").click(function () {
+				var replyForm = $(this).closest("li").find(".reply-form");
+				replyForm.toggle();
+			});
+		});
+	</script>
+
+
+
 
 </body>
 

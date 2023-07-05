@@ -17,13 +17,19 @@ namespace Infracstuructures.Repositories
         {
             _appDbContext = context;
         }
-        public async Task<List<Comment>> GetAllCommentByPostId(int postId)
-        {
-            var listComment = await _appDbContext.Comments
-                .Where(p => p.PostId == postId)
-                .OrderByDescending(p => p.CreateDate)
-                .ToListAsync();
-            return listComment;
-        }
-    }
+		public async Task<List<Comment>> GetAllCommentByPostId(int postId)
+		{
+			var listComment = await _appDbContext.Comments
+				.Include(c => c.ParentComment) // Include child comments
+				.Include(c => c.CommentUser) // Include comment user
+				.Where(c => c.PostId == postId)
+				.OrderByDescending(c => c.CreateDate)
+				.ToListAsync();
+
+			return listComment;
+		}
+
+
+
+	}
 }
