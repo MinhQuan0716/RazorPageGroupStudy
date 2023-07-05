@@ -26,7 +26,7 @@ namespace Infracstuructures.Repositories
         public async Task<List<Post>> SortPostByCreateDate(int groupId)
         {
             var sortedPosts = await _appDbContext.Posts
-                .Where(p => p.GroupId == groupId && p.PostStatusId == 2)
+                .Where(p => p.GroupId == groupId && (p.PostStatusId == 1 || p.PostStatusId == 4))
                 .OrderByDescending(p => p.CreateTime)
                 .ToListAsync();
 
@@ -51,7 +51,7 @@ namespace Infracstuructures.Repositories
         public async Task<List<Post>> GetPostsByUserId(int userId, int groupId)
         {
             return await _appDbContext.Posts
-                .Where(p => p.CreateUserId == userId && p.GroupId == groupId && p.PostStatusId == 1)
+                .Where(p => p.CreateUserId == userId && p.GroupId == groupId && (p.PostStatusId == 1 || p.PostStatusId == 4))
                 .ToListAsync();
         }
         public async Task<List<Post>> GetPostsPendingByUserId(int userId, int groupId)

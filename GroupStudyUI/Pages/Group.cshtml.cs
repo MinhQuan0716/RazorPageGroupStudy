@@ -34,15 +34,14 @@ namespace GroupStudyUI.Pages
         public int TotalPostInGroup { get; set; }
         public async Task<IActionResult> OnGet(int id)
         {
-            if (!_contextAccessor.HttpContext.Session.Keys.Any())
+            string isLogin = HttpContext.Session.GetString("isLogin");
+
+            if (isLogin == null || isLogin.Equals("false"))
             {
                 return RedirectToPage("/Login");
             }
-            bool isLogin = BitConverter.ToBoolean(_contextAccessor.HttpContext.Session.Get("isLogin"));
-            if (!isLogin)
-            {
-                return RedirectToPage("/Login");
-            }
+
+
             Group = await _groupService.GetGroupBydId(id);
 
             if (Group == null)

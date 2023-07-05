@@ -78,14 +78,6 @@
                                                         <i class="zmdi zmdi-folder" aria-hidden="true"></i>File Attach
                                                     </a>
                                                     <a href="/PostDetail?id=@post.Id" target="_blank" style="margin-right: 20px"><i class="zmdi zmdi-help-outline" aria-hidden="true"></i>View Post Detail</a>
-                                                    <form method="post">
-                                                        <button type="submit"
-                                                            asp-page-handler="ReportPost"
-                                                            asp-route-postId="@post.Id"
-                                                            class="btn btn-danger">
-                                                            <i class="zmdi zmdi-bug" aria-hidden="true"></i> Report
-                                                        </button>
-                                                    </form>
                                                 </div>
                                             </div>
                                         </div>
@@ -94,6 +86,14 @@
                                                 <a href="#">
                                                     <button type="button" class="q-type238"> @post.CommentOnPost answers </button>
                                                 </a>
+                                                <form method="post" class="mt-3">
+                                                    <button type="submit"
+                                                        asp-page-handler="ReportPost"
+                                                        asp-route-postId="@post.Id"
+                                                            class="btn btn-danger">
+                                                        <i class="zmdi zmdi-bug" aria-hidden="true"></i> Report
+                                                    </button>
+                                                </form>
                                             </div>
                                         </div>
                                     </div>
@@ -104,7 +104,7 @@
                         <!--  End of content-1------>
 
                         <section id="content2">
-                            <!--Most Your Post Section -->
+                            <!-- Your Post Section -->
                             @foreach (var post in Model.listPostsOfUser)
                             {
                                 <div class="question-type2033">
@@ -129,7 +129,6 @@
                                                         <i class="zmdi zmdi-folder" aria-hidden="true"></i>File Attach
                                                     </a>
                                                     <a href="/PostDetail?id=@post.Id" target="_blank" style="margin-right: 20px"><i class="zmdi zmdi-help-outline" aria-hidden="true"></i>View Post Detail</a>
-                                                    <a href="#" style="margin-right: 20px"><i class="zmdi zmdi-bug" aria-hidden="true"></i>Report</a>
                                                 </div>
                                             </div>
                                         </div>
@@ -138,6 +137,14 @@
                                                 <a href="#">
                                                     <button type="button" class="q-type238"> @post.CommentOnPost answers </button>
                                                 </a>
+                                                <form method="post" class="mt-3">
+                                                    <button type="submit"
+                                                        asp-page-handler="ReportPost"
+                                                        asp-route-postId="@post.Id"
+                                                            class="btn btn-danger">
+                                                        <i class="zmdi zmdi-bug" aria-hidden="true"></i> Report
+                                                    </button>
+                                                </form>
                                             </div>
                                         </div>
                                     </div>
@@ -264,8 +271,8 @@
                                 <a href="#"><img src="~/imgs/default_avatar.png" alt="Image"></a>
                                 <div class="imag-overlay39"> <a href="#"><i class="fa fa-plus" aria-hidden="true"></i></a> </div>
                             </div> <span class="points-details938">
-                                <a href="#"><h5>Ahmed Hasan</h5></a>
-                                <p>206 Comments</p>
+                                <a href="#"><h5>Nghia</h5></a>
+                                <p>500 Comments</p>
                             </span>
                         </div>
                         <hr>
@@ -274,8 +281,8 @@
                                 <a href="#"><img src="~/imgs/default_avatar.png" alt="Image"></a>
                                 <div class="imag-overlay39"> <a href="#"><i class="fa fa-plus" aria-hidden="true"></i></a> </div>
                             </div> <span class="points-details938">
-                                <a href="#"><h5>Ahmed Hasan</h5></a>
-                                <p>206 Comments</p>
+                                <a href="#"><h5>Quan</h5></a>
+                                <p>395 Comments</p>
                             </span>
                         </div>
                         <hr>
@@ -284,8 +291,8 @@
                                 <a href="#"><img src="~/imgs/default_avatar.png" alt="Image"></a>
                                 <div class="imag-overlay39"> <a href="#"><i class="fa fa-plus" aria-hidden="true"></i></a> </div>
                             </div> <span class="points-details938">
-                                <a href="#"><h5>Ahmed Hasan</h5></a>
-                                <p>206 Comments</p>
+                                <a href="#"><h5>Dat</h5></a>
+                                <p>69 Comments</p>
                             </span>
                         </div>
                         <hr>
