@@ -95,5 +95,15 @@ namespace Application.Service
             var listPost = await _postRepo.GetPostsBannedByUserId(userId, groupId);
             return listPost;
         }
-    }
+
+		public async Task<bool> UpdatePost(Post post)
+		{
+            var findPost = await _postRepo.GetByIdAsync(post.Id);
+            if (findPost != null)
+            {
+                _postRepo.Update(post);
+            }
+            return await _unitOfWork.SaveChangesAsync() > 0;
+		}
+	}
 }

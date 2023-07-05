@@ -19,5 +19,6 @@ namespace Application.IService
         Task<List<Post>> GetPostsByUserId(int userId, int groupId);
         Task<List<Post>> GetPostsPendingByUserId(int userId, int groupId);
         Task<List<Post>> GetPostsBannedByUserId(int userId, int groupId);
+        Task<bool> UpdatePost(Post post);
     }
 }

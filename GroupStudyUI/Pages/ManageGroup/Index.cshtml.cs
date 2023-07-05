@@ -74,6 +74,7 @@ namespace GroupStudyUI.Pages.ManageGroup
 		public async Task< IActionResult> OnPostBanUser(int? userId)
 		{
 			int groupId = (int)TempData["GroupId"];
+
 			if (userId == null)
 			{
 				return NotFound();
@@ -85,6 +86,7 @@ namespace GroupStudyUI.Pages.ManageGroup
 				return BadRequest();
 			}
 			listUserInGroup = await _userService.GetUsersByGroupId(groupId);
+			TempData["Message"] = "User successfully banned.";
 			return Page();
 		}
 		public async Task<IActionResult> OnPostPromoteUser(int? userId)
@@ -101,8 +103,52 @@ namespace GroupStudyUI.Pages.ManageGroup
 				return BadRequest();
 			}
 			listUserInGroup = await _userService.GetUsersByGroupId(groupId);
+			TempData["Message"] = "User is successfully promote.";
 			return Page();
 		}
-
+		public async Task<IActionResult> OnPostBanPost(int? postId)
+		{
+			int groupId = (int)TempData["GroupId"];
+			if (postId == null)
+			{
+				return NotFound();
+			}
+		Post post=	await _postService.GetPostById(postId.Value);
+			if(post == null)
+			{
+				return NotFound();
+			}
+			post.PostStatusId = 3;
+			bool isBanned = await _postService.UpdatePost(post);
+			if(!isBanned)
+			{
+				return BadRequest();
+			}
+			TempData["Message"] = "Post is successfully banned";
+			listPostInGroup= await _postService.GetPostsByGroupId(groupId);
+			return Page();
+		}
+		public async Task<IActionResult> OnPostApprovePost(int? postId)
+		{
+			int groupId = (int)TempData["GroupId"];
+			if (postId == null)
+			{
+				return NotFound();
+			}
+			Post post = await _postService.GetPostById(postId.Value);
+			if (post == null)
+			{
+				return NotFound();
+			}
+			post.PostStatusId = 2;
+			bool isBanned = await _postService.UpdatePost(post);
+			if (!isBanned)
+			{
+				return BadRequest();
+			}
+			TempData["Message"] = "Post is successfully approve";
+			listPostInGroup = await _postService.GetPostsByGroupId(groupId);
+			return Page();
+		}
 	}
 }

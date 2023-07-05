@@ -21,12 +21,17 @@
 <div class="tab-content mt-3">
 	<div class="tab-pane fade show active" id="user-tab-content">
 		<h4>User Management</h4>
+		@if (!string.IsNullOrEmpty(TempData["Message"] as string))
+		{
+			<div class="alert alert-success">@TempData["Message"]</div>
+		}
 		<table class="table">
 			<thead>
 				<tr>
 					<th>Username</th>
 					<th>Email</th>
-					<th>Actions</th>
+					<th>Status</th>
+					<th>Action</th>
 				</tr>
 			</thead>
 			<tbody>
@@ -35,6 +40,12 @@
 					<tr>
 						<td>@user.Name</td>
 						<td>@user.Email</td>
+						<td>
+							@foreach(var status in user.UserGroups.ToList())
+							{
+							 <span>status.isBanned</span>
+							}
+						</td>
 						<td>
 							<form method="post">
 								<button type="submit" asp-page-handler="BanUser"
@@ -79,6 +90,22 @@
 						<td>@post.PostStatusId</td>
 						<td>
 							<!-- Actions for user management (e.g., ban, promote, etc.) -->
+							<form method="post">
+								<button type="submit"
+									asp-page-handler="BanPost"
+									asp-route-postId="@post.Id"
+									class="btn btn-danger btn-sm">
+									Ban
+								</button>
+							</form>
+							<form method="post">
+								<button type="submit"
+									asp-page-handler="ApprovePost"
+									asp-route-postId="@post.Id"
+									class="btn btn-success btn-sm">
+									Approve
+								</button>
+							</form>
 						</td>
 					</tr>
 				}

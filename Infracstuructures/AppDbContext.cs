@@ -21,7 +21,7 @@ namespace Infracstuructures
         public DbSet<UserGroup> UserGroups { get; set; }
         public DbSet<Post> Posts { get; set; }
         public DbSet<CommentMap> CommentMap { get; set; }
-
+        public DbSet<PostStatus> PostStaus { get; set; }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
            /* modelBuilder.Entity<Comment>()
