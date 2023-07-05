@@ -48,7 +48,10 @@ namespace GroupStudyUI.Pages
                 Name = Name,
                 Description = Description,
                 Status = Status,
+                
             };
+            newGroup.memberAmount = 0;
+            ++newGroup.memberAmount ;
             await _groupService.CreateGroup(newGroup);
             Group isInDb = await _groupService.GetSavedGroup();
             if (isInDb!=null)
@@ -59,6 +62,7 @@ namespace GroupStudyUI.Pages
                     UserId = userLoginData.Id,
                     CreatedDate = System.DateTime.Now,
                     GroupRoleId = 1,
+                    
                 };
                 await _userGroupService.AddUserToGroup(userInGroup);
             }

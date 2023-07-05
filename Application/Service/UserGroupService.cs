@@ -20,7 +20,7 @@ namespace Application.Service
         }
         public async Task AddUserToGroup(UserGroup userInGroup)
         {
-            var userGroup =await _userGroupRepo.GetById(userInGroup.GroupId,userInGroup.GroupId);
+            var userGroup =await _userGroupRepo.GetById(userInGroup.UserId,userInGroup.GroupId);
             if(userGroup == null)
             {
              await   _userGroupRepo.AddAsync(userInGroup);
@@ -50,5 +50,15 @@ namespace Application.Service
 			}
 			return await _unitOfWork.SaveChangesAsync() > 0;
 		}
+        public async Task<bool> CheckUserExisted(int userId,int gropuId) 
+        {
+            bool isExisted = false;
+             var userGroup = await _userGroupRepo.GetById(userId,gropuId);
+            if (userGroup != null)
+            {
+                isExisted = true;
+            }
+            return isExisted;
+        }
 	}
 }

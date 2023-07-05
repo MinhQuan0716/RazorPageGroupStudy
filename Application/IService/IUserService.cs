@@ -18,5 +18,6 @@ namespace Application.IService
         Task<User> FindUserById(int userId);
         Task<List<User>> GetAllUserV2();
         Task<User> GetUserById(int id);
+        Task<User> GetUserWithRole(int id);
     }
 }

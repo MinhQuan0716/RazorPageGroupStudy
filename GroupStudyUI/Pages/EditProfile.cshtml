@@ -1,5 +1,6 @@
 ﻿@page
 @model GroupStudyUI.Pages.EditProfileModel
+
 <div class="container bootstrap snippets bootdey">
     <h1 class="text-primary">Edit Profile</h1>
     <hr>
@@ -9,7 +10,6 @@
             <div class="text-center">
                 <img src="https://bootdey.com/img/Content/avatar/avatar7.png" class="avatar img-circle img-thumbnail" alt="avatar">
                 <h6>Upload a different photo...</h6>
-
                 <input type="file" class="form-control">
             </div>
         </div>
@@ -44,13 +44,14 @@
                 </div>
                 <div class="form-group">
                     <label class="col-lg-3 control-label">Role:</label>
-                    <div class="col-lg-8">
-                        <input class="form-control" type="password" asp-for="Users.RoleId" readonly>
-                    </div>
+    <div class="col-lg-8">
+        <input type="hidden" asp-for="Users.RoleId" value="2">
+        <input class="form-control" type="text" value="2" readonly>
+    </div>
                 </div>
                 <div class="form-group">
                     <div class="col-md-12 text-center">
-                        <button type="submit" value ="Save" class="btn btn-primary">Save</button>
+                        <button asp-route-userId="@Model.Users.Id" type="submit" value="Save" class="btn btn-primary">Save</button>
                     </div>
                 </div>
             </form>

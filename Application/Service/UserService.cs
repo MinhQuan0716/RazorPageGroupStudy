@@ -88,5 +88,10 @@ namespace Application.Service
             var user = _userRepo.GetByIdAsync(id);
             return user;
         }
+
+        public async Task<User> GetUserWithRole(int id)
+        {
+            return await _userRepo.GetUserWithRole(id);
+        }
     }
 }

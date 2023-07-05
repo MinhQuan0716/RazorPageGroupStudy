@@ -23,22 +23,21 @@ namespace GroupStudyUI.Pages
             {
                 return NotFound();
             }
-            Users = await _userService.FindUserById(id.Value);
+            Users = await _userService.GetUserWithRole(id.Value);
             if(Users == null)
             {
                 return NotFound();  
             }
             return Page();
         }
-        public async Task<IActionResult> OnPost()
+        public async Task<IActionResult> OnPost(int? userId)
         {
+            Users= await _userService.GetUserWithRole(userId.Value);
             if (!ModelState.IsValid)
             {
                 var errors = ModelState.Values.SelectMany(v => v.Errors);
                 return Page();
             }
-
-
 
             try
             {

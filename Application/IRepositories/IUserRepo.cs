@@ -14,5 +14,6 @@ namespace Application.IRepositories
         Task<List<User>> GetUsersByGroupId(int groupId);
         Task<bool> SoftRemove(int userId);
         Task<List<User>> GetAllUserV2();
+        Task<User> GetUserWithRole(int id);
     }
 }

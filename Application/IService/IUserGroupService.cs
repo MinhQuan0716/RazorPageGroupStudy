@@ -12,5 +12,6 @@ namespace Application.IService
         Task AddUserToGroup(UserGroup userGroup);
         Task<bool> BanUserFromGroup(int userId);
         Task<bool> PromoteUser(int userId);
+        Task<bool> CheckUserExisted(int userId,int groupId);
     }
 }

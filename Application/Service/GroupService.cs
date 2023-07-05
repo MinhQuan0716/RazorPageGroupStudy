@@ -30,7 +30,8 @@ namespace Application.Service
                     Description = group.Description,
                     CreateDate = DateTime.UtcNow,
                     Status = group.Status,
-                    InviteUrl = group.InviteUrl
+                    InviteUrl = group.InviteUrl,
+                    memberAmount=group.memberAmount
                 };
                 await _groupRepo.AddAsync(newGroup);
             }

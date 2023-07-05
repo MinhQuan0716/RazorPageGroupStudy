@@ -19,7 +19,7 @@ namespace Infracstuructures.Repositories
 
         public async Task<UserGroup> GetById(int userId, int groupId)
         {
-            return await _appDbContext.UserGroups.SingleOrDefaultAsync(ug => ug.GroupId == groupId && ug.UserId == userId);
+            return await _appDbContext.UserGroups.AsNoTracking().SingleOrDefaultAsync(ug => ug.GroupId == groupId && ug.UserId == userId);
         }
         public async Task<UserGroup> isUserExisted(int userId)
         {

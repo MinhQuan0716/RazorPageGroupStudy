@@ -33,6 +33,10 @@ namespace Infracstuructures.Repositories
           User user= await _dbSet.FirstOrDefaultAsync(x => x.Email.Equals(email)&&x.Password.Equals(password));
             return user;
         }
+        public async Task<User> GetUserWithRole(int id)
+        {
+            return await _dbContext.Users.Include(u => u.Role).FirstOrDefaultAsync(x => x.Id == id);
+        }
         public async Task<List<User>> GetUsersByGroupId(int groupId)
         {
             return await _dbContext.Users
