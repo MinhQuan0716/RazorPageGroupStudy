@@ -22,6 +22,8 @@ namespace Infracstuructures.Repositories
 			var listChildComment= await _appDbContext.CommentMap.Where(c=>c.ParentCommentId==parentComment).ToListAsync();
 			foreach (var comment in listChildComment)
 			{
+				var childComment =await  _appDbContext.Comments.SingleOrDefaultAsync(co => co.Id == comment.SubCommentId);
+				_appDbContext.Comments.Remove(childComment);
 				_appDbContext.CommentMap.Remove(comment);
 			}
 		}

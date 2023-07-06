@@ -214,8 +214,8 @@ namespace GroupStudyUI.Pages.ManageGroup
 					return BadRequest();
 				}
 			}
-			int groupId = (int)TempData["GroupId"];
-			listCommentInGroup = await _commentService.GetAllCommentByGroupId(groupId);
+			/*int groupId = (int)TempData["GroupId"];
+			listCommentInGroup = await _commentService.GetAllCommentByGroupId(groupId);*/
 			return Page();
 		}
 	}
