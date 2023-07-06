@@ -77,7 +77,12 @@ namespace GroupStudyUI.Pages.ManageGroup
 			existingGroup.Status = groupInfo.Status;
 			existingGroup.InviteUrl = groupInfo.InviteUrl;
 			existingGroup.UpdateDate = DateTime.Now;
-
+			bool checkInviteURL = await _groupService.CheckInviteUrlExisted(existingGroup.InviteUrl);
+			if (checkInviteURL)
+			{
+				ModelState.AddModelError(string.Empty, "Invite url already existed");
+				return Page();
+			}
 			// Call the group service to update the group in the database
 			await _groupService.UpdateGroup(existingGroup);
 
@@ -97,6 +102,9 @@ namespace GroupStudyUI.Pages.ManageGroup
 			{
 				return BadRequest();
 			}
+			var groupInfo = await _groupService.GetGroupBydId(groupId);
+			groupInfo.memberAmount--;
+			await _groupService.UpdateGroup(groupInfo);
 			listUserInGroup = await _userService.GetUsersByGroupId(groupId);
 			TempData["Message"] = "User successfully banned.";
 			return Page();

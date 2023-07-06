@@ -36,6 +36,8 @@ namespace GroupStudyUI.Pages.AdminPage
         }
         public IActionResult OnPostLogout()
         {
+            HttpContext.Session.Remove("User");
+            HttpContext.Session.Remove("isAdmin");
             return RedirectToPage("/Login");
         }
     }

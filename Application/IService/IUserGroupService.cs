@@ -13,5 +13,7 @@ namespace Application.IService
         Task<bool> BanUserFromGroup(int userId);
         Task<bool> PromoteUser(int userId);
         Task<bool> CheckUserExisted(int userId,int groupId);
+        Task<UserGroup> FindUserInGroup(int userId,int groupId);
+        Task<bool> OutGroup(int userId, int groupId);
     }
 }

@@ -64,5 +64,20 @@ namespace Application.Service
 		{
 			return await _commentRepo.GetAllCommentByGroupId(groupId);
 		}
+
+		public async Task<bool> DeleteComment(int commentId)
+		{
+			var commentFound= await _commentRepo.GetByIdAsync(commentId);
+			if(commentFound != null) 
+			{
+				await _commentRepo.RemoveAsync(commentFound);
+			}
+			return await _unitOfWork.SaveChangesAsync() > 0;
+		}
+
+		public async Task<Comment> GetCommentById(int commentId)
+		{
+			return await _commentRepo.GetByIdAsync(commentId);
+		}
 	}
 }

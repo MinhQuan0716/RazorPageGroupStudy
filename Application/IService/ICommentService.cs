@@ -13,5 +13,7 @@ namespace Application.IService
 		Task<bool> CreateComment(int userId, int postId, string content);
 		Task<bool> ReplyComment(int userId, int postId, string content, int replyCommentId);
 		Task<List<Comment>> GetAllCommentByGroupId(int groupId);
+		Task<bool> DeleteComment(int commentId);
+		Task<Comment> GetCommentById(int commentId);
 	}
 }

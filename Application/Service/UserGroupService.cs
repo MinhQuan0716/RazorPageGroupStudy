@@ -33,9 +33,9 @@ namespace Application.Service
             var userGroup = await _userGroupRepo.isUserExisted(userId);
             if (userGroup != null)
             {
-                userGroup.isBanned = true;
-                userGroup.BannedDate=DateTime.Now;
-                 _userGroupRepo.Update(userGroup);
+               /* userGroup.isBanned = true;
+                userGroup.BannedDate=DateTime.Now;*/
+                await  _userGroupRepo.RemoveAsync(userGroup);
             }
           return  await _unitOfWork.SaveChangesAsync()>0;
 		}
@@ -60,5 +60,19 @@ namespace Application.Service
             }
             return isExisted;
         }
-	}
+
+        public async Task<UserGroup> FindUserInGroup(int userId, int groupId)
+        {
+            return await _userGroupRepo.GetById(userId,groupId);    
+        }
+        public async Task<bool> OutGroup(int userId,int groupId)
+        {
+            var userInGroup= await _userGroupRepo.GetById(userId,groupId);
+            if (userInGroup != null)
+            {
+                await _userGroupRepo.RemoveAsync(userInGroup);
+            }
+            return await _unitOfWork.SaveChangesAsync()>0;
+        }
+    }
 }

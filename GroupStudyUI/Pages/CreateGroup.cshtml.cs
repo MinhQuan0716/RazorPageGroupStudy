@@ -52,7 +52,7 @@ namespace GroupStudyUI.Pages
                 Name = Name,
                 Description = Description,
                 Status = Status,
-                
+                isDeleted= false,
             };
             newGroup.memberAmount = 0;
             ++newGroup.memberAmount ;

@@ -202,9 +202,24 @@
 					<option value="Private" selected="@(Model.groupInfo.Status == "Private")">Private</option>
 				</select>
 			</div>
+			<div class="form-group">
+				<label for="name">Invite Code</label>
+				<input type="text" class="form-control" id="name" name="groupInfo.InviteUrl" value="@Model.groupInfo.InviteUrl" required>
+			</div>
 
 			<button type="submit" class="btn btn-primary">Update</button>
 		</form>
+		 @if (ViewData.ModelState.IsValid == false)
+    {
+        <div class="alert alert-danger">
+            <ul>
+                @foreach (var error in ViewData.ModelState.Values.SelectMany(v => v.Errors))
+                {
+                    <li>@error.ErrorMessage</li>
+                }
+            </ul>
+        </div>
+    }
 	</div>
 
 </div>

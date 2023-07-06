@@ -50,7 +50,7 @@ namespace GroupStudyUI.Pages.AdminPage
             Groups = await _groupService.GetGroupBydId(id.Value);
             if (Groups != null)
             {
-                await _groupService.SoftRemoveGroup(id.Value);
+                await _groupService.RemoveGroup(id.Value);
             }
             return RedirectToPage("/AdminPage/GroupIndex");
 

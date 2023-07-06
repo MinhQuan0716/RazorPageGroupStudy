@@ -105,5 +105,26 @@ namespace Application.Service
 		{
             return await _groupRepo.GetGroupThroughLink(inviteUrl);
 		}
+
+        public async Task<bool> RemoveGroup(int groupId)
+        {
+            var groupInfo= await _groupRepo.GetByIdAsync(groupId);
+            if(groupInfo!=null)
+            {
+                await _groupRepo.RemoveAsync(groupInfo);
+            }
+            return await _unitOfWork.SaveChangesAsync()>0;
+        }
+
+		public async Task<bool> CheckInviteUrlExisted(string inviteUrl)
+		{
+            bool isExisted = false;
+            var group = await _groupRepo.GetGroupThroughLink(inviteUrl);
+            if(group!=null )
+            {
+                isExisted = true;
+            }
+            return isExisted;
+		}
 	}
 }

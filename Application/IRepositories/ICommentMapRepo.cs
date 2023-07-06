@@ -9,5 +9,7 @@ namespace Application.IRepositories
 {
 	public interface ICommentMapRepo : IGenericRepo<CommentMap>
 	{
+		Task DeleteChildComment(int parentComment);
+		Task<List<CommentMap>> GetAllChildComment(int parentComment);
 	}
 }

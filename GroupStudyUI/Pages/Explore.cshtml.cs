@@ -68,7 +68,7 @@ namespace GroupStudyUI.Pages
             var userLoginJson = _contextAccessor.HttpContext.Session.GetString("User");
             var userLoginData = JsonConvert.DeserializeObject<User>(userLoginJson);
             var isInGroup = await _userGroupService.CheckUserExisted(userLoginData.Id, groupId.Value);
-            
+          
             if (isInGroup)
             {
                 return RedirectToPage("/Group", new { id = groupId });
@@ -97,7 +97,7 @@ namespace GroupStudyUI.Pages
         }
         public async Task<IActionResult> OnPostJoinGroupByLink(string? inviteUrl)
         {
-              var userLoginJson = _contextAccessor.HttpContext.Session.GetString("User");
+            var userLoginJson = _contextAccessor.HttpContext.Session.GetString("User");
             var userLoginData = JsonConvert.DeserializeObject<User>(userLoginJson);
             if (inviteUrl == null)
             {
