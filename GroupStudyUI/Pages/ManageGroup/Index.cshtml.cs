@@ -187,7 +187,15 @@ namespace GroupStudyUI.Pages.ManageGroup
 			{
 				return BadRequest("You cannot remove this comment");
 			}*/
-
+			bool isDeleteChild = await _commentMapService.DeleteAllMappingComment(commentId.Value);
+			if (isDeleteChild)
+			{
+				bool isDeleteChilComment= await _commentService.DeleteComment(commentId.Value);	
+				if (isDeleteChilComment)
+				{
+					return Page();
+				}
+			}
 			List<CommentMap> list = await _commentMapService.GetAllReplyComment(commentId.Value);
 		
 			if (list.Count == 0)
@@ -197,7 +205,7 @@ namespace GroupStudyUI.Pages.ManageGroup
 				{
 					return BadRequest();
 				}
-				return Page();
+				return Page(); 
 			}
 
 
@@ -214,8 +222,8 @@ namespace GroupStudyUI.Pages.ManageGroup
 					return BadRequest();
 				}
 			}
-			/*int groupId = (int)TempData["GroupId"];
-			listCommentInGroup = await _commentService.GetAllCommentByGroupId(groupId);*/
+			int groupId = (int)TempData["GroupId"];
+			listCommentInGroup = await _commentService.GetAllCommentByGroupId(groupId);
 			return Page();
 		}
 	}
