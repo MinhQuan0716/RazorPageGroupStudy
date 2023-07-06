@@ -56,6 +56,10 @@ namespace GroupStudyUI.Pages
             {
                 ErrorMessage = "Password is incorrect";
                 return Page();
+            } else if (loginUser.IsDeleted == true)
+            {
+                ErrorMessage = "Your account has been deleted";
+                return Page();
             }
 
             if (loginUser != null)

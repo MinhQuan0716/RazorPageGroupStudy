@@ -11,5 +11,7 @@ namespace Application.IService
 	{
 		Task<bool> DeleteAllReplyComment(int parentComment);
 		Task<List<CommentMap>> GetAllReplyComment(int parentComment);
+		Task<bool> DeleteAllMappingComment(int subComment);
+		Task<List<CommentMap>> GetAllMappingComment(int subComment);
 	}
 }

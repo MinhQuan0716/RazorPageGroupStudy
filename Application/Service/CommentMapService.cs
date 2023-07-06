@@ -19,15 +19,24 @@ namespace Application.Service
 			_unitOfWork = unitOfWork;
 		}
 
+		public async Task<bool> DeleteAllMappingComment(int subComment)
+		{
+		   await _commentRepo.RemoveAllCommentMapping(subComment);
+			return await _unitOfWork.SaveChangesAsync()>0;
+		}
+
 		public async Task<bool> DeleteAllReplyComment(int parentComment)
 		{
 			await _commentRepo.DeleteChildComment(parentComment);
 			return await _unitOfWork.SaveChangesAsync() > 0;
 		}
 
-		
+		public async Task<List<CommentMap>> GetAllMappingComment(int subComment)
+		{
+			return await _commentRepo.GetAllCommentMapping(subComment);
+		}
 
-	public async	Task<List<CommentMap>> GetAllReplyComment(int parentComment)
+		public async	Task<List<CommentMap>> GetAllReplyComment(int parentComment)
 		{
 			return await _commentRepo.GetAllChildComment(parentComment);
 		}

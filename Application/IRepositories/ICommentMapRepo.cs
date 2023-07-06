@@ -11,5 +11,7 @@ namespace Application.IRepositories
 	{
 		Task DeleteChildComment(int parentComment);
 		Task<List<CommentMap>> GetAllChildComment(int parentComment);
+		Task<List<CommentMap>> GetAllCommentMapping(int subComment);
+		Task RemoveAllCommentMapping(int subComment);	
 	}
 }

@@ -3,10 +3,12 @@ using System.Collections.Generic;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using Application.IService;
+using Application.Service;
 using Domain.Entities;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using Newtonsoft.Json;
 
 namespace GroupStudyUI.Pages.ManageGroup
 {
@@ -18,7 +20,8 @@ namespace GroupStudyUI.Pages.ManageGroup
         private readonly IHttpContextAccessor _contextAccessor;
 		private readonly IUserGroupService _userGroupService;
 		private readonly ICommentService _commentService;
-        public IndexModel(IUserService userService, IGroupService groupService, IPostService postService, IHttpContextAccessor contextAccessor,IUserGroupService userGroupService, ICommentService commentService)
+		private readonly ICommentMapService _commentMapService;
+        public IndexModel(IUserService userService, IGroupService groupService, IPostService postService, IHttpContextAccessor contextAccessor,IUserGroupService userGroupService, ICommentService commentService,ICommentMapService commentMapService)
         {
             _contextAccessor = contextAccessor;
             _postService = postService;
@@ -26,6 +29,7 @@ namespace GroupStudyUI.Pages.ManageGroup
             _userService = userService;
 			_userGroupService= userGroupService;
 			_commentService = commentService;
+			_commentMapService = commentMapService;
         }
         [BindProperty]
         public int GroupId { get; set; }
@@ -170,5 +174,50 @@ namespace GroupStudyUI.Pages.ManageGroup
 			listPostInGroup = await _postService.GetPostsByGroupId(groupId);
 			return Page();
 		}
+		public async Task<IActionResult> OnPostDeleteComment(int? commentId)
+		{
+			if (commentId == null)
+			{
+				return NotFound();
+			}
+			/*string customerJson = _contextAccessor.HttpContext.Session.GetString("User");
+			var user = JsonConvert.DeserializeObject<User>(customerJson);
+			Comment findComment = await _commentService.GetCommentById(commentId.Value);
+			if (findComment.CreateByUserId != user.Id)
+			{
+				return BadRequest("You cannot remove this comment");
+			}*/
+
+			List<CommentMap> list = await _commentMapService.GetAllReplyComment(commentId.Value);
+		
+			if (list.Count == 0)
+			{
+				bool isDelete = await _commentService.DeleteComment(commentId.Value);
+				if (!isDelete)
+				{
+					return BadRequest();
+				}
+				return Page();
+			}
+
+
+			bool isChildDelete = await _commentMapService.DeleteAllReplyComment(commentId.Value);
+			if (!isChildDelete)
+			{
+				return BadRequest();
+			}
+			else
+			{
+				bool isParentDelete = await _commentService.DeleteComment(commentId.Value);
+				if (!isParentDelete)
+				{
+					return BadRequest();
+				}
+			}
+			int groupId = (int)TempData["GroupId"];
+			listCommentInGroup = await _commentService.GetAllCommentByGroupId(groupId);
+			return Page();
+		}
 	}
-}
+	}
+

@@ -30,5 +30,19 @@ namespace Infracstuructures.Repositories
 		{
 			return  await _appDbContext.CommentMap.Where(c => c.ParentCommentId == parentComment).ToListAsync();
 		}
+
+		public async Task<List<CommentMap>> GetAllCommentMapping(int subComment)
+		{
+			return await _appDbContext.CommentMap.Where(x=>x.SubCommentId==subComment).ToListAsync();	
+		}
+
+		public async Task RemoveAllCommentMapping(int subComment)
+		{
+			var listCommentMapping=await GetAllCommentMapping(subComment);
+			foreach (var comment in listCommentMapping)
+			{
+				_appDbContext.CommentMap.Remove(comment);
+			}
+		}
 	}
 }

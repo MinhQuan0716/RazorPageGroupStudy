@@ -172,7 +172,11 @@
 						<td>@(cmt.CommentUser.Name)</td>
 						<td>@(cmt.Post.PostTitle)</td>
 						<td>@cmt.CreateDate</td>
-						<td></td>
+						<td>
+							<form method="post">
+								<button type="submit" asp-route-commentId="@cmt.Id" asp-page-handler="DeleteComment">Delete comment</button>
+							</form>
+						</td>
 						
 					</tr>
 				}

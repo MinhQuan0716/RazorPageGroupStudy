@@ -18,15 +18,13 @@ namespace GroupStudyUI.Pages
         private readonly IPostService _postService;
         private readonly ICommentService _commentService;
         private readonly IHttpContextAccessor _contextAccessor;
-        private readonly ICommentMapService _commentMapService;
-        public PostDetailModel(IGroupService groupService, IPostService postService, IHttpContextAccessor contextAccessor, IUserService userService, ICommentService commentService,ICommentMapService commentMapService)
+        public PostDetailModel(IGroupService groupService, IPostService postService, IHttpContextAccessor contextAccessor, IUserService userService, ICommentService commentService)
         {
             _groupService = groupService;
             _contextAccessor = contextAccessor;
             _postService = postService;
             _userService = userService;
             _commentService = commentService;
-            _commentMapService = commentMapService;
         }
         [BindProperty]
         public Post Post { get; set; }
@@ -74,45 +72,8 @@ namespace GroupStudyUI.Pages
 
 			return RedirectToPage("/PostDetail", new { id = postId });
 		}
-        public async Task<IActionResult> OnPostDeleteComment(int? commentId)
-        {
-            if (commentId == null)
-            {
-                return NotFound();
-            }
-			string customerJson = _contextAccessor.HttpContext.Session.GetString("User");
-			var user = JsonConvert.DeserializeObject<User>(customerJson);
-			Comment findComment = await _commentService.GetCommentById(commentId.Value);
-			if (findComment.CreateByUserId != user.Id)
-			{
-				return BadRequest("You cannot remove this comment");
-			}
-			List<CommentMap> list = await _commentMapService.GetAllReplyComment(commentId.Value);
-            if(list.Count == 0)
-            {
-				bool isDelete = await _commentService.DeleteComment(commentId.Value);
-				if (!isDelete)
-				{
-					return BadRequest();
-				}
-                return Page();
-			}
-		
-			
-			bool isChildDelete = await _commentMapService.DeleteAllReplyComment(commentId.Value);
-			if (!isChildDelete)
-            {
-                return BadRequest();
-            } else
-            {
-                bool isParentDelete = await _commentService.DeleteComment(commentId.Value);
-				if (!isParentDelete)
-                {
-                    return BadRequest();
-                }
-            }
-            return Page();
-        }
+      
+            
 
 	}
 }
